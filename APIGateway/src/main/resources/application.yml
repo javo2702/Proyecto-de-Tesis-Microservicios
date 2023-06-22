@@ -1,0 +1,18 @@
+# serivce name
+spring:
+  application:
+    name: gateway-service
+  #cloud:
+  #  gateway:
+  #    enabled: false
+#Tomcat Embedded Server Configuration
+server:
+  port: 8089
+
+#Eureka Configuration Properties
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+#  instance:
+#    instance-id: ${spring.application.name}:${random.value}
