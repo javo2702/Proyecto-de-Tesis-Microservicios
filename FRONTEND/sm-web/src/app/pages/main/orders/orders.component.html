@@ -1,17 +1,21 @@
-<div class="order-container">
-    <div class="lateral-nav">
-        <nav>
-            <a href="" class="link">
-                <img class="icon" src="/assets/icons/user-default.png" alt="">
+<div class="general-container vh-100">
+    <aside class="aside nav-items">
+        <div class="aside-content">
+            <a routerLink="tables" routerLinkActive="active" class="link">
+                <div>
+                    <img class="icon" src="/assets/icons/home.png" alt="">
+                </div>
                 <p>Inicio</p> 
             </a>
-            <a href="" class="link">
-                <img class="icon" src="/assets/icons/user-default.png" alt="">
+            <a routerLink="orderlist" routerLinkActive="active" class="link">
+                <div>
+                    <img class="icon" src="/assets/icons/home.png" alt="">  
+                </div>
                 <p>Pedidos</p> 
             </a>
-        </nav>
-    </div>
-    <div class="content">
-        <app-mesas></app-mesas>
-    </div>
+        </div>
+    </aside>
+    <main class="h">
+        <router-outlet></router-outlet>
+    </main>
 </div>

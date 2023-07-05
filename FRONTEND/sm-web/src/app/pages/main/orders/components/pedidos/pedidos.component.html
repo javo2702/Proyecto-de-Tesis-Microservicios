@@ -1,0 +1,62 @@
+<div class="modal" *ngIf="showDetalles">
+    <div class="modal-content">
+        <h3 class="texto-info">Detalles del pedido numero {{selectedPedido?.id}}</h3>
+        <p><strong>Estado:  </strong> <span [ngClass]="{'tag':true,'success':selectedPedido?.estado?.toLowerCase()==='listo','error':selectedPedido?.estado?.toLowerCase()==='recibido'}">{{selectedPedido?.estado}}</span></p>
+        <p><strong>Descripcion:</strong></p>
+        <p style="white-space: pre-line" class="capitalize">{{selectedPedido?.descripcion}}</p>
+        <p><strong>N° Mesa:</strong> <span class="texto-info-sec">{{selectedPedido?.mesa}}</span></p>
+        <a class="btn btn-danger" (click)="closeModal()">Cerrar</a>
+    </div>
+</div>
+<div class="modal" *ngIf="showConfirmationAlert">
+    <div class="modal-content">
+        <h4 class="texto-info">¿Esta seguro que desea elimnar el pedido?</h4>
+        <div class="row-custom">
+            <a class="btn btn-primary-custom" (click)="deleteOrder()">Confirmar</a>
+            <a class="btn btn-danger" (click)="cancelRemove()">Cancelar</a>
+        </div>
+        
+    </div>
+</div>
+<div class="row-custom bg-main">
+    <p class="texto">Lista de pedidos</p>
+    <p class="texto">Fecha: <span>{{date}}</span></p>
+</div>
+<div class="table tasks">
+    <div class="table-body d-flex">
+        <table class="table-component table-style w-100">
+            <tr class="table-title-component">
+                <th># Pedido</th>
+                <th>Estado</th>
+                <th># Mesa</th>
+                <th>Hora</th>
+            </tr>
+            <tr *ngIf="pedidos.length==0">
+                <p>No se han registrado pedidos aun</p>
+            </tr>
+            <tr class="table-row" *ngFor="let p of pedidos" (click)="getDetallePedido(p)">
+                <td>{{p.idpedido}}</td>
+                <td [ngClass]="{'tag':true,'success':p.estado.toLowerCase()==='listo','error':p.estado.toLowerCase()==='recibido'}">{{p.estado}}</td>
+                <td>N° {{p.idmesa}}</td>
+                <td>{{p.fecha}}</td>
+            </tr>
+        </table>
+        <table class="table-component table-action">
+            <tr class="table-title-component"><th>Accion</th></tr>
+            <tr class="table-row" *ngFor="let p of pedidos">
+                <div class="row-custom">
+                    <div class="action">
+                        <p class="tooltip-container"><span class="remove">Remove</span></p>
+                        <a (click)="remove(p)"><img class="img" src="/assets/icons/remover.png" alt=""></a>
+                    </div>
+                </div>
+            </tr>
+        </table>
+
+    </div>
+</div>
+<div *ngIf="showNotification">
+    <div class="notification {{notificationType}}">
+        <p>{{notificationMessage}}</p>
+    </div>
+</div>

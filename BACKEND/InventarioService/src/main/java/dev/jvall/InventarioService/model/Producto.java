@@ -23,5 +23,6 @@ public class Producto implements Serializable {
     private double precio;
     private String estado;
     private double descuento;
+    private String imagen;
     private String categoria;
 }

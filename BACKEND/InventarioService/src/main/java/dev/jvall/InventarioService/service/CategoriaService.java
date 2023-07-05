@@ -16,7 +16,6 @@ import java.util.List;
 public class CategoriaService {
     private final CategoriaRepository categoriaRepository;
     public List<Categoria> getCategoryList(){
-        log.info("Getting category list from db");
         return categoriaRepository.getCategoryList();
     }
 }

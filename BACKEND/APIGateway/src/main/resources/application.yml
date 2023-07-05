@@ -2,8 +2,21 @@
 spring:
   application:
     name: gateway-service
-  #cloud:
-  #  gateway:
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:4200"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - DELETE
+              - PUT
+              - OPTIONS
   #    enabled: false
 #Tomcat Embedded Server Configuration
 server:
@@ -13,6 +26,6 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://eureka-server:8761/eureka
 #  instance:
 #    instance-id: ${spring.application.name}:${random.value}

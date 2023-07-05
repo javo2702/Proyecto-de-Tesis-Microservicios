@@ -1,0 +1,60 @@
+.contenido{
+    position: relative;
+}
+.category-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.productos-container{
+    position: absolute;
+    top: 12rem;
+    height: 58rem;
+    overflow-y: scroll;
+    left: 0;
+    right: 0;
+    bottom: 2rem;
+}
+.option-container{
+    position: absolute;
+    top:72rem;
+    bottom: 0rem;
+    left: 0rem;
+    right: 0rem;
+}
+.options-custom{
+    display: flex;
+    justify-content: center;
+    gap: .8rem;
+}
+.btn-platos-custom{
+    width: 20rem;
+    padding: 1rem 2rem;
+    color: white;
+    background-color: #014572;
+    text-align: center;
+    border-radius: .5rem;
+}
+.btn-platos-custom-active{
+    background-color: #012842;
+}
+.btn-platos-custom:hover{
+    background-color: #012842;
+}
+.food-category-2{
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    grid-template-rows: repeat(2,1fr);
+    gap: .5rem;
+    overflow-x: scroll;
+}
+.food-results-2{
+    width: 80%;
+}
+.results-2{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    row-gap: .5rem;
+}

@@ -12,26 +12,43 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/inventary")
 @RequiredArgsConstructor
+@Slf4j //borrar depues
 public class InventarioRestController {
     @Value( "${server.port}" )
     private String port ;
-
     private final ProductoService productoService;
     private final CategoriaService categoriaService;
     @GetMapping( "/server/info" )
     public ResponseEntity<String> showOrderInfo() {
         return ResponseEntity.ok( "DESDE EL SERVICIO DE INVENTARIO, el número de puerto es: " + port );
     }
-
+    @GetMapping("/products")
+    public ResponseEntity<List<Producto>> getProductsList(){
+        try{
+            List<Producto> foodlist = productoService.getProductsList();
+            return new ResponseEntity<>(foodlist,HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     @GetMapping("/foodlist")
     public ResponseEntity<List<Producto>> getListFood(){
         try{
             List<Producto> foodlist = productoService.getFoodList();
             return new ResponseEntity<>(foodlist,HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/foodlist/show/{productid}")
+    public ResponseEntity<Producto> getProduct(@PathVariable int productid){
+        try{
+            Producto product = productoService.getProductById(productid);
+            return new ResponseEntity<>(product,HttpStatus.OK);
         } catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -53,10 +70,5 @@ public class InventarioRestController {
         } catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-    @PostMapping("/create")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createProduct(@RequestBody ProductoRequest producto){
-        //implementar despues
     }
 }

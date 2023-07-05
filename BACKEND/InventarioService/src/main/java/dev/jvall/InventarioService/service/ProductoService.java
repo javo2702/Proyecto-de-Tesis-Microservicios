@@ -13,13 +13,16 @@ import java.util.List;
 @Slf4j //borrar depues
 public class ProductoService {
     private final ProductoRepository productoRepository;
+    public List<Producto> getProductsList(){
+        return productoRepository.getProductsList();
+    }
     public List<Producto> getFoodList(){
-        log.info("Getting food list from db");
         return productoRepository.getFoodList();
     }
-
     public List<Producto> getDrinkList(){
-        log.info("Getting drink list from db");
         return productoRepository.getDrinkList();
+    }
+    public Producto getProductById(int idproduct){
+        return productoRepository.getProductById(idproduct);
     }
 }

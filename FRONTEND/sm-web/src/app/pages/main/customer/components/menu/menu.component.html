@@ -1,0 +1,69 @@
+
+
+<div class="contenido">
+    <div class="category-container">
+        <div class="food-category-2">
+            <div *ngFor="let cat of categoriaMostrar" (click)="getPlatosByCategory(cat)">
+                <div [ngClass]="{'category':true,'category-activated':cat.actived}">
+                    <p>{{cat.nombre}}</p>
+                </div>
+            </div>
+        </div> 
+        <p>Resultados:</p>
+    </div>
+    <div class="productos-container">
+        <div class="food-results-2">
+            <div class="results-2">
+                <div class="results" *ngFor="let product of productosMostrar">
+                    <div class="product">
+                        <img class="product-img" src="/assets/images/producto.png" alt="Producto">
+                        <p class="product-name capitalize">{{product?.nombre}}<br><span class="texto-opcional">{{product?.descripcion}}</span></p>
+                        <div class="product-option">
+                            <p>S/. <span>{{product?.precio}}</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="option-container">
+        <div class="options-custom">
+            <a [ngClass]="{'btn-platos-custom':true,'btn-platos-custom-active':selectedPlatos}" (click)="changeProducsCategoriesPlatos()">Platos</a>
+            <a [ngClass]="{'btn-platos-custom':true,'btn-platos-custom-active':!selectedPlatos}" (click)="changeProducsCategoriesBebidas()">Bebidas</a>
+        </div>
+        
+    </div>
+</div>
+<div class="hide">
+    <div class="">
+        <div class="">
+            
+        </div>
+    </div>
+    <div class="detail-content hide">
+        <p>Bebidas disponibles:</p>
+        <div class="food-wrapp">
+            <div class="food-category">
+                <div *ngFor="let cat of categoriasapi" (click)="getBebidasByCategory(cat)">
+                    <div [ngClass]="{'category':true,'category-activated':cat.actived}" *ngIf="cat.idcategoria>=14 && cat.idcategoria<=17">
+                        <p>{{cat.nombre}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="food-results">
+                <p>Resultados:</p>
+                <div class="results">
+                    <div class="results" *ngFor="let product of bebidos">
+                        <div class="product">
+                            <img class="product-img" src="/assets/images/producto.png" alt="Producto">
+                            <p class="product-name">{{product?.nombre}}</p>
+                            <div class="product-option">
+                                <p>S/. <span>{{product?.precio}}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

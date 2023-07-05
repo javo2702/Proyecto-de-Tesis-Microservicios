@@ -1,12 +1,12 @@
 package dev.jvall.PedidoService.model;
 
-import jakarta.annotation.Nullable;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity

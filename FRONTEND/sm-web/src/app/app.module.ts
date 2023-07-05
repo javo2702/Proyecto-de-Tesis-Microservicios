@@ -9,6 +9,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { FakeBackendModule } from './fake-backend/fake-backend.module';
 import { authTokeninterceptorProvider } from './pages/auth/interceptors';
 
+import { BackendModule } from './backend/backend.module';
+import { ApiService } from './backend/services/api.service'; 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,9 +21,10 @@ import { authTokeninterceptorProvider } from './pages/auth/interceptors';
     AppRoutingModule,
     AuthModule,
     HttpClientModule,
-    FakeBackendModule
+    FakeBackendModule,
+    BackendModule
   ],
-  //providers: [authTokeninterceptorProvider],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

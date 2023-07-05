@@ -1,0 +1,96 @@
+<div class="modal" *ngIf="showRegisterOk">
+    <div class="modal-content">
+        <h3 class="texto-info">Pedido Registrado de manera exitosa</h3>
+        <p>Detalles:</p>
+        <p><strong># Pedido:</strong> {{orderRegistered?.idpedido}}</p>
+        <p><strong>Estado:  </strong> <span [ngClass]="{'tag':true,'success':orderRegistered?.estado?.toLowerCase()==='listo','error':orderRegistered?.estado?.toLowerCase()==='recibido'}">{{orderRegistered?.estado}}</span></p>
+        <p><strong>N° Mesa:</strong> <span class="texto-info-sec">{{orderRegistered?.idmesa}}</span></p>
+        <a class="btn btn-danger" (click)="closeModal()">Cerrar</a>
+    </div>
+</div>
+<div class="modal" *ngIf="showNoOrderItems">
+    <div class="modal-content">
+        <h3>No puede registrar un pedido sin haber elegido al menos un producto</h3>
+        <a class="btn btn-danger" (click)="closeModalError()">Cerrar</a>
+    </div>
+</div>
+<div class="register-container">
+    <div class="food-content">
+        <p class="text-title row-custom bg-main t-white">Platos disponibles:</p>
+        <div class="food-wrapp">
+            <div class="food-category">
+                <div *ngFor="let cat of categoriasapi" (click)="getProductsByCategory(cat)">
+                    <div [ngClass]="{'category':true,'category-activated':cat.actived}">
+                        <p>{{cat.nombre}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="food-results">
+                <p>Resultados:</p>
+                <div class="results">
+                    <div class="results" *ngFor="let product of productosapi">
+                        <div class="product">
+                            <img class="product-img" src="/assets/images/producto.png" alt="Producto">
+                            <p class="product-name capitalize">{{product?.nombre}}<br><span class="texto-opcional">{{product?.descripcion}}</span></p>
+                            <div class="product-option">
+                                <p>S/. <span>{{product?.precio}}</span></p>
+                                <a class="btn-add" (click)="add(product)">+</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="detail-content">
+        <p class="row-custom bg-main t-white">Detalles de la orden:</p>
+        <div class="detail-wrapp">
+            <div class="row-custom">
+                <p><strong>Camarero:</strong></p>
+                <p class="capitalize">{{user?.username}}</p>
+            </div>
+            <div class="row-custom">
+                <p><strong>N° Mesa:</strong></p>
+                <p>N° {{table}}</p>
+            </div>
+            <div>
+                <table class="table-component w-100">
+                    <tr class="table-title-component t-detalle">
+                        <th>Cantidad</th>
+                        <th>Descripcion</th>
+                        <th>Subtotal</th>
+                        <th>Accion</th>
+                    </tr>
+                    <tr *ngIf="order.length == 0">Debe seleccionar productos</tr>
+                    <tr *ngFor="let item of order">
+                        <td>
+                            <div class="row-custom-center">
+                                <a class="btn-counter" (click)="decrement(item)">-</a>
+                                <p>{{item.cantidad}}</p>
+                                <a class="btn-counter" (click)="increment(item)">+</a>
+                            </div>
+                        </td>
+                        <td><p>{{item.descripcion}}</p></td>
+                        <td>S/.{{item.subtotal}}</td>
+                        <td>
+                            <div class="action">
+                                <p class="tooltip-container"><span class="tooltip remove">Remove</span></p>
+                                <a (click)="remove(item)"><img src="/assets/icons/delete.png" alt=""></a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div *ngIf="order.length > 0"><p>Total: <strong>S/.{{total}}</strong></p></div>
+            </div>
+            <div class="row-custom around p-2">
+                <a class="btn btn-primary-custom" (click)="registerOrder()">Registrar pedido</a>
+                <a class="btn btn-danger" (click)="cancelOrder()">Cancelar</a>
+            </div>
+        </div>
+    </div>
+    <!--<div *ngIf="showNotification">
+        <div class="notification">
+            <p>Producto Agregado Correctamente</p>
+        </div>
+    </div>-->
+</div>

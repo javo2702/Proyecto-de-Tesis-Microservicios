@@ -39,11 +39,9 @@ export class LoginComponent {
         .login(this.form.value as LoginCredentials)
         .pipe(
           finalize(() => {
-            console.log("Success")
             this.processingRequest = false
           }),
           catchError((error: HttpErrorResponse) => {
-            console.log("Error")
             if (error.status === 401) {
               this.handleUnauthorized();
               return EMPTY;

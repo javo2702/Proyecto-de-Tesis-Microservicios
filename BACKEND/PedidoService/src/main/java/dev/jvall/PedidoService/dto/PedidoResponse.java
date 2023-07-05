@@ -1,10 +1,10 @@
 package dev.jvall.PedidoService.dto;
 
 import dev.jvall.PedidoService.model.PedidoDetalle;
-import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.lang.Nullable;
 
 import java.util.List;
 

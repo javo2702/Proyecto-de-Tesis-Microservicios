@@ -28,10 +28,10 @@ export class AuthService {
     );
   }
   private redirectToMain(): void {
-    this.router.navigateByUrl('main');
+    this.router.navigateByUrl('main'); 
   }
   logout(): void {
-    //this.removeUserFromLocalStorage();
+    this.removeUserFromLocalStorage();
     this.user.next(null);
     this.router.navigateByUrl('/login');
   }

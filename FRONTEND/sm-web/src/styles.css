@@ -1,1 +1,893 @@
 /* You can add global styles to this file, and also import other style files */
+/* ----- Colores -------- */
+:root{
+    --main: #000;
+    --sec2: #014572;
+    --sec: #006bb3;
+    --white: #FFF;
+    --border: #e0e0e0;
+    --bg: #eeeeee;;
+    --bg-title-table: #c4c4c4;
+    --bg-table-hover: #e9e9e9;
+}
+
+/* ----- Globales ------- */
+html{
+    font-size: 62.5%;
+    box-sizing: border-box;
+    height: 100%;
+    max-height: 100%;
+}
+*, *:before, *:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+body {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.6;
+    margin: 0;
+    height: 100%;
+    max-height: 100%;
+}
+a{
+    text-decoration: none;
+    color: var(--main);
+}
+p>a>img{
+    height: 1rem;
+}
+a > img{
+    width: auto;
+}
+i > img{
+    width: auto;
+}
+h3{
+    text-align: center;
+}
+p{
+    margin: 0;
+}
+.btn{
+    background-color: var(--sec);
+    color: var(--white);
+    padding: 1rem 1.5rem;
+    border-radius: .5rem;
+    font-size: 1.4rem;
+}
+.btn:hover{
+    background-color: var(--bg);
+    color: var(--main);
+}
+/* ----- Globales ------- */
+
+.bg-image{
+    background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(10).webp");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+}
+.bg-image-2{
+    background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(18).webp");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+}
+.logo-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.logo{
+    width: 14rem;
+}
+.text-primary-custom{
+    color: #003566;
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+.form-label{
+    color: #003566;
+}
+.form-control{
+    padding: 1.4rem;
+    padding-left: 1.7rem;
+    font-size: 1.5rem;
+}
+.form-control:hover{
+    border-color: #003566;
+}
+.text-hover{
+    color: blue;
+}
+.text-hover:hover{
+    cursor: pointer;
+    color: #0115ad;
+}
+.btn-primary-custom{
+    border-radius: 0.4rem;
+    padding: 1.5rem 2rem;
+    background-color: #003566;
+    color: white;
+    border: none;
+    font-size: 1.4rem;
+}
+.btn-primary-custom:hover{
+    background-color: #064f93;
+    color: white;
+    cursor: pointer;
+}
+.btn-secondary-custom{
+    border-radius: 0.4rem;
+    padding: 1.5rem 2rem;
+    background-color: #8b041a;
+    color: white;
+    border: none;
+    font-size: 1.4rem;
+}
+.text-success{
+    color: #057017;
+}
+.text-error{
+    color: #8b041a;
+}
+.btn-secondary-custom:hover{
+    background-color: #b30724;
+    color: white;
+}
+/* ------- General container ---- */
+.general-container{
+    padding-top: 7rem;
+    display: grid;
+    grid-template-columns: 27rem 2.5fr;
+    height: 100vh;
+    gap: .2rem;
+    max-height: 100%;
+    height: 100%;
+}
+@media (max-width: 1180px) {
+    .general-container{
+        grid-template-columns: 20rem 2.5fr;
+    }
+}
+@media (max-width: 768px) {
+    .general-container{
+        display: block;
+    }
+}
+/* ------ Header  ------- */
+.header{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    height: 7.2rem;
+    width: 100%;
+    background-color: var(--main);
+    color: var(--white);
+}
+.nav-up{
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+}
+.logo{
+    width: 20rem;
+    padding: 2rem;
+}
+.logo-icon{
+    width: 9rem;
+}
+.login{
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+.user{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    position: relative;
+    border-left: 1px white solid;
+}
+.user img:hover{
+    cursor: pointer;
+}
+.user-name{
+    margin-left: 1rem;
+    text-transform: capitalize;
+    font-size: 1.6rem;
+    color: white;
+}
+.user-name:hover{
+    cursor: pointer;
+}
+.user-options{
+    box-shadow: 0rem .8rem .8rem -7px black;
+    position: absolute;
+    z-index: 1;
+    width: 29rem;
+    background-color: var(--white);
+    top: 7rem;
+    right: .3rem;
+}
+.user-main{
+    display: grid;
+    grid-template-columns: 5rem 2fr;
+    align-items: center;
+    border-bottom: .1rem solid var(--border);
+    padding: 1.5rem;
+}
+.options{
+    display: flex;
+    flex-direction: column;
+    border-bottom: .1rem solid var(--border);
+}
+.option{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.option>i{
+    margin: 1.5rem 0 1.5rem 1.5rem;
+}
+.option:hover{
+    cursor: pointer;
+    background-color: var(--sec);
+}
+.option:hover a{
+    color: var(--white);
+}
+.option:hover img{
+    filter: invert(100%);
+}
+.icon>img{
+    width: 1rem;
+    cursor: pointer;
+    margin-right: .8rem;
+}
+.icon>img:hover{
+    filter: opacity(0.5) drop-shadow(0 0 0 var(--sec));
+}
+.show-login{
+    filter: opacity(0.7) drop-shadow(0 0 0 var(--sec));
+    cursor: pointer;
+}
+.nav{
+    display: block;
+    box-shadow: 1rem 1rem 1rem var(--border);
+}
+.nav-items a{
+    width: 100%;
+    padding: .5rem 1rem;
+}
+.nav-items a:hover{
+    cursor: pointer;
+}
+.nav-items a:hover img{
+    filter: invert(100%); 
+}
+@media (max-width: 1120px) {
+    .nav-items a{
+        width: 85%;
+        padding: .5rem 1rem;
+    }
+}
+@media (min-width: 768px) {
+    .nav{
+        display: none;
+    }
+}
+@media (max-width: 768px) {
+    .header{
+        height: auto;
+    }
+    .logo{
+        width: auto;
+    }
+    .nav-up{
+        position: relative;
+    }
+    .nav{
+        display: block;
+    }
+    .nav-items a{
+        width: auto;
+    }
+    .nav-content{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin: 2rem;
+    }
+}
+@media (max-width: 620px) {
+    .nav-items a{
+        width: 100%;
+    }
+    .responsive-navbar{
+        display: block;
+    }
+    .nav-content{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+/* ----- Aside options ------- */
+.aside{
+    padding: 2rem .5rem;
+    max-height: 100%;
+    height: 100%;
+    background-color: #014572;
+    box-shadow: .5rem 0rem 1rem var(--border);
+}
+.aside-content{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+}
+.aside-content a{
+    width: 17rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: .5rem 2rem;
+    padding: .5rem;
+}
+@media (max-width: 1180px) {
+    .aside-content a{
+        width: 15rem;
+    }
+}
+.aside-content a:hover{
+    background-color: var(--sec);
+    border-radius: .4rem;
+    color: var(--white);
+    font-weight: bold;
+}
+
+.active{
+    background-color: var(--sec);
+    border-radius: .4rem;
+    color: var(--white);
+    font-weight: bold;
+}
+.active img{
+    filter: invert(100%);
+}
+@media (max-width: 768px) {
+    .aside{
+        display: none;
+    }
+}
+
+/* ---- Main Container ---- */
+.main-container{
+    background-color: var(--bg);
+    padding: 2rem 4rem;
+    max-height: 100%;
+    height: 100%;
+}
+.h{
+    padding: 1rem 1rem;
+}
+.content{
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 2.5rem;
+}
+@media (max-width: 1350px) {
+    .content{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+@media (max-width: 1120px) {
+    .content{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+@media (max-width: 500px) {
+    .content{
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+.sub-content{
+    background-color: var(--white);
+    border-radius: .25rem;
+    display: flex;
+    flex-direction: column;
+}
+.sub-content .info{
+    padding: 2rem;
+    height: 100%;
+    position: relative;
+}
+.info p{
+    text-align: right;
+}
+.info-image{
+    background-color: var(--sec);
+    border-radius: .25rem;
+    padding: .5rem 1rem;
+    position: absolute;
+    top: -1rem;
+}
+.linking{
+    margin-top: .8rem;
+    background-color: var(--border);
+    padding: 1rem .5rem;
+    border-bottom-right-radius: .5rem;
+    border-bottom-left-radius: .5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.linking a:hover{
+    color: var(--sec);
+    font-weight: bold;
+}
+.linking img:hover{
+    cursor: pointer;
+    filter: opacity(0.3) drop-shadow(0 0 0 var(--sec));
+}
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+}
+.icons-resize{
+    width: 7rem;
+}
+.saldo, .citas{
+    font-size: 2.5rem;
+    color: var(--sec);
+    font-weight: bold;
+}
+
+.tables{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 3rem;
+    margin-top: 5rem;
+}
+@media (max-width: 1200px) {
+    .tables{
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+
+.table{
+    background-color: var(--white);
+    border-radius: .25rem;
+    position: relative;
+    max-height: 100%;
+}
+.table-title{
+    position: absolute;
+    top: -1.2rem;
+    left: 1.2rem;
+    background-color: var(--sec);
+    width: 97%;
+    border-radius: .25rem;
+    padding: 1rem 1rem;
+}
+@media (max-width: 1480px) {
+    .table-title{
+        width: 94%;
+    }
+}
+@media (max-width: 1320px) {
+    .table-title{
+        width: 92.5%;
+    }
+}
+@media (max-width: 1200px) {
+    .table-title{
+        width: 96.5%;
+    }
+}
+@media (max-width: 960px) {
+    .table-title{
+        width: 90%;
+    }
+}
+.title{
+    color: var(--white);
+}
+.table-body{
+    padding: 1rem 1rem;
+}
+.body-item{
+    display: flex;
+    justify-content: space-between;
+    margin: 2.5rem 0 0 0;
+}
+.tasks .body-item{
+    border-bottom: .1rem solid var(--border);
+}
+.table-component{  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 1.2rem;
+}
+
+.table-component tr{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1rem;
+    border-bottom: var(--border) solid .1rem;
+}
+.t-detalle > th{
+    width: auto;
+}
+.table-style tr td,th{
+    width: 12rem;
+    text-align: center;
+}
+.table-row{
+    font-size: 1.5rem;
+}
+.table-component .table-row:hover{
+    cursor: pointer;
+    background-color: var(--bg-table-hover);
+}
+.table-component .table-title-component{
+    background-color: black;
+    text-align: center;
+    color: white;
+}
+.tooltip-container{
+    position: relative;
+}
+.tooltip{
+    position: absolute;
+    padding: .1em 1rem;
+    top: -2.2rem;
+    left: -2.2rem;
+    font-size: 1.2rem;
+    z-index: 20;
+}
+.edit{
+    background-color: var(--sec2);
+    border-radius: .2rem;
+    color: var(--white);
+}
+.remove{
+    color: red;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.action:hover .tooltip{
+    display: inline-block;
+}
+
+.h100{
+    height: 100%;
+}
+
+.graphics{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+}
+@media (max-width: 1200px) {
+    .graphics{
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+.graphic{
+    background-color: var(--white);
+    border-radius: .25rem;
+    padding: .5rem;
+    position: relative;
+}
+.graphic-title{
+    position: absolute;
+    background-color: var(--sec);
+    width: 95%;
+    padding: 1rem;
+    border-radius: .25rem;
+    color: var(--white);
+    z-index: 10;
+    top: -1rem;
+    left: 1rem;
+}
+.graphic-style{
+    height: 30rem;
+}
+
+.hide{
+    display: none;
+}
+
+
+/* ----- COMPONENTES GENERALES ----- */
+.row-custom{
+    margin: .5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    row-gap: 2rem;
+    column-gap: 2rem;
+    height: auto;
+}
+.p-2{
+    padding: 2rem !important;
+}
+.texto{
+    display: inline-block;
+}
+.vh-100{
+    height: 100%;
+}
+.w-50{
+    width: 90rem;
+    margin: 0 auto;
+}
+.unit-container{
+    grid-template-columns: 1fr;
+}
+.navigation a{
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    margin: 0 .5rem;
+    color: white;
+}
+.navigation a:hover{
+    background-color: #aaa;
+}
+.activelink{
+    font-weight: 600;
+    background-color: #aaa;
+}
+.icon-bg-white{
+    filter: invert(100%);
+}
+
+
+/* The Modal (background) */
+.modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  .texto-info{
+    color: #014572;
+    font-weight: bold;
+  }
+  .texto-info-sec{
+    background-color: #2f34c1;
+    margin-left: 1rem;
+    border-radius: .3rem;
+    padding: .5rem;
+    color: white;
+    font-weight: bold;
+  }
+  .capitalize{
+    text-transform: capitalize;
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 25% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50rem; /* Could be more or less, depending on screen size */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    gap: 1rem;
+}
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+.close:hover,
+.close:focus {
+color: black;
+text-decoration: none;
+cursor: pointer;
+}
+
+.notification{
+    position: absolute;
+    top: 9rem;
+    right: 2rem;
+    padding: 1.5rem 2.5rem;
+    color: white;
+    font-size: 1.2rem;
+    border-radius: .2rem;
+}
+.tag{
+    padding: .2rem 1rem;
+    border-radius: .5rem;
+}
+.success{
+    background-color: green;
+    color: white;
+}
+.error{
+    background-color: red;
+    color: white;
+}
+.warning{
+    background-color: darkgoldenrod;
+}
+.information{
+    background-color: grey;
+}
+.img{
+    width: 2rem;
+}
+
+/*productos*/
+.register-container {
+    display: grid;
+    grid-template-columns: 1fr 40rem;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    background-color: white;
+}
+
+.food-content { grid-area: 1 / 1 / 2 / 2; }
+.detail-content { 
+    grid-area: 1 / 2 / 2 / 3; 
+    border-left: 1px solid black;
+    padding: 0 1rem 0 2rem;
+    margin-left: 2rem;
+}
+.t-white{
+    color: white;
+    padding: 1rem 2rem !important;
+}
+.food-category{
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: .2rem;
+    
+}
+.category{
+    background-color: #FFE096;
+    width: 11rem;
+    height: 4rem;
+    border-radius: .3rem;
+    padding: .5rem 1rem;
+    text-align: center;
+    color:#fff;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    text-transform: uppercase;
+}
+.category-activated{
+    background-color: #FFC539;
+    color: black;
+}
+.category:hover{
+    background-color: #FFC539;
+    color: black;
+    cursor: pointer;
+}
+.results{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    column-gap: .2rem;
+    row-gap: 1rem;
+}
+.product{
+    width: 18rem;
+    border: 1px #43689F solid;
+    border-radius: .3rem;
+    padding: 1rem;
+}
+.product-img{
+    width: 12rem;
+}
+.product-option{
+    display: flex;
+    justify-content: space-between;
+}
+.product-option > a{
+    color: white;
+}
+.product-name{
+    font-size:.9em;
+    font-weight: 200;
+}
+.btn-add{
+    background-color:#014572;
+    padding: .2rem 1rem;
+    border-radius: .5rem;
+}
+.btn-add:hover{
+    background-color:#0263a3;
+    cursor: pointer;
+}
+.row-custom-center{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+.row-custom-center > a{
+    color: white;
+}
+.btn-counter{
+    background-color: #014572;
+    padding: .2rem .6rem;
+    border-radius: .3rem;
+}
+.btn-counter:hover{
+    background-color: #0776c0;
+    cursor: pointer;
+}
+.around{
+    justify-content: space-around;
+    margin-top: 2rem;
+}
+.btn{
+    width: 15rem;
+    padding: 1rem 2rem;
+    color: white;
+}
+.btn-primary{
+    background-color: #003566;
+}
+.btn-danger{
+    background-color: rgb(164, 0, 0);
+}
+.action:hover{
+    cursor: pointer;
+}
+.bg-main{
+    background-color: #014572;
+}
+.texto{
+    color:white;
+    font-size: 1.6rem;
+    padding: 1rem 2rem !important;
+}
+@media (max-width:500px) {
+    .row-custom{
+        display: none;
+    }
+    .login{
+        display: none;
+    }
+    .nav-up{
+        justify-content: center;
+    }
+}
+.texto-opcional{
+    color: #909090;
+}

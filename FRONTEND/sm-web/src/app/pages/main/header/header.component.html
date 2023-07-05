@@ -1,4 +1,4 @@
-<div class="header">
+<!--<div class="header">
     <a id="logo" routerLink="/">Solar Marino</a>
     <div class="module-nav">
         <p>MODULO DE </p>
@@ -17,4 +17,69 @@
             Salir
         </button>
     </div>
-</div>
+</div> -->
+<header class="header">
+    <div class="nav-up">
+        <div class="logo">
+            <img class="logo-icon" src="../../../../assets/icons/logo.png" alt="">
+        </div> 
+        <div class="row-custom">
+            <p>MODULO DE </p>
+            <nav class="navigation">
+                <a *smShowForRoles="['Orders', 'Manager']" routerLink="/orders/tables" routerLinkActive="activelink">Pedidos</a>
+                <a *smShowForRoles="['Kitchen', 'Manager']" routerLink="/kitchen" routerLinkActive="activelink">Cocina</a>
+                <a *smShowForRoles="['Customer', 'Manager']" routerLink="/customer/menu" routerLinkActive="activelink">Clientes</a>
+            </nav>
+        </div>
+        <div class="login">
+            <div class="login-content">
+                <div class="user" (click)="toggleOption()">
+                    <p class="user-name show-login">
+                        {{user?.username}}
+                    </p>
+                    <img class="show-login" src="/assets/icons/user.png" alt="">
+                    <a class="show-login icon">
+                        <img class="icon-bg-white" src="/assets/icons/arrow-down.png" alt="">
+                    </a>
+                </div>
+                <div class="user-options" [ngClass]="{'hide':hideOption}">
+                    <div class="user-main">
+                        <img src="/assets/icons/user.png" alt="">
+                        <div class="user-main-info">
+                            <p>{{user?.username}}</p>
+                            <!--<p>user.name@correo.com</p>-->
+                        </div>
+                    </div>
+                    <div class="options">
+                        <div class="option">
+                            <i><img src="/assets/icons/account.png" alt=""></i>  
+                            <a href="">Cuenta</a>
+                        </div>
+                        <div class="option">
+                            <i><img src="/assets/icons/settings.png" alt=""></i>
+                            <a href="">Configuracion</a>
+                        </div>
+                    </div>
+                    <div class="logout">
+                        <div class="option">
+                            <i><img src="/assets/icons/logout.png" alt=""></i>
+                            <a (click)="logout()">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <i class="responsive-navbar hide">
+                <img src="/assets/icons/burger-bar.png" alt="">
+            </i>
+        </div>
+    </div>
+    <!--<div class="nav hide">
+        <div class="nav-content nav-items">
+            <a href="/index.html" ><img src="/assets/icons/home.png" alt="">   Inicio</a>
+            <a href="/citas.html" class="active"><img src="/assets/icons/calendar.png" alt=""> Citas</a>
+            <a href="/pagos.html"><img src="/assets/icons/pago.png" alt="">   Pagos</a>
+            <a href=""><img src="/assets/icons/sales.png" alt="">   Reporte de Ventas</a>
+            <a href=""><img src="/assets/icons/inventario.png" alt="">   Inventario</a>
+        </div>
+    </div>-->
+</header>

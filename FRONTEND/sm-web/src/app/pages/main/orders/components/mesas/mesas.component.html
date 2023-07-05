@@ -1,13 +1,36 @@
-<div class="container table">
-    <div class="container-header">
-        <p>Mesas</p>
+<div class="modal" *ngIf="showBusyTable">
+    <div class="modal-content">
+        <br>
+        <h3>No se puede registrar un producto a una mesa ocupada</h3>
+        <br>
+        <a class="btn btn-danger" (click)="closeModal()">Cerrar</a>
     </div>
+</div>
+<div class="row-custom bg-main"> 
+    <p class="texto p-2">Disposicion de mesas</p>
+</div>
+<div class="tables-dispose">
     <div class="container-content">
-
+        <div class="content-grid">
+            <div class="table-content" (click)="navigateRegister(t)" *ngFor="let t of mesasDisponibles">
+                <img src="{{t.image}}" alt="">
+                <p>{{t.numero}}</p>
+            </div>
+        </div>
+        <div class="table-legend">
+            <div class="info">
+                <p>Disponible</p>
+                <img src="/assets/icons/mesa-disponible.png" alt="">
+            </div>
+            <div class="info">
+                <p>No disponible</p>
+                <img src="/assets/icons/mesa-ocupada.png" alt="">
+            </div>
+        </div>
     </div>
     <div class="container-nav">
-        <a class="btn-nav" href="">PRINCIPAL</a>
-        <a class="btn-nav" href="">TERRAZA</a>
-        <a class="btn-nav" href="">PISCINA</a>
+        <a [ngClass]="{'btn-nav':true, 'btn-nav-activated':showPrincipal}" (click)="getTablesByLocation('principal')" >PRINCIPAL</a>
+        <a [ngClass]="{'btn-nav':true, 'btn-nav-activated':showTerraza}" (click)="getTablesByLocation('terraza')" >TERRAZA</a>
+        <a [ngClass]="{'btn-nav':true, 'btn-nav-activated':showPiscina}" (click)="getTablesByLocation('piscina')" >PISCINA</a>
     </div>
 </div>

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 import java.util.List;
 
@@ -12,10 +13,20 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PedidoRequest {
+    @Nullable
     private String fecha_pedido;
-    private double monto_pedido;
+    @Nullable
+    private Double monto_pedido;
+    @Nullable
     private String estado_pedido;
-    private int idmozo_pedido;
-    private int idmesa_pedido;
+    @Nullable
+    private Integer idmozo_pedido;
+    @Nullable
+    private Integer idbill_pedido;
+    @Nullable
+    private Integer idcliente_pedido;
+    @Nullable
+    private Integer idmesa_pedido;
+    @Nullable
     private List<PedidoDetalleRequest> detalles_pedido;
 }

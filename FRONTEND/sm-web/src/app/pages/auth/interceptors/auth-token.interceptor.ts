@@ -17,21 +17,27 @@ export class AuthTokenInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    console.log("GG")
+    const isFoodListRequest = req.method === 'GET' && req.url.includes('/inventary/foodlist');
     return this.authService.isLoggedIn$.pipe(
       first(),
       switchMap((isLoggedIn) => {
-        if (isLoggedIn === false) {
+        if (isLoggedIn === false || false) {
+          console.log("HABER SI PASA")
           return next.handle(req);
+        } else{
+          console.log("ACA HAY ALGO RARO")
         }
 
         return this.authService.user$.pipe(
           first(Boolean),
           switchMap(({ token }) => {
+            console.log("errorrrr")
             const headers = req.headers.append(
               'Authorization',
               `Bearer ${token}`
             );
-            return next.handle(req.clone({ headers }));
+            return next.handle(req);
           })
         );
       })

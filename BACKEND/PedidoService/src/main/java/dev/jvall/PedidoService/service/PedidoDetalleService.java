@@ -22,4 +22,10 @@ public class PedidoDetalleService {
     public PedidoDetalle saveOrderDetail(int idpedido, int idproducto, int cantidad){
         return pedidoDetallesRepository.saveOrderDetail(idpedido,idproducto,cantidad);
     }
+    public List<PedidoDetalle> updateOrderDetails(int idpedido,int idproducto, int cantidad){
+        return pedidoDetallesRepository.updateOrderDetails(idpedido,idproducto,cantidad);
+    }
+    public List<PedidoDetalle> deleteOrderDetail(int idpedido,int idproducto){
+        return pedidoDetallesRepository.deleteOrderDetail(idpedido,idproducto);
+    }
 }

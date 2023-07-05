@@ -1,4 +1,4 @@
-.order-container {
+/*.order-container {
     display: grid;
     grid-template-columns: 12rem 1fr;
     grid-template-rows: 1fr;
@@ -7,11 +7,10 @@
 }
 .lateral-nav { 
     grid-area: 1 / 1 / 2 / 2; 
-    background-color: red;
+    background-color: #43689F;
 }
 .content { 
     grid-area: 1 / 2 / 2 / 3;
-    background-color: blue;
 }
 .link{
     display: flex;
@@ -20,6 +19,9 @@
     padding: 0 0 0 1.5rem;
     margin: 1rem 0;
 }
+.active{
+    background-color: black;
+}
 .link:hover{
     background-color: black;
 }
@@ -27,4 +29,4 @@
     width: 25px;
     height: 25px;
 }
-    
+    */

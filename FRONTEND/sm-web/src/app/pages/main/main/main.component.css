@@ -1,0 +1,27 @@
+.main-content-wrapp{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+    margin: 8rem 0rem;
+}
+.welcome{
+    color: black;
+    font-size: 2.3rem;
+    font-weight: 600;
+}
+.welcome-info{
+    color: blue;
+    font-size: 1.7rem;
+}
+.row-custom{
+    margin-top: 5rem;
+    justify-content: center;
+}
+.item-link{
+    padding: 4rem;
+}
+.item-link:hover{
+    cursor: pointer;
+    background-color:deepskyblue;
+}

@@ -1,1 +1,66 @@
-<p>kitchen works!</p>
+<div class="modal" *ngIf="showConfirmationAlert">
+    <div class="modal-content">
+        <h4 class="texto-info">¿Esta seguro que desea elimnar el pedido?</h4>
+        <div class="row-custom">
+            <a class="btn btn-primary-custom" (click)="deleteOrder()">Confirmar</a>
+            <a class="btn btn-danger" (click)="cancelRemove()">Cancelar</a>
+        </div>
+        
+    </div>
+</div>
+<div class="general-container unit-container">
+    <main class="">
+        <div class="list-container-flex">
+            <div class="table tasks list-left">
+                <div class="table-body">
+                    <table class="table-component table-style w-100">
+                        <tr class="table-title-component">
+                            <th>#</th>
+                            <th>Pedido</th>
+                            <th>Estado</th>
+                            <th># Mesa</th>
+                            <th>Fecha y Hora</th>
+                            <th >Accion</th>
+                        </tr>
+                        <tr *ngIf="pedidos.length==0">
+                            <p>No hay pedidos {{filter}}</p>
+                        </tr>
+                        <div *ngFor="let i of pedidos">
+                            <tr class="table-row" *ngIf="i.estado.toLowerCase()===filter">
+                                <td>{{i.idpedido}}</td>
+                                <td>Descripcion</td>
+                                <td [ngClass]="{'tag':true,'success':i.estado.toLowerCase()==='listo','error':i.estado.toLowerCase()==='recibido'}">{{i.estado}}</td>
+                                <td>N° {{i.idmesa}}</td>
+                                <td>{{i.fecha}}</td>
+                                <td>
+                                    <div class="row-custom" *ngIf="i.estado.toLowerCase()==='recibido'">
+                                        <div class="action">
+                                            <p class="tooltip-container"><span class="tooltip remove">Remove</span></p>
+                                            <a (click)="ready(i)"><img class="img" src="/assets/icons/ready.png" alt=""></a>
+                                        </div>
+                                        <div class="action">
+                                            <p class="tooltip-container"><span class="tooltip remove">Remove</span></p>
+                                            <a (click)="remove(i)"><img class="img" src="/assets/icons/remover.png" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <p class="text-warning" *ngIf="i.estado.toLowerCase()!=='recibido'">Sin acciones</p>
+                                </td>
+                            </tr>
+                        </div>
+                        
+                    </table>
+                </div>
+            </div>
+            <div class="list-right">
+                <a [ngClass]="{'btn-nav':true, 'btn-nav-activated':showlisto}" (click)="filtrar('listo')">Pedidos Listos</a>
+                <a [ngClass]="{'btn-nav':true, 'btn-nav-activated':!showlisto}" (click)="filtrar('recibido')">Pedidos En cola</a>
+            </div>
+        </div>
+        <div *ngIf="showNotification">
+            <div class="notification {{notificationType}}">
+                <p>{{notificationMessage}}</p>
+            </div>
+        </div>
+        
+    </main>
+</div>

@@ -16,21 +16,27 @@ import java.util.List;
 @Slf4j //borrar depues
 public class PedidoService {
     private final PedidoRepository pedidoRepository;
-    public List<Pedido> getOrderList(){
+    public List<Pedido> getOrderList(String fecha){
         log.info("Getting order list from db");
-        return pedidoRepository.getOrderList();
+        return pedidoRepository.getOrderList(fecha);
+    }
+    public List<Pedido> changeOrderStateList(int orderid,String state,String fecha){
+        return pedidoRepository.changeOrderStateList(orderid,state,fecha);
     }
     public Pedido saveOrder(String fecha, double monto, String estado, int idmozo, int idmesa){
         return pedidoRepository.saveOrder(fecha,monto,estado,idmozo,idmesa);
     }
-    public void setOrderBill(int idpedido,int idcomprobante){
+    public Pedido setOrderBill(int idpedido,int idcomprobante){
 
-        pedidoRepository.setOrderBill(idpedido,idcomprobante);
+        return pedidoRepository.setOrderBill(idpedido,idcomprobante);
     }
     public Pedido showOrder(int idpedido){
         return pedidoRepository.showOrder(idpedido);
     }
-    public void setOrderClient(int idpedido, int idcliente){
-        pedidoRepository.setOrderClient(idpedido,idcliente);
+    public Pedido setOrderClient(int idpedido, int idcliente){
+        return pedidoRepository.setOrderClient(idpedido,idcliente);
+    }
+    public List<Pedido> deleteOrder(int orderid,int tableid,String fecha){
+        return pedidoRepository.deleteOrder(orderid,tableid,fecha);
     }
 }

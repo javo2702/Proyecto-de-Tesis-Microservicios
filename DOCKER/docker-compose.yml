@@ -1,0 +1,48 @@
+version: '3.8'
+services:
+  mysql-server:
+    image: mysql/mysql-server
+    environment:
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: toor
+    container_name: mysql-container
+    ports:
+      - 33061:3306
+    networks:
+      - 'dockernetflix-network'
+  eureka-server:
+    image: eureka-server
+    restart: always
+    container_name: eureka-container
+    ports:
+      - '8761:8761'
+    networks:
+      - 'dockernetflix-network'
+  zuul-service:
+    image: api-gateway
+    restart: always
+    container_name: api-gateway-container
+    ports:
+      - '8089:8089'
+    networks:
+      - 'dockernetflix-network'
+  inventary-microservice:
+    image: inventary-service
+    restart: always
+    container_name: inventary-container
+    depends_on:
+      - mysql-server
+    networks:
+      - 'dockernetflix-network'
+  order-microservice:
+    image: order-service
+    restart: always
+    container_name: order-container
+    depends_on:
+      - mysql-server
+    networks:
+      - 'dockernetflix-network'
+networks:
+  dockernetflix-network: #necesitamos crear en una red para alojar los servicios en ella y que puedan comunicarse entre sí
+ 
