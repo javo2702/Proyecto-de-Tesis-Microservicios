@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Order } from '../orders/components/pedidos/pedidos.component';
-import { PedidoResponse } from 'src/app/backend/interfaces/pedido';
+import { DetallesPedidoResponse, PedidoResponse } from 'src/app/backend/interfaces/pedido';
 import { ApiService } from 'src/app/backend/services/api.service';
 import { format } from 'date-fns';
 
@@ -24,15 +23,16 @@ export class KitchenComponent implements OnInit{
   currentDate: Date = new Date();
   date = this.currentDate.getDate() + " / " + (this.currentDate.getMonth()+1) + " / " + this.currentDate.getFullYear()
 
-  showlisto:boolean=true;
+  showlisto:boolean=false;
   filter:string='recibido'
-  pedidos:PedidoResponse[] = []
-  pedidoCopy:PedidoResponse[] = []
-  pedidoTemp:PedidoResponse | undefined
+  pedidos:Order[] = []
+  pedidoCopy:Order[] = []
+  pedidoTemp:Order | undefined
   showNotification:boolean = false
   showConfirmationAlert:boolean=false
   notificationMessage:string=""
   notificationType:string="success"
+  loading:boolean = true
   constructor(
     private apiService: ApiService,
     private cdr:ChangeDetectorRef
@@ -40,18 +40,13 @@ export class KitchenComponent implements OnInit{
    // this.getProducts()
   }
   ngOnInit() {
-    this.getPedidos().then(
-      ()=>{
-        this.filtrar("recibido")
-      }
-    )
+    this.getPedidos()
   }
   ngAfterViewInit(){
-    console.log("after view init")
+
   }
   async getPedidos():Promise<void>{
-    console.log("getting")
-    let detallesPedidos:PedidoResponse[] = []
+    let detallesPedidos:Order[] = []
     const currentDate = new Date()
     const formattedDate = format(currentDate, 'yyyy-MM-dd');
     this.apiService.getPedidos(formattedDate)
@@ -59,7 +54,8 @@ export class KitchenComponent implements OnInit{
         pedidos.forEach((p)=>{
           this.apiService.getPedidoDetalle(p.idpedido)
           .then(pedido=>{
-            detallesPedidos.push(pedido)
+            let pp = this.getDetallePedido(pedido)
+            detallesPedidos.push(pp)
             this.cdr.detectChanges()
           })
           .catch(error => {
@@ -70,19 +66,28 @@ export class KitchenComponent implements OnInit{
       .then(()=>{
           this.pedidos = detallesPedidos
           this.pedidoCopy = this.pedidos
+          this.loading = false
+          //this.filtrar("recibido")
           this.cdr.detectChanges()
-        }
-      )
-      .then(()=>{
-        this.cdr.detectChanges() 
-      })
+        })
       .catch(error => {
         console.error(error);
       });
   }
-  async showPedidos():Promise<void>{
-    await this.getPedidos()
-    this.filtrar("recibido")
+  getDetallePedido(p:Order):Order{
+    let descripcion = ""
+    p.detalles?.forEach((d)=>{
+      this.apiService.getProduct(d.idproducto)
+        .then((producto)=>{
+          descripcion = descripcion + d.cantidad + " " + producto.nombre + " - " + producto.precio + "<br/>"
+          p.desc = descripcion
+          this.cdr.detectChanges()
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    })
+    return p
   }
 
   ready(i:PedidoResponse):void{
@@ -103,7 +108,8 @@ export class KitchenComponent implements OnInit{
       pedidos.forEach((p)=>{
         this.apiService.getPedidoDetalle(p.idpedido)
         .then(pedido=>{
-          detallesPedidos.push(pedido)
+          let pp = this.getDetallePedido(pedido)
+          detallesPedidos.push(pp)
           this.cdr.detectChanges()
         })
         .catch(error => {
@@ -129,16 +135,7 @@ export class KitchenComponent implements OnInit{
       console.error(error);
     });
   }
-  /*remove(i:PedidoResponse):void{
-    this.showNotification = true
-    this.notificationMessage = "Se ha eliminado el pedido"
-    this.notificationType = "error"
-    setTimeout(() => {
-      this.showNotification = false;
-      this.cdr.detectChanges()
-    }, 1500);
-  }*/
-  remove(i:PedidoResponse):void{
+  remove(i:Order):void{
     this.showConfirmationAlert = true
     this.pedidoTemp = i
   }
@@ -146,15 +143,28 @@ export class KitchenComponent implements OnInit{
     this.showConfirmationAlert = false
   }
   deleteOrder():void{
+    let detallesPedidos:PedidoResponse[] = []
     this.showConfirmationAlert = false
     const currentDate = new Date()
     const formattedDate = format(currentDate, 'yyyy-MM-dd');
     this.apiService.deletePedido(this.pedidoTemp!.idpedido,this.pedidoTemp!.idmesa,formattedDate)
       .then((pedidos)=>{
-        console.log(pedidos)
-        this.pedidos = pedidos
+        pedidos.forEach((p)=>{
+          this.apiService.getPedidoDetalle(p.idpedido)
+          .then(pedido=>{
+            let pp = this.getDetallePedido(pedido)
+            detallesPedidos.push(pp)
+            this.cdr.detectChanges()
+          })
+          .catch(error => {
+            console.error(error);
+          });
+        })
+      })
+      .then(()=>{
+        this.pedidos = detallesPedidos
         this.showNotification = true
-        this.notificationMessage = "Se ha eliminado el pedido"
+        this.notificationMessage = "El pedido ha sido cancelado"
         this.notificationType = "error"
         setTimeout(() => {
           this.showNotification = false;
@@ -167,7 +177,6 @@ export class KitchenComponent implements OnInit{
       })
   }
   filtrar(state:string):void{
-    console.log("filtrando")
     if(state==="listo"){
       this.filter = 'listo'
       this.showlisto = true
@@ -175,8 +184,8 @@ export class KitchenComponent implements OnInit{
       this.filter='recibido'
       this.showlisto=false;
     }
-    this.pedidos = this.pedidoCopy.filter(({estado}:PedidoResponse)=>{
-      return estado.toLowerCase().includes(state)
-    })
   }
+}
+export interface Order extends PedidoResponse{
+  desc?:string
 }

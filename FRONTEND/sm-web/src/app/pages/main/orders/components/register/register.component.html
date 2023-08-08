@@ -1,59 +1,217 @@
-<div class="modal" *ngIf="showRegisterOk">
-    <div class="modal-content">
-        <h3 class="texto-info">Pedido Registrado de manera exitosa</h3>
-        <p>Detalles:</p>
-        <p><strong># Pedido:</strong> {{orderRegistered?.idpedido}}</p>
-        <p><strong>Estado:  </strong> <span [ngClass]="{'tag':true,'success':orderRegistered?.estado?.toLowerCase()==='listo','error':orderRegistered?.estado?.toLowerCase()==='recibido'}">{{orderRegistered?.estado}}</span></p>
-        <p><strong>N° Mesa:</strong> <span class="texto-info-sec">{{orderRegistered?.idmesa}}</span></p>
-        <a class="btn btn-danger" (click)="closeModal()">Cerrar</a>
+<div id="popup-modal" tabindex="-1" [ngClass]="{'hidden':!showRegisterOk}" class="fixed top-0 left-0 right-0 z-40 p-4 bg-black bg-opacity-10 overflow-x-hidden overflow-y-auto md:inset-0 h-full">
+    <div class="relative w-full max-h-full">
+        <div class="relative w-[500px] mt-[150px] bg-white rounded-lg shadow mx-auto">
+            <button (click)="closeModal()" type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center " data-modal-hide="popup-modal">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="p-6 text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-20 h-20 mx-auto fill-green-500">
+                    <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                </svg>   
+                <div>
+                    <h3 class="my-2 text-lg font-normal text-gray-500">Pedido Registrado de manera exitosa</h3>
+                    <p class="text-center mb-1">Detalles</p>
+                    <table class="w-full text-center text-sm text text-gray-500 mx-auto">
+                        <thead class="text-xs sticky top-0 left-0 right-0 z-10 text-white uppercase bg-sky-950">
+                            <tr>
+                                <th scope="col" class="px-4 py-3">
+                                    # Pedido
+                                </th>
+                                <th scope="col" class="px-2 py-3">
+                                    Estado
+                                </th>
+                                <th scope="col" class="px-2 py-3">
+                                    N° Mesa
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-200">
+                                <td class="px-2 py-4">
+                                    {{orderRegistered?.idpedido}}
+                                </td>
+                                <td class="px-2 py-4">
+                                    <p [ngSwitch]="orderRegistered?.estado?.toLowerCase()">
+                                        <span *ngSwitchCase="'listo'" class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">{{orderRegistered?.estado}}</span>
+                                        <span *ngSwitchCase="'recibido'" class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">{{orderRegistered?.estado}}</span>
+                                    </p>
+                                </td>
+                                <td class="px-2 py-4"><p class="bg-yellow-400 text-black px-2 py-1 rounded-lg">{{orderRegistered?.idmesa}}</p></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>               
+                <button (click)="closeModal()" data-modal-hide="popup-modal" type="button" class="text-gray-500 mt-3 bg-white hover:bg-gray-500  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">Cerrar</button>
+            </div>
+        </div>
     </div>
 </div>
-<div class="modal" *ngIf="showNoOrderItems">
-    <div class="modal-content">
-        <h3>No puede registrar un pedido sin haber elegido al menos un producto</h3>
-        <a class="btn btn-danger" (click)="closeModalError()">Cerrar</a>
+<div id="popup-modal" tabindex="-1" [ngClass]="{'hidden':!showNoOrderItems}" class="fixed top-0 left-0 right-0 z-40 p-4 bg-black bg-opacity-10 overflow-x-hidden overflow-y-auto md:inset-0 h-full">
+    <div class="relative w-full max-h-full">
+        <div class="relative w-[500px] mt-[150px] bg-white rounded-lg shadow mx-auto">
+            <button (click)="closeModalError()" type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center " data-modal-hide="popup-modal">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="p-6 text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-20 h-20 mx-auto fill-red-500">
+                    <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
+                </svg>   
+                <div>
+                    <h3 class="my-2 text-lg font-normal text-gray-500">No puede registrar un pedido sin haber elegido al menos un producto</h3>
+                </div>               
+                <button (click)="closeModalError()" data-modal-hide="popup-modal" type="button" class="text-gray-500 mt-3 bg-white hover:bg-gray-500  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">Cerrar</button>
+            </div>
+        </div>
     </div>
 </div>
-<div class="register-container">
-    <div class="food-content">
-        <p class="text-title row-custom bg-main t-white">Platos disponibles:</p>
-        <div class="food-wrapp">
-            <div class="food-category">
-                <div *ngFor="let cat of categoriasapi" (click)="getProductsByCategory(cat)">
-                    <div [ngClass]="{'category':true,'category-activated':cat.actived}">
-                        <p>{{cat.nombre}}</p>
+<div class="grid grid-cols-[1fr_.5fr] gap-2">
+    <div class="">
+        <p class="bg-sky-700 text-white py-2 px-4 flex flex-col justify-center">Platos disponibles:</p>
+        <div class="px-2 py-2">
+            <div class="grid grid-cols-6 gap-2 animate-pulse" [ngClass]="{'hidden':categoriasapi.length>0}">
+                <div class="h-[40px] w-full mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[40px] w-full mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[40px] w-full mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[40px] w-full mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[40px] w-full mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[40px] w-full mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[40px] w-full mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[40px] w-full mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[40px] w-full mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[40px] w-full mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[40px] w-full mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[40px] w-full mx-auto bg-gray-200 rounded-md"></div>
+            </div>
+            <div class="grid grid-cols-6 gap-2" [ngClass]="{'hidden':categoriasapi.length==0}">
+                <div class="flex items-center justify-center w-full" *ngFor="let cat of categoriasapi" (click)="getProductsByCategory(cat)">
+                    <div class="w-full text-white text-center rounded-md px-2 xl:px-4 py-2 h-[40px] hover:bg-yellow-400 hover:cursor-pointer" [ngClass]="{'bg-yellow-300':!cat.actived,'bg-yellow-400':cat.actived}">
+                        <p class="text-[13px] xl:text-base h-[18px] overflow-hidden uppercase">{{cat.nombre}}</p>
                     </div>
                 </div>
             </div>
-            <div class="food-results">
-                <p>Resultados:</p>
-                <div class="results">
-                    <div class="results" *ngFor="let product of productosapi">
-                        <div class="product">
-                            <img class="product-img" src="/assets/images/producto.png" alt="Producto">
-                            <p class="product-name capitalize">{{product?.nombre}}<br><span class="texto-opcional">{{product?.descripcion}}</span></p>
-                            <div class="product-option">
-                                <p>S/. <span>{{product?.precio}}</span></p>
-                                <a class="btn-add" (click)="add(product)">+</a>
+            <div class="flex flex-col justify-between">
+                <p class="text-gray-500 my-2">Resultados:</p>
+                <div class="h-[448px]">
+                    <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 animate-pulse" [ngClass]="{'hidden':productosshow.length>0}">
+                        <div class="rounded-md border-1 border-gray-200 h-[212px]"><div class="h-full flex flex-col justify-between pt-3"><div class="rounded-md mx-auto bg-gray-200 lg:h-[100px] lg:w-[120px]"></div><div class="px-4"><div class="h-[30px] w-full bg-gray-200 rounded-md"></div></div><div class="flex justify-between items-center"><div class="px-2 w-full"><p class="w-10/12 mx-auto text-center h-[20px] bg-gray-200 rounded-md"></p></div><a class="bg-gray-200 rounded-md px-4 py-1 text-white h-[35px] hover:bg-sky-950 hover:cursor-pointer"></a></div></div></div>
+                        <div class="rounded-md border-1 border-gray-200 h-[212px]"><div class="h-full flex flex-col justify-between pt-3"><div class="rounded-md mx-auto bg-gray-200 lg:h-[100px] lg:w-[120px]"></div><div class="px-4"><div class="h-[30px] w-full bg-gray-200 rounded-md"></div></div><div class="flex justify-between items-center"><div class="px-2 w-full"><p class="w-10/12 mx-auto text-center h-[20px] bg-gray-200 rounded-md"></p></div><a class="bg-gray-200 rounded-md px-4 py-1 text-white h-[35px] hover:bg-sky-950 hover:cursor-pointer"></a></div></div></div>
+                        <div class="rounded-md border-1 border-gray-200 h-[212px]"><div class="h-full flex flex-col justify-between pt-3"><div class="rounded-md mx-auto bg-gray-200 lg:h-[100px] lg:w-[120px]"></div><div class="px-4"><div class="h-[30px] w-full bg-gray-200 rounded-md"></div></div><div class="flex justify-between items-center"><div class="px-2 w-full"><p class="w-10/12 mx-auto text-center h-[20px] bg-gray-200 rounded-md"></p></div><a class="bg-gray-200 rounded-md px-4 py-1 text-white h-[35px] hover:bg-sky-950 hover:cursor-pointer"></a></div></div></div>
+                        <div class="rounded-md border-1 border-gray-200 h-[212px]"><div class="h-full flex flex-col justify-between pt-3"><div class="rounded-md mx-auto bg-gray-200 lg:h-[100px] lg:w-[120px]"></div><div class="px-4"><div class="h-[30px] w-full bg-gray-200 rounded-md"></div></div><div class="flex justify-between items-center"><div class="px-2 w-full"><p class="w-10/12 mx-auto text-center h-[20px] bg-gray-200 rounded-md"></p></div><a class="bg-gray-200 rounded-md px-4 py-1 text-white h-[35px] hover:bg-sky-950 hover:cursor-pointer"></a></div></div></div>
+                        <div class="rounded-md border-1 border-gray-200 h-[212px]"><div class="h-full flex flex-col justify-between pt-3"><div class="rounded-md mx-auto bg-gray-200 lg:h-[100px] lg:w-[120px]"></div><div class="px-4"><div class="h-[30px] w-full bg-gray-200 rounded-md"></div></div><div class="flex justify-between items-center"><div class="px-2 w-full"><p class="w-10/12 mx-auto text-center h-[20px] bg-gray-200 rounded-md"></p></div><a class="bg-gray-200 rounded-md px-4 py-1 text-white h-[35px] hover:bg-sky-950 hover:cursor-pointer"></a></div></div></div>
+                        <div class="rounded-md border-1 border-gray-200 h-[212px]"><div class="h-full flex flex-col justify-between pt-3"><div class="rounded-md mx-auto bg-gray-200 lg:h-[100px] lg:w-[120px]"></div><div class="px-4"><div class="h-[30px] w-full bg-gray-200 rounded-md"></div></div><div class="flex justify-between items-center"><div class="px-2 w-full"><p class="w-10/12 mx-auto text-center h-[20px] bg-gray-200 rounded-md"></p></div><a class="bg-gray-200 rounded-md px-4 py-1 text-white h-[35px] hover:bg-sky-950 hover:cursor-pointer"></a></div></div></div>
+                    </div>
+                    <div class="grid grid-cols-2 lg:grid-cols-3 gap-4" [ngClass]="{'hidden':productosshow.length==0}">
+                        <div class="rounded-md border-1 border-sky-800" *ngFor="let product of productosshow">
+                            <div class="">
+                                <img class="w-full lg:h-[120px] lg:w-[120px] mx-auto" src="/assets/images/producto.png" alt="Producto">
+                                <div class="h-[50px] overflow-hidden flex flex-col items-center justify-start text-center capitalize">
+                                    <p class="">{{product?.nombre}}</p>
+                                    <span class="text-gray-400 text-[14px] px-4">{{product?.descripcion}}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <p class="w-full text-center text-[18px]">S/. <span>{{product?.precio}}</span></p>
+                                    <a class="bg-sky-800 rounded-md px-4 py-1 text-white text-[20px] hover:bg-sky-950 hover:cursor-pointer" (click)="add(product)">+</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="flex justify-end mt-3" [ngClass]="{'hidden':productosshow.length==0}">
+                    <nav aria-label="">
+                        <ul class="flex items-center -space-x-px h-10 text-base">
+                          <li>
+                            <a (click)="previous()" [ngClass]="{'hidden':currentIndex==1}" class="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 hover:border-sky-800 rounded-l-lg hover:bg-gray-800 hover:text-gray-700">
+                              <span class="sr-only">Previous</span>
+                              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                              </svg>
+                            </a>
+                          </li>
+                          <li *ngFor="let p of pagination">
+                            <a (click)="toNumber(p)" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:border-sky-800 hover:bg-gray-800 hover:text-gray-700" [ngClass]="{'text-sky-700':p==currentIndex.toString(),'rounded-l-lg':currentIndex==1&&currentIndex.toString()==p,'rounded-r-lg':currentIndex==pagination.length&&currentIndex.toString()==p}">{{p}}</a>
+                          </li>
+                          <li>
+                            <a (click)="next()" [ngClass]="{'hidden':currentIndex==pagination.length}" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:border-sky-800 rounded-r-lg hover:bg-gray-800 hover:text-gray-700">
+                              <span class="sr-only">Next</span>
+                              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                              </svg>
+                            </a>
+                          </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
-    <div class="detail-content">
-        <p class="row-custom bg-main t-white">Detalles de la orden:</p>
+    <div class="">
+        <p class="bg-sky-700 text-white py-2 px-4 flex flex-col justify-center">Detalles de la orden:</p>
         <div class="detail-wrapp">
-            <div class="row-custom">
-                <p><strong>Camarero:</strong></p>
-                <p class="capitalize">{{user?.username}}</p>
+            <div class="px-3">
+                <div class="row-custom">
+                    <p><strong>Camarero:</strong></p>
+                    <p class="capitalize">{{user?.username}}</p>
+                </div>
+                <div class="row-custom">
+                    <p><strong>N° Mesa:</strong></p>
+                    <p>N° {{table}}</p>
+                </div>
             </div>
-            <div class="row-custom">
-                <p><strong>N° Mesa:</strong></p>
-                <p>N° {{table}}</p>
+            <div class="w-full relative  overflow-y-scroll overflow-hidden h-[500px] border-b border-gray-200">
+                <table class="w-full text-center text-sm text text-gray-500 mx-auto">
+                    <thead class="text-xs sticky top-0 left-0 right-0 z-10 text-white uppercase bg-sky-950">
+                        <tr>
+                            <th scope="col" class="px-4 py-3">
+                                Cantidad
+                            </th>
+                            <th scope="col" class="px-2 py-3">
+                                Descripcion
+                            </th>
+                            <th scope="col" class="px-2 py-3">
+                                Subtotal
+                            </th>
+                            <th scope="col" class="px-2 py-3">
+                                Accion
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of order" class="border-b border-gray-200">
+                            <td class="px-2 py-4">
+                                <div class="row-custom-center">
+                                    <a class="btn-counter" (click)="decrement(item)">-</a>
+                                    <p>{{item.cantidad}}</p>
+                                    <a class="btn-counter" (click)="increment(item)">+</a>
+                                </div>
+                            </td>
+                            <td class="px-2 py-4"><p>{{item.descripcion}}</p></td>
+                            <td class="px-2 py-4">S/.{{item.subtotal}}</td>
+                            <td class="px-2 py-4">
+                                <div class="action">
+                                    <div (click)="remove(item)" class="tooltip-custom">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-red-500 hover:cursor-pointer hover:fill-red-800">
+                                            <path d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375z" />
+                                            <path fill-rule="evenodd" d="M3.087 9l.54 9.176A3 3 0 006.62 21h10.757a3 3 0 002.995-2.824L20.913 9H3.087zm6.133 2.845a.75.75 0 011.06 0l1.72 1.72 1.72-1.72a.75.75 0 111.06 1.06l-1.72 1.72 1.72 1.72a.75.75 0 11-1.06 1.06L12 15.685l-1.72 1.72a.75.75 0 11-1.06-1.06l1.72-1.72-1.72-1.72a.75.75 0 010-1.06z" clip-rule="evenodd" />
+                                        </svg>  
+                                        <p class="tooltiptext bg-red-500 left-[-10px]">Eliminar</p>  
+                                    </div> 
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div *ngIf="order.length==0" class="border-b w-full py-2 px-4 text-gray-400 text-center">
+                    <p>Debe seleccionar productos</p>
+                </div>
             </div>
-            <div>
+            <div class="my-4" *ngIf="order.length > 0"><p>Total: <strong>S/.{{total}}</strong></p></div>
+            <div class="hidden">
                 <table class="table-component w-100">
                     <tr class="table-title-component t-detalle">
                         <th>Cantidad</th>
@@ -82,9 +240,9 @@
                 </table>
                 <div *ngIf="order.length > 0"><p>Total: <strong>S/.{{total}}</strong></p></div>
             </div>
-            <div class="row-custom around p-2">
-                <a class="btn btn-primary-custom" (click)="registerOrder()">Registrar pedido</a>
-                <a class="btn btn-danger" (click)="cancelOrder()">Cancelar</a>
+            <div class="grid grid-cols-2 justify-center items-center px-4 mt-4 gap-4">
+                <a class="text-center bg-sky-700 rounded-md px-4 py-2 text-white hover:bg-sky-900 hover:cursor-pointer" (click)="registerOrder()">Registrar</a>
+                <a class="text-center bg-red-800 rounded-md px-4 py-2 text-white hover:bg-red-900 hover:cursor-pointer" (click)="cancelOrder()">Cancelar</a>
             </div>
         </div>
     </div>

@@ -1,53 +1,45 @@
-<!--<div>
-    <h1>Solar Marino</h1>
-    <form [formGroup]="form" (ngSubmit)="login()">
-      <label for="username"> Username </label>
-      <input
-        type="text"
-        name="username"
-        formControlName="username"
-        autocomplete="off"
-      />
-      <label for="password">Password </label>
-      <input type="password" name="password" formControlName="password" />
-      <p *ngIf="form.hasError('invalidCredentials')" class="error-msg">
-        Las credenciales son incorrectas
-      </p>
-      <button type="submit" [disabled]="form.invalid || processingRequest">
-        Iniciar Sesión
-      </button>
-    </form>
-  </div> -->
+
 <div class="bg-image">
   <div class="container mx-auto row align-items-center justify-content-center justify-content-lg-end vh-100">
-    <div class="card text-bg-light col-xs-10 col-sm-8 col-lg-4">
+    <div class="w-[400px] bg-white rounded-md">
         <div class="card-body">
-          <div class="authBlock">
-            <div class="logo-container">
-              <img class="logo" src="../../../assets/icons/logo.png" alt="">
+          <div class="authBlock p-4">
+            <div class="w-[65%] mx-auto">
+              <img class="" src="./assets/icons/logo.png" alt="">
             </div>
             
-            <h3 class="text-center text-primary-custom">Bienvenido</h3>
+            <h3 class="text-center text-sky-700 text-[18px] mt-2">Iniciar Sesion</h3>
             <form [formGroup]="form" (ngSubmit)="login()">
-              <div class="formGroup">
+
+              <div class="my-4">
+                <label for="email" class="block text-md font-medium leading-6 text-sky-800">Correo:</label>
+                <div class="mt-2">
+                  <input id="email" name="email" type="email" autocomplete="email" formControlName="username" placeholder="Ingrese su correo"  #userName required class="block w-full rounded-md border-[1px] border-sky-700 px-3 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                </div>
+              </div>
+              <div>
+                <label for="email" class="block text-md font-medium leading-6 text-sky-800">Password:</label>
+                <div class="mt-2">
+                  <input id="password" name="password" type="password" autocomplete="password" formControlName="password" placeholder="Ingrese su contraseña"  #userPassword required class="block w-full rounded-md border-[1px] border-sky-700 px-3 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                </div>
+              </div>
+
+              <!--<div class="formGroup">
                 <label for="" class="form-label">Correo:</label> 
                 <input type="text" name="username" formControlName="username" autocomplete="off" class="form-control mb-2" placeholder="Ingrese su correo" #userName required>
               </div>
               <div class="form-group">
                 <label for="" class="form-label">Contraseña:</label>
                 <input type="password" name="password" formControlName="password" class="form-control mb-2" placeholder="Ingrese su contraseña" #userPassword required>
-              </div>
-              <p *ngIf="form.hasError('invalidCredentials')" class="error-msg">
-                Las credenciales son incorrectas
+              </div>-->
+              <p *ngIf="form.hasError('invalidCredentials')" class="text-red-500 text-[14px] mt-2">
+                *Las credenciales son incorrectas
               </p>
-              <button class="btn-primary-custom w-100 my-2" type="submit" [disabled]="form.invalid || processingRequest">
-                Iniciar Sesión
+              <button class="w-full bg-sky-800 rounded-md text-white py-2 my-4 hover:bg-sky-950 hover:cursor-pointer" type="submit" [disabled]="form.invalid || processingRequest">
+                Ingresar
               </button>
             </form>
           </div>
-          <!--<div class="redirectToLogin mt-2 text-center">
-            <span>Don't have an account?<span class="redirect text-primary" routerLink="/register-user"> Sign Up</span></span>
-          </div>-->
         </div>
     </div>
   </div>

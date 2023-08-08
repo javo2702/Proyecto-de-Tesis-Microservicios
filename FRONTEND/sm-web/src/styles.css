@@ -1,4 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.tooltip-custom{
+    position: relative;
+}
+.tooltip-custom .tooltiptext {
+    visibility: hidden;
+    color: #fff;
+    font-size: 10px;
+    text-align: center;
+    padding: 1px 5px;
+    border-radius: 6px;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    top: -12px;
+    z-index: 1;
+  }
+  .tooltip-custom:hover .tooltiptext {
+    cursor: pointer;
+    visibility: visible;
+  }
+  .vertical{
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    text-align: center;
+}
+.active{
+    background-color: rgb(3 105 161);
+    border-radius: .2rem;
+    color: var(--white);
+    font-weight: bold;
+}
 /* ----- Colores -------- */
 :root{
     --main: #000;
@@ -13,7 +46,6 @@
 
 /* ----- Globales ------- */
 html{
-    font-size: 62.5%;
     box-sizing: border-box;
     height: 100%;
     max-height: 100%;
@@ -25,7 +57,6 @@ html{
 }
 body {
     font-family: "Poppins", sans-serif;
-    font-size: 1.6rem;
     line-height: 1.6;
     margin: 0;
     height: 100%;
@@ -355,12 +386,7 @@ p{
     font-weight: bold;
 }
 
-.active{
-    background-color: var(--sec);
-    border-radius: .4rem;
-    color: var(--white);
-    font-weight: bold;
-}
+
 .active img{
     filter: invert(100%);
 }

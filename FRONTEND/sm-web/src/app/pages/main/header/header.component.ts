@@ -9,6 +9,8 @@ import { User } from '../../auth/model/user.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
+  showMobile:boolean = false
+  showOptions:boolean = false
   currentUser$ = this.authService.user$;
   user: User | null = null;
   hideOption:Boolean = true
@@ -16,8 +18,7 @@ export class HeaderComponent {
   constructor(private authService: AuthService) {
     this.getModuleName()
   }
-  
-  logout(): void {
+  log_out(){
     this.authService.logout();
   }
   getModuleName():void{

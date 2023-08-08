@@ -8,6 +8,7 @@ import { hasRole } from '../../auth/guards/has-role.guard';
 import { RegisterComponent } from './components/register/register.component';
 import { ProductoComponent } from './components/register/components/producto/producto.component';
 import { ActualizarComponent } from './components/actualizar/actualizar.component';
+import { CtableComponent } from '../../shared/componentes/ctable/ctable.component';
 
 
 const routes = [
@@ -43,7 +44,8 @@ const routes = [
     PedidosComponent,
     RegisterComponent,
     ProductoComponent,
-    ActualizarComponent
+    ActualizarComponent,
+    CtableComponent
   ],
   imports: [
     CommonModule,RouterModule.forChild(routes)

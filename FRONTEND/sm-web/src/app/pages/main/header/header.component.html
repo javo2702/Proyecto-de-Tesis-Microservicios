@@ -1,27 +1,101 @@
-<!--<div class="header">
-    <a id="logo" routerLink="/">Solar Marino</a>
-    <div class="module-nav">
-        <p>MODULO DE </p>
-        <nav class="nav">
-            <a *smShowForRoles="['Orders', 'Manager']" routerLink="/orders">Pedidos</a>
-            <a *smShowForRoles="['Kitchen', 'Manager']" routerLink="/kitchen">Cocina</a>
-            <a *smShowForRoles="['Customer', 'Manager']" routerLink="/customer">Clientes</a>
-        </nav>
+<nav class="bg-black py-0 z-30">
+    <div class="mx-auto px-3 lg:px-10">
+      <div class="relative flex h-16 items-center justify-between w-full">
+        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <!-- Mobile menu button-->
+          <button (click)="showMobile=!showMobile" type="button" class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+            <!--
+              Icon when menu is closed.
+  
+              Menu open: "hidden", Menu closed: "block"
+            -->
+            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+            <!--
+              Icon when menu is open.
+  
+              Menu open: "block", Menu closed: "hidden"
+            -->
+            <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="flex items-center justify-between w-full">
+            <div class="flex items-center justify-center sm:items-stretch sm:justify-start">
+                <div class="flex flex-shrink-0 items-center">
+                  <img class="w-[100px]" src="./assets/icons/logo.png" alt="">
+                </div>
+              </div>
+              <div class="flex flex-row">
+                  <p>MODULO DE </p>
+                  <nav class="navigation">
+                      <a *smShowForRoles="['Orders', 'Manager']" routerLink="/orders/tables" routerLinkActive="activelink">Pedidos</a>
+                      <a *smShowForRoles="['Kitchen', 'Manager']" routerLink="/kitchen" routerLinkActive="activelink">Cocina</a>
+                      <a *smShowForRoles="['Customer', 'Manager']" routerLink="/customer/menu" routerLinkActive="activelink">Clientes</a>
+                  </nav>
+              </div>
+              <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <p class="text-white">{{user?.username}}</p>
+                <!--<button type="button" class="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                  </svg>
+                </button> -->
+                <!-- Profile dropdown -->
+                <div class="relative ml-3">
+                  <div class="flex flex-row items-center justify-center gap-1">
+                    <button (click)="showOptions=!showOptions" type="button" class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true" data-dropdown-toggle="user-dropdown-menu" data-dropdown-placement="bottom">
+                      <span class="sr-only">Open user menu</span>
+                      <img class="h-8 w-8 rounded-full" src="http://app.emape.gob.pe/cdn-emape/global/user-default.png" alt="">
+                    </button>
+                    <button (click)="showOptions=!showOptions">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 fill-white">
+                        <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd" />
+                      </svg>                
+                    </button>
+                  </div>
+                  <div id="user-dropdown-menu" *ngIf="showOptions" class="z-50 absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                    <!-- Active: "bg-gray-100", Not Active: "" 
+                    <a class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+                    <a class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>-->
+                    <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-sky-800 hover:text-white hover:cursor-pointer" role="menuitem" tabindex="-1" id="user-menu-item-2" (click)="log_out()">Sign out</a>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
     </div>
-    <div class="user-row">
-        <span class="separator"></span>
-        <p>{{user?.username}}</p>
-        <img src="/assets/icons/user-default.png" alt="">
-        <button (click)="logout()">
-            <img src="/assets/icons/logout.svg" alt="" />
-            Salir
-        </button>
+  
+    <!-- Mobile menu, show/hide based on menu state. -->
+    <div *ngIf="showMobile" class="sm:hidden z-50 absolute left-0 right-0 bg-black" id="mobile-menu">
+      <div class="space-y-1 px-2 pb-3 pt-2">
+        <a *smShowForRoles="['Orders', 'Manager']" routerLink="/orders/tables" routerLinkActive="activelink" class="text-white text-center rounded-md px-3 py-2 text-sm font-medium flex items-center gap-1.5 lg:gap-3 hover:text-red-400">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+            </svg>              
+            Pedidos
+        </a>
+        <a *smShowForRoles="['Kitchen', 'Manager']" routerLink="/kitchen" routerLinkActive="activelink" class="text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z" />
+            </svg>              
+            Cocina
+        </a>
+        <a *smShowForRoles="['Customer', 'Manager']" routerLink="/customer/menu" routerLinkActive="activelink" class="text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+            </svg>              
+            Clientes
+        </a>
+      </div>
     </div>
-</div> -->
-<header class="header">
+</nav>
+<!--<header class="header">
     <div class="nav-up">
         <div class="logo">
-            <img class="logo-icon" src="../../../../assets/icons/logo.png" alt="">
+            <img class="logo-icon" src="./assets/icons/logo.png" alt="">
         </div> 
         <div class="row-custom">
             <p>MODULO DE </p>
@@ -47,7 +121,7 @@
                         <img src="/assets/icons/user.png" alt="">
                         <div class="user-main-info">
                             <p>{{user?.username}}</p>
-                            <!--<p>user.name@correo.com</p>-->
+                            <p>user.name@correo.com</p>
                         </div>
                     </div>
                     <div class="options">
@@ -63,7 +137,7 @@
                     <div class="logout">
                         <div class="option">
                             <i><img src="/assets/icons/logout.png" alt=""></i>
-                            <a (click)="logout()">Logout</a>
+                            <a (click)="log_out()">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -73,13 +147,4 @@
             </i>
         </div>
     </div>
-    <!--<div class="nav hide">
-        <div class="nav-content nav-items">
-            <a href="/index.html" ><img src="/assets/icons/home.png" alt="">   Inicio</a>
-            <a href="/citas.html" class="active"><img src="/assets/icons/calendar.png" alt=""> Citas</a>
-            <a href="/pagos.html"><img src="/assets/icons/pago.png" alt="">   Pagos</a>
-            <a href=""><img src="/assets/icons/sales.png" alt="">   Reporte de Ventas</a>
-            <a href=""><img src="/assets/icons/inventario.png" alt="">   Inventario</a>
-        </div>
-    </div>-->
-</header>
+</header>-->

@@ -20,6 +20,13 @@ const routes: Routes = [
       import('./pages/main/main.module').then(
         (m) => m.MainModule
       )
+  },
+  {
+    path: 'customer',
+    loadChildren: () => 
+      import('./pages/main/customer/customer.module').then(
+        (m) => m.CustomerModule
+      )
   }
 ]
 

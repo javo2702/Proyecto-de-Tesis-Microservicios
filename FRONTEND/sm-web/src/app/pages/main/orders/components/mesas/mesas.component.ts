@@ -9,6 +9,9 @@ import { ApiService } from 'src/app/backend/services/api.service';
 })
 export class MesasComponent implements OnInit{
 
+  columnas:number = 6
+  filas:number = 4
+
   showPrincipal:boolean = false
   showTerraza:boolean = false
   showPiscina:boolean = false

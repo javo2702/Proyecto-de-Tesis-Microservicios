@@ -1,60 +1,182 @@
-<div class="modal" *ngIf="showDetalles">
-    <div class="modal-content">
-        <h3 class="texto-info">Detalles del pedido numero {{selectedPedido?.id}}</h3>
-        <p><strong>Estado:  </strong> <span [ngClass]="{'tag':true,'success':selectedPedido?.estado?.toLowerCase()==='listo','error':selectedPedido?.estado?.toLowerCase()==='recibido'}">{{selectedPedido?.estado}}</span></p>
-        <p><strong>Descripcion:</strong></p>
-        <p style="white-space: pre-line" class="capitalize">{{selectedPedido?.descripcion}}</p>
-        <p><strong>N° Mesa:</strong> <span class="texto-info-sec">{{selectedPedido?.mesa}}</span></p>
-        <a class="btn btn-danger" (click)="closeModal()">Cerrar</a>
-    </div>
-</div>
-<div class="modal" *ngIf="showConfirmationAlert">
-    <div class="modal-content">
-        <h4 class="texto-info">¿Esta seguro que desea elimnar el pedido?</h4>
-        <div class="row-custom">
-            <a class="btn btn-primary-custom" (click)="deleteOrder()">Confirmar</a>
-            <a class="btn btn-danger" (click)="cancelRemove()">Cancelar</a>
+<div id="popup-modal" tabindex="-1" [ngClass]="{'hidden':!showDetalles}" class="fixed top-0 left-0 right-0 z-40 p-4 bg-black bg-opacity-10 overflow-x-hidden overflow-y-auto md:inset-0 h-full">
+    <div class="relative w-full max-h-full">
+        <div class="relative w-[500px] mt-[150px] bg-white rounded-lg shadow mx-auto">
+            <button (click)="closeModal()" type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center " data-modal-hide="popup-modal">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="p-6 text-center"> 
+                <div>
+                    <h3 class="my-2 text-lg font-normal text-gray-500">Detalles del pedido numero <span class="text-sky-700">{{selectedPedido?.id}}</span></h3>
+                    <table class="w-full text-center text-sm text text-gray-500 mx-auto">
+                        <thead class="text-xs sticky top-0 left-0 right-0 z-10 text-white uppercase bg-sky-950">
+                            <tr>
+                                <th scope="col" class="px-2 py-3">
+                                    Estado
+                                </th>
+                                <th scope="col" class="px-4 py-3">
+                                    Descripcion
+                                </th>
+                                <th scope="col" class="px-2 py-3">
+                                    N° Mesa
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-200">
+                                <td class="px-2 py-4">
+                                    <p [ngSwitch]="selectedPedido?.estado?.toLowerCase()">
+                                        <span *ngSwitchCase="'listo'" class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">{{selectedPedido?.estado}}</span>
+                                        <span *ngSwitchCase="'recibido'" class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">{{selectedPedido?.estado}}</span>
+                                    </p>
+                                </td>
+                                <td class="px-2 py-4">
+                                    {{selectedPedido?.descripcion}}
+                                </td>
+                                <td class="px-2 py-4"><p class="bg-yellow-400 text-black px-2 py-1 rounded-lg">{{selectedPedido?.mesa}}</p></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>               
+                <button (click)="closeModal()" data-modal-hide="popup-modal" type="button" class="text-gray-500 mt-3 bg-white hover:bg-gray-500  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">Cerrar</button>
+            </div>
         </div>
-        
     </div>
 </div>
-<div class="row-custom bg-main">
-    <p class="texto">Lista de pedidos</p>
-    <p class="texto">Fecha: <span>{{date}}</span></p>
+<div id="popup-modal" tabindex="-1" [ngClass]="{'hidden':!showConfirmationAlert}" class="fixed top-0 left-0 right-0 z-40 p-4 bg-black bg-opacity-10 overflow-x-hidden overflow-y-auto md:inset-0 h-full">
+    <div class="relative w-full max-h-full">
+        <div class="relative w-[500px] mt-[150px] bg-white rounded-lg shadow mx-auto">
+            <button (click)="cancelRemove()" type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center " data-modal-hide="popup-modal">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="p-6 text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-20 h-20 mx-auto fill-red-500">
+                    <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
+                </svg>   
+                <div>
+                    <h3 class="my-2 text-lg font-normal text-gray-500">¿Esta seguro que desea cancelar el pedido?</h3>
+                </div>       
+                <button (click)="deleteOrder()" data-modal-hide="popup-modal" type="button" class="text-white mt-3 mr-5 bg-green-500 hover:bg-green-700  rounded-lg text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">Confirmar</button>        
+                <button (click)="cancelRemove()" data-modal-hide="popup-modal" type="button" class="text-gray-500 mt-3 bg-white hover:bg-gray-500  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">Cancelar</button>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="table tasks">
-    <div class="table-body d-flex">
-        <table class="table-component table-style w-100">
-            <tr class="table-title-component">
-                <th># Pedido</th>
-                <th>Estado</th>
-                <th># Mesa</th>
-                <th>Hora</th>
-            </tr>
-            <tr *ngIf="pedidos.length==0">
-                <p>No se han registrado pedidos aun</p>
-            </tr>
-            <tr class="table-row" *ngFor="let p of pedidos" (click)="getDetallePedido(p)">
-                <td>{{p.idpedido}}</td>
-                <td [ngClass]="{'tag':true,'success':p.estado.toLowerCase()==='listo','error':p.estado.toLowerCase()==='recibido'}">{{p.estado}}</td>
-                <td>N° {{p.idmesa}}</td>
-                <td>{{p.fecha}}</td>
-            </tr>
+<div class="h-full grid grid-rows-[50px_1fr]">
+    <div class="bg-sky-700 py-2 px-4 flex flex-row items-center justify-between text-white">
+        <p class="">Lista de pedidos</p>
+        <p class="">Fecha: <span>{{date}}</span></p>
+    </div>
+    <div class="p-4 w-full relative  overflow-hidden">
+        <table class="w-full text-center text-sm text text-gray-500 mx-auto">
+            <thead class="text-xs text-white uppercase bg-sky-950">
+                <tr>
+                    <th scope="col" class="px-4 py-3">
+                        # Pedido
+                    </th>
+                    <th scope="col" class="px-2 py-3">
+                        Estado
+                    </th>
+                    <th scope="col" class="px-2 py-3">
+                        # Mesa
+                    </th>
+                    <th scope="col" class="px-2 py-3">
+                        Hora
+                    </th>
+                    <th scope="col" class="px-2 py-3">
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of pedidos" class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                    <th  (click)="getDetallePedido(p)" scope="row" class="px-2 py-4 font-bold text-gray-900">
+                        {{p.idpedido}}
+                    </th>
+                    <td (click)="getDetallePedido(p)" class="px-2 py-4">
+                        <p [ngSwitch]="p?.estado?.toLowerCase()">
+                            <span *ngSwitchCase="'listo'" class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">{{p?.estado}}</span>
+                            <span *ngSwitchCase="'recibido'" class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">{{p?.estado}}</span>
+                        </p>
+                    </td>
+                    <td  (click)="getDetallePedido(p)" class="px-2 py-4">
+                        N° {{p.idmesa}}
+                    </td>
+                    <td  (click)="getDetallePedido(p)" class="px-2 py-4">
+                        {{p.fecha}}
+                    </td>
+                    <td class="px-2 py-4">
+                        <div class="flex flex-row items-center justify-center gap-4">
+                            <!--<div class="tooltip-custom">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-yellow-500 hover:cursor-pointer hover:fill-yellow-800">
+                                    <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
+                                    <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
+                                </svg>
+                                <p class="tooltiptext bg-yellow-500 left-[-5px]">Editar</p>  
+                            </div>
+                            <div class="tooltip-custom">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-green-500 hover:cursor-pointer hover:fill-green-800">
+                                    <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                                </svg>
+                                <p class="tooltiptext bg-green-500 left-[0px]">Alta</p>  
+                            </div>-->
+                            <div (click)="remove(p)" class="tooltip-custom">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-red-500 hover:cursor-pointer hover:fill-red-800">
+                                    <path d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375z" />
+                                    <path fill-rule="evenodd" d="M3.087 9l.54 9.176A3 3 0 006.62 21h10.757a3 3 0 002.995-2.824L20.913 9H3.087zm6.133 2.845a.75.75 0 011.06 0l1.72 1.72 1.72-1.72a.75.75 0 111.06 1.06l-1.72 1.72 1.72 1.72a.75.75 0 11-1.06 1.06L12 15.685l-1.72 1.72a.75.75 0 11-1.06-1.06l1.72-1.72-1.72-1.72a.75.75 0 010-1.06z" clip-rule="evenodd" />
+                                </svg>  
+                                <p class="tooltiptext bg-red-500 left-[-10px]">Eliminar</p>  
+                            </div>                                          
+                            <!--<button type="button" class="px-3 py-2 text-xs font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-800 focus:bg-green-900 dark:bg-green-200 dark:hover:bg-green-400 dark:focus:ring-green-400">Emitir</button>-->
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
         </table>
-        <table class="table-component table-action">
-            <tr class="table-title-component"><th>Accion</th></tr>
-            <tr class="table-row" *ngFor="let p of pedidos">
-                <div class="row-custom">
-                    <div class="action">
-                        <p class="tooltip-container"><span class="remove">Remove</span></p>
-                        <a (click)="remove(p)"><img class="img" src="/assets/icons/remover.png" alt=""></a>
+        <div *ngIf="pedidos.length==0" class="border-b w-full py-2 px-4 text-gray-400 text-center">
+            <p>No se han registrado pedidos aun</p>
+        </div>
+    </div>
+    <!--<div class="table tasks">
+        <div class="table-body d-flex">
+            <table class="table-component table-style w-100">
+                <tr class="table-title-component">
+                    <th># Pedido</th>
+                    <th>Estado</th>
+                    <th># Mesa</th>
+                    <th>Hora</th>
+                </tr>
+                <tr *ngIf="pedidos.length==0">
+                    <p>No se han registrado pedidos aun</p>
+                </tr>
+                <tr class="table-row" *ngFor="let p of pedidos" (click)="getDetallePedido(p)">
+                    <td>{{p.idpedido}}</td>
+                    <td [ngClass]="{'tag':true,'success':p.estado.toLowerCase()==='listo','error':p.estado.toLowerCase()==='recibido'}">{{p.estado}}</td>
+                    <td>N° {{p.idmesa}}</td>
+                    <td>{{p.fecha}}</td>
+                </tr>
+            </table>
+            <table class="table-component table-action">
+                <tr class="table-title-component"><th>Accion</th></tr>
+                <tr class="table-row" *ngFor="let p of pedidos">
+                    <div class="row-custom">
+                        <div class="action">
+                            <p class="tooltip-container"><span class="remove">Remove</span></p>
+                            <a (click)="remove(p)"><img class="img" src="/assets/icons/remover.png" alt=""></a>
+                        </div>
                     </div>
-                </div>
-            </tr>
-        </table>
-
-    </div>
+                </tr>
+            </table>
+    
+        </div>
+    </div>-->
 </div>
+
 <div *ngIf="showNotification">
     <div class="notification {{notificationType}}">
         <p>{{notificationMessage}}</p>

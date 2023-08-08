@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../../auth/auth.service';
 import { User } from '../../../../auth/model/user.interface';
@@ -14,18 +14,21 @@ import { format, addHours } from 'date-fns';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit{
+export class RegisterComponent implements OnInit, AfterViewInit{
 
   table:number = -1;
   currentUser$ = this.authService.user$;
   user: User | null = null;
   orderRegistered: PedidoResponse | undefined
   selectedCategory:number = -1
+  productosshow: Producto[] = []
   productosapi: Producto[] = []
   productoscopy: Producto[] = []
-  categoriasapi: Categoria[] | undefined;
+  categoriasapi: Categoria[] = [];
   order: OrderItem[] = []
   total: number | undefined
+  pagination:string[] = []
+  currentIndex:number=1
 
   showNotification: boolean = false;
   showRegisterOk:boolean = false;
@@ -41,6 +44,9 @@ export class RegisterComponent implements OnInit{
   ) {
     this.getUser()
   }
+  ngAfterViewInit(): void {
+    //this.getProductsByCategory(this.categoriasapi![0])
+  }
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.table = params['tableSeletected'];
@@ -53,6 +59,15 @@ export class RegisterComponent implements OnInit{
       .then(productos => {
         this.productosapi = productos
         this.productoscopy = this.productosapi
+        this.pagination = []
+        for(let i=0;i<this.productosapi.length/6;i++){
+          this.pagination.push((i+1).toString())
+        }
+        this.productosshow = this.productosapi.slice(this.currentIndex-1,6*this.currentIndex)
+        if(this.categoriasapi){
+          this.getProductsByCategory(this.categoriasapi![0])
+        }
+          
         this.cdr.detectChanges()
       })
       .catch(error => {
@@ -63,6 +78,7 @@ export class RegisterComponent implements OnInit{
     this.apiService.getCategoryList()
       .then(categorias => {
         this.categoriasapi = categorias;
+        this.getProductsByCategory(this.categoriasapi![0])
         this.cdr.detectChanges()
       })
       .catch(error => {
@@ -73,13 +89,18 @@ export class RegisterComponent implements OnInit{
     let actived = this.categoriasapi?.indexOf(cat)!
     let previousActived = this.selectedCategory
     this.selectedCategory = actived
-    this.categoriasapi![actived].actived = true
     if(previousActived!= -1){
       this.categoriasapi![previousActived].actived = false
     }
+    this.categoriasapi![actived].actived = true
     this.productosapi = this.productoscopy.filter(({categoria}:Producto)=>{
       return categoria.toLowerCase().includes(cat.nombre)
     })  
+    this.productosshow = this.productosapi.slice(this.currentIndex-1,6*this.currentIndex)
+    this.pagination = []
+    for(let i=0;i<this.productosapi.length/6;i++){
+      this.pagination.push((i+1).toString())
+    }
   }
   getUser():void{
     this.currentUser$.subscribe(
@@ -203,6 +224,25 @@ export class RegisterComponent implements OnInit{
   }
   closeModalError(){
     this.showNoOrderItems = false
+  }
+  toNumber(index:string){
+    this.currentIndex = Number(index)
+    this.productosshow = []
+    this.productosshow = this.productosapi.slice(6*(this.currentIndex-1),6*this.currentIndex)
+  }
+  next(){
+    if(this.currentIndex+1<=this.pagination.length){
+      this.currentIndex = this.currentIndex + 1
+    }
+    this.productosshow = []
+    this.productosshow = this.productosapi.slice(6*(this.currentIndex-1),6*this.currentIndex)
+  }
+  previous(){
+    if(this.currentIndex-1>0){
+      this.currentIndex = this.currentIndex - 1
+    }
+    this.productosshow = []
+    this.productosshow = this.productosapi.slice(6*(this.currentIndex-1),6*this.currentIndex)
   }
 }
 

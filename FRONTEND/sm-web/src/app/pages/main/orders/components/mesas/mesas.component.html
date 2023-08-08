@@ -6,31 +6,57 @@
         <a class="btn btn-danger" (click)="closeModal()">Cerrar</a>
     </div>
 </div>
-<div class="row-custom bg-main"> 
-    <p class="texto p-2">Disposicion de mesas</p>
-</div>
-<div class="tables-dispose">
-    <div class="container-content">
-        <div class="content-grid">
-            <div class="table-content" (click)="navigateRegister(t)" *ngFor="let t of mesasDisponibles">
-                <img src="{{t.image}}" alt="">
-                <p>{{t.numero}}</p>
-            </div>
-        </div>
-        <div class="table-legend">
-            <div class="info">
-                <p>Disponible</p>
-                <img src="/assets/icons/mesa-disponible.png" alt="">
-            </div>
-            <div class="info">
-                <p>No disponible</p>
-                <img src="/assets/icons/mesa-ocupada.png" alt="">
-            </div>
-        </div>
+<div class="h-full grid grid-rows-[50px_1fr]">
+    <div class="bg-sky-700 py-2 px-4 flex flex-col justify-center"> 
+        <p class="text-white">Disposicion de mesas</p>
     </div>
-    <div class="container-nav">
-        <a [ngClass]="{'btn-nav':true, 'btn-nav-activated':showPrincipal}" (click)="getTablesByLocation('principal')" >PRINCIPAL</a>
-        <a [ngClass]="{'btn-nav':true, 'btn-nav-activated':showTerraza}" (click)="getTablesByLocation('terraza')" >TERRAZA</a>
-        <a [ngClass]="{'btn-nav':true, 'btn-nav-activated':showPiscina}" (click)="getTablesByLocation('piscina')" >PISCINA</a>
+    <div class="grid grid-cols-table">
+        <div class="flex flex-col items-center justify-center gap-12">
+            <div class="grid grid-cols-5 gap-12 animate-pulse" [ngClass]="{'hidden':mesasDisponibles.length>0}">
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+            </div>
+            <div class="grid grid-cols-5 gap-12" [ngClass]="{'hidden':mesasDisponibles.length==0}">
+                <div class="h-[100px] w-[100px] mx-auto" (click)="navigateRegister(t)" *ngFor="let t of mesasDisponibles">
+                    <div class="h-[100px] w-[100px] relative">
+                        <img src="{{t.image}}" alt="">
+                        <p class="absolute top-[37%] w-[100px] text-center text-white font-semibold text-[20px]">{{t.numero}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="table-legend">
+                <div class="info">
+                    <p>Disponible</p>
+                    <img src="/assets/icons/mesa-disponible.png" alt="">
+                </div>
+                <div class="info">
+                    <p>No disponible</p>
+                    <img src="/assets/icons/mesa-ocupada.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-rows-3 gap-[1px] my-[1px] mr-[2px]">
+            <a [ngClass]="{'bg-yellow-400':showPrincipal}" class="bg-yellow-200 px-1 py-4 vertical flex items-center justify-center hover:bg-yellow-400 hover:cursor-pointer" (click)="getTablesByLocation('principal')" >PRINCIPAL</a>
+            <a [ngClass]="{'bg-yellow-400':showTerraza}" class="bg-yellow-200 px-1 py-4 vertical flex items-center justify-center hover:bg-yellow-400 hover:cursor-pointer" (click)="getTablesByLocation('terraza')" >TERRAZA</a>
+            <a [ngClass]="{'bg-yellow-400':showPiscina}" class="bg-yellow-200 px-1 py-4 vertical flex items-center justify-center hover:bg-yellow-400 hover:cursor-pointer" (click)="getTablesByLocation('piscina')" >PISCINA</a>
+        </div>
     </div>
 </div>

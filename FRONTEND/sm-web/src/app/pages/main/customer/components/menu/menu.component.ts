@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/pages/auth/auth.service';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit{
+  categoria:string = ""
   selectedPlatos:boolean = true
   productosMostrar:Producto[] = []
   productosMostrarCopy:Producto[] = []
@@ -100,6 +101,7 @@ export class MenuComponent implements OnInit{
     this.categoriaMostrar = this.categoryDrink
   }
   getPlatosByCategory(nombre:Categoria){
+    this.categoria = nombre.nombre
     let actived = this.categoriasapi?.indexOf(nombre)!
     let previousActived = this.selectedFoodCategory
     this.selectedFoodCategory = actived

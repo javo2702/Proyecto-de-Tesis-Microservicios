@@ -10,7 +10,7 @@ import { FakeBackendModule } from './fake-backend/fake-backend.module';
 import { authTokeninterceptorProvider } from './pages/auth/interceptors';
 
 import { BackendModule } from './backend/backend.module';
-import { ApiService } from './backend/services/api.service'; 
+import { ApiService } from './backend/services/api.service';
 
 @NgModule({
   declarations: [

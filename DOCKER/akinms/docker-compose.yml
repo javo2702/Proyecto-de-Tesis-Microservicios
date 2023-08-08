@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  akinms-server:
+    image: api-akinms
+    restart: always
+    container_name: apiakinms-container
+    ports:
+      - '8088:8089'
+ 

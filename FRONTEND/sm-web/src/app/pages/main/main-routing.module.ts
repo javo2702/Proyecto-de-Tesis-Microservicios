@@ -38,20 +38,15 @@ const routes: Routes = [
         loadChildren: () =>
           import('./kitchen/kitchen.module').then((m) => m.KitchenModule),
       },
-      {
+      /*{
         path: 'customer',
         canActivate: [hasRole(['Customer', 'Manager'])],
         canLoad: [hasRole(['Customer', 'Manager'])],
-        // canActivate: [HasRoleGuard],
-        // canLoad: [HasRoleGuard],
-        // data: {
-        //   allowedRoles: ['Accounting', 'Manager'],
-        // },
         loadChildren: () =>
           import('./customer/customer.module').then(
             (m) => m.CustomerModule
           ),
-      },
+      },*/
     ],
   },
 ];
