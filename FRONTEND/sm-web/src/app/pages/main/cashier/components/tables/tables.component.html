@@ -1,1 +1,176 @@
-<p>tables works!</p>
+<!--<div class="modal" *ngIf="showBusyTable">
+    <div class="modal-content">
+        <br>
+        <h3>No se puede registrar un producto a una mesa ocupada</h3>
+        <br>
+        <a class="btn btn-danger" (click)="closeModal()">Cerrar</a>
+    </div>
+</div>-->
+<div id="popup-modal" tabindex="-1" [ngClass]="{'hidden':!showNoRegisterTable}" class="fixed top-0 left-0 right-0 z-40 p-4 bg-black bg-opacity-10 overflow-x-hidden overflow-y-auto md:inset-0 h-full">
+    <div class="relative w-full max-h-full">
+        <div class="relative w-[500px] mt-[150px] bg-white rounded-lg shadow mx-auto">
+            <button (click)="showNoRegisterTable=false" type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center " data-modal-hide="popup-modal">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="p-6 text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-20 h-20 mx-auto fill-red-500">
+                    <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
+                </svg>   
+                <div>
+                    <h3 class="my-2 text-lg font-normal text-gray-500">Esta Mesa no Tiene ningun pedido registrado asignado</h3>
+                </div>          
+                <button (click)="showNoRegisterTable=false" data-modal-hide="popup-modal" type="button" class="text-gray-500 mt-3 bg-white hover:bg-gray-500  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="h-full grid grid-rows-[50px_1fr] relative">
+    <!-- drawer component -->
+    <div class="absolute top-0 right-0 bottom-0 z-40 transition-transform bg-white w-[500px] shadow-sm" [ngClass]="{'hidden':!showDetailsTable}" tabindex="-1" aria-labelledby="drawer-label">
+        <div class="flex flex-row justify-between items-center bg-sky-800 px-4 py-2">
+            <div class="flex flex-row items-center gap-2 text-base font-semibold text-white">
+                <svg class="w-4 h-4 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <h5>
+                    Informacion de la Mesa 
+                </h5>
+                <h5>[]</h5> 
+            </div>
+            <button (click)="showDetailsTable=false" type="button" data-drawer-hide="drawer-example" aria-controls="drawer-example" class="text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex items-center justify-center" >
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+                <span class="sr-only">Close menu</span>
+            </button>
+        </div>
+        <div>
+            <div class="detail-wrapp">
+                <div class="px-3">
+                    <div class="row-custom">
+                        <p><strong>Camarero:</strong></p>
+                        <p class="capitalize">{{user?.username}}</p>
+                    </div>
+                    <div class="row-custom">
+                        <p><strong>N° Mesa:</strong></p>
+                        <p>N° {{table}}</p>
+                    </div>
+                </div>
+                <div class="w-full relative  overflow-y-scroll overflow-hidden h-[590px] border-b border-gray-200">
+                    <table class="w-full text-center text-sm text text-gray-500 mx-auto">
+                        <thead class="text-xs sticky top-0 left-0 right-0 z-10 text-white uppercase bg-black">
+                            <tr>
+                                <th scope="col" class="px-4 py-3">
+                                    Cantidad
+                                </th>
+                                <th scope="col" class="px-2 py-3">
+                                    Descripcion
+                                </th>
+                                <th scope="col" class="px-2 py-3">
+                                    Subtotal
+                                </th>
+                                <!--<th scope="col" class="px-2 py-3">
+                                    Accion
+                                </th>-->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of order" class="border-b border-gray-200">
+                                <td class="px-2 py-4">
+                                    <div class="row-custom-center">
+                                        <p>{{item.cantidad}}</p>
+                                    </div>
+                                </td>
+                                <td class="px-2 py-4"><p>{{item.descripcion}}</p></td>
+                                <td class="px-2 py-4">S/.{{item.subtotal}}</td>
+                                <!--<td class="px-2 py-4">
+                                    <div class="action">
+                                        <div (click)="remove(item)" class="tooltip-custom">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-red-500 hover:cursor-pointer hover:fill-red-800">
+                                                <path d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375z" />
+                                                <path fill-rule="evenodd" d="M3.087 9l.54 9.176A3 3 0 006.62 21h10.757a3 3 0 002.995-2.824L20.913 9H3.087zm6.133 2.845a.75.75 0 011.06 0l1.72 1.72 1.72-1.72a.75.75 0 111.06 1.06l-1.72 1.72 1.72 1.72a.75.75 0 11-1.06 1.06L12 15.685l-1.72 1.72a.75.75 0 11-1.06-1.06l1.72-1.72-1.72-1.72a.75.75 0 010-1.06z" clip-rule="evenodd" />
+                                            </svg>  
+                                            <p class="tooltiptext bg-red-500 left-[-10px]">Eliminar</p>  
+                                        </div> 
+                                    </div>
+                                </td>-->
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div *ngIf="order.length==0" class="border-b w-full py-2 px-4 text-gray-400 text-center">
+                        <p>Ocurrió un problema al tratar de obtener los datos</p>
+                    </div>
+                </div>
+                <div class="my-4" *ngIf="order.length > 0"><p>Total: <strong>S/.{{total}}</strong></p></div>
+                <div class="my-4 px-4 flex flex-row justify-between">
+                    <label for="">Método de pago:</label>
+                    <select name="metodo" id="metodo" class="border-1 border-sky-800 px-2 py-1 rounded-md text-gray-700">
+                        <option value="-1">Seleccione metodo de pago</option>
+                        <option value="1">Efectivo</option>
+                        <option value="2">Tarjeta</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-2 justify-center items-center px-4 mt-4 gap-4">
+                    <a class="text-center bg-sky-700 rounded-md px-4 py-2 text-white hover:bg-sky-900 hover:cursor-pointer" (click)="cobrar()">Cobrar</a>
+                    <a class="text-center bg-red-800 rounded-md px-4 py-2 text-white hover:bg-red-900 hover:cursor-pointer" (click)="showDetailsTable=false">Cerrar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-sky-700 py-2 px-4 flex flex-col justify-center"> 
+        <p class="text-white">Disposicion de mesas</p>
+        <a (click)="showDetailsTable=true">abrir side bar</a>
+    </div>
+    <div class="grid grid-cols-table">
+        <div class="flex flex-col items-center justify-center gap-12" [ngClass]="{'bg-black bg-opacity-25':showDetailsTable}">
+            <div class="grid grid-cols-5 gap-12 animate-pulse" [ngClass]="{'hidden':mesasDisponibles.length>0}">
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+                <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
+            </div>
+            <div class="grid grid-cols-5 gap-12" [ngClass]="{'hidden':mesasDisponibles.length==0}">
+                <div class="h-[100px] w-[100px] mx-auto" (click)="navigateRegister(t)" *ngFor="let t of mesasDisponibles">
+                    <div class="h-[100px] w-[100px] relative">
+                        <img src="{{t.image}}" alt="">
+                        <p class="absolute top-[37%] w-[100px] text-center text-white font-semibold text-[20px]">{{t.numero}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="table-legend">
+                <div class="info">
+                    <p>Disponible</p>
+                    <img src="/assets/icons/mesa-disponible.png" alt="">
+                </div>
+                <div class="info">
+                    <p>No disponible</p>
+                    <img src="/assets/icons/mesa-ocupada.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-rows-3 gap-[1px] my-[1px] mr-[2px]">
+            <a [ngClass]="{'bg-yellow-400':showPrincipal}" class="bg-yellow-200 px-1 py-4 vertical flex items-center justify-center hover:bg-yellow-400 hover:cursor-pointer" (click)="getTablesByLocation('principal')" >PRINCIPAL</a>
+            <a [ngClass]="{'bg-yellow-400':showTerraza}" class="bg-yellow-200 px-1 py-4 vertical flex items-center justify-center hover:bg-yellow-400 hover:cursor-pointer" (click)="getTablesByLocation('terraza')" >TERRAZA</a>
+            <a [ngClass]="{'bg-yellow-400':showPiscina}" class="bg-yellow-200 px-1 py-4 vertical flex items-center justify-center hover:bg-yellow-400 hover:cursor-pointer" (click)="getTablesByLocation('piscina')" >PISCINA</a>
+        </div>
+    </div>
+</div>

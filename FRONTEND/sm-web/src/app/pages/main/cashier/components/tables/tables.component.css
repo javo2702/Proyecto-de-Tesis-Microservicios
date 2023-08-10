@@ -1,0 +1,15 @@
+.table-legend{
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+.info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+.info img{
+    width: 1.5rem;
+    height: 1.5rem;
+}

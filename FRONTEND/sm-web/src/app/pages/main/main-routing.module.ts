@@ -38,6 +38,30 @@ const routes: Routes = [
         loadChildren: () =>
           import('./kitchen/kitchen.module').then((m) => m.KitchenModule),
       },
+      {
+        path: 'cashier',
+        canActivate: [hasRole(['Cashier', 'Manager'])],
+        canLoad: [hasRole(['Cashier', 'Manager'])],
+        // canActivate: [HasRoleGuard],
+        // canLoad: [HasRoleGuard],
+        // data: {
+        //   allowedRoles: ['Inventory', 'Manager'],
+        // },
+        loadChildren: () =>
+          import('./cashier/cashier.module').then((m) => m.CashierModule),
+      },
+      {
+        path: 'admin',
+        canActivate: [hasRole(['Manager'])],
+        canLoad: [hasRole(['Manager'])],
+        // canActivate: [HasRoleGuard],
+        // canLoad: [HasRoleGuard],
+        // data: {
+        //   allowedRoles: ['Inventory', 'Manager'],
+        // },
+        loadChildren: () =>
+          import('./admin/admin.module').then((m) => m.AdminModule),
+      },
       /*{
         path: 'customer',
         canActivate: [hasRole(['Customer', 'Manager'])],

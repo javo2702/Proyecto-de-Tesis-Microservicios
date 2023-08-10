@@ -19,6 +19,11 @@ const usersDb = [
     role: 'Customer',
   },
   {
+    username: 'jose',
+    password: '1234',
+    role: 'Cashier',
+  },
+  {
     username: 'javier',
     password: '1234',
     role: 'Manager',
