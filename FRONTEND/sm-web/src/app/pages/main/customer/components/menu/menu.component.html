@@ -13,7 +13,7 @@
                 <div class="rounded-md border-1 border-sky-800" *ngFor="let product of productosMostrar">
                     <div class="py-2">
                         <img class="w-[60px] h-[60px] lg:h-[120px] lg:w-[120px] mx-auto" src="/assets/images/producto.png" alt="Producto">
-                        <div class="h-[45px] overflow-hidden flex flex-col items-center text-center capitalize" [ngClass]="{'justify-center':product?.descripcion==null,'justify-start':product?.descripcion!=null}">
+                        <div class="flex flex-col items-center text-center capitalize" [ngClass]="{'justify-center':product?.descripcion==null,'justify-start':product?.descripcion!=null}">
                             <p class="text-[14px]">{{product?.nombre}}</p>
                             <span class="text-gray-400 text-[12px] px-4">{{product?.descripcion}}</span>
                         </div>

@@ -1,0 +1,13 @@
+spring:
+  main:
+    allow-circular-references: true
+  application:
+    name: auth-service
+server:
+  port: 9100
+eureka:
+  client:
+    service-url:
+      default-zone: http://eureka-server:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${random.value}

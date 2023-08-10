@@ -1,9 +1,23 @@
+# serivce name
 spring:
   application:
     name: auth-service
+  datasource:
+    url: jdbc:mysql://localhost:33061/db_sm_user?
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: admin
+    password: admin
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+#Tomcat Embedded Server Configuration
 server:
-  port: 9100
+  port: 9569
+#Eureka Configuration Properties
 eureka:
   client:
-    service-url:
-      default-zone: http://localhost:8761/eureka
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${random.value}

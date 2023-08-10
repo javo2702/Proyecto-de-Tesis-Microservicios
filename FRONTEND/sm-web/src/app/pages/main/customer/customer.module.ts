@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { MenuComponent } from './components/menu/menu.component';
 import { ValoracionComponent } from './components/valoracion/valoracion.component';
 import { hasRole } from '../../auth/guards/has-role.guard';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 const routes = [
@@ -31,7 +32,9 @@ const routes = [
     ValoracionComponent
   ],
   imports: [
-    CommonModule, RouterModule.forChild(routes)
+    CommonModule, RouterModule.forChild(routes),
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class CustomerModule { }
