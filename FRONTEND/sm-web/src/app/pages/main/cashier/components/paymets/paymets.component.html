@@ -1,183 +1,216 @@
-<div class="py-4">
-    <h3 class="text-gray-500 text-lg mb-3">Registro de Pagos</h3>
-    <div class="px-4 py-4 w-11/12 mx-auto border border-gray-300 rounded-md shadow-sm">
-        <div class="flex justify-end">
-            <div class="mb-3 flex gap-10">
-                <div class="flex flex-row gap-20 items-center justify-center">
-                    <a (click)="previousMonth()" class="rounded-md p-[8px] hover:bg-gray-200 hover:cursor-pointer">
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-                        </svg>
-                    </a>
-                    <p class="w-[100px] text-center">{{month}}</p>
-                    <a (click)="nextMonth()" class="rounded-md p-[8px] hover:bg-gray-200 hover:cursor-pointer">
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                        </svg>
-                    </a>
-                </div>
-                <div>
-                    <input type="date" name="fecha" id="fecha" class="border border-gray-300 rounded-md px-4 py-1">
-                </div>
+<div id="popup-modal" tabindex="-1" [ngClass]="{'hidden':!showForm}" class="fixed top-0 left-0 right-0 z-40 p-4 bg-black bg-opacity-10 overflow-x-hidden overflow-y-auto md:inset-0 h-full">
+    <div class="relative w-full max-h-full">
+        <div class="w-[500px] mt-[150px] bg-white rounded-lg shadow mx-auto">
+            <div class="flex flex-row justify-between items-center bg-sky-800 rounded-t-lg px-4 py-2 text-white">
+                <p>Registrar Pago</p>
+                <button (click)="closeModal()" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center " data-modal-hide="popup-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
             </div>
-        </div>
-        <div class="w-full relative  overflow-hidden">
-            <table class="w-full text-center text-sm text text-gray-500 mx-auto">
-                <thead class="text-xs text-white uppercase bg-sky-950">
-                    <tr>
-                        <th scope="col" class="px-4 py-3">
-                            # Operacion
-                        </th>
-                        <th scope="col" class="px-2 py-3">
-                            Flujo
-                        </th>
-                        <th scope="col" class="px-2 py-3">
-                            Monto
-                        </th>
-                        <th scope="col" class="px-2 py-3">
-                            Fecha y Hora
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
-                        <td class="px-2 py-3">
-                            01
-                        </td>
-                        <td class="px-2 py-3">
-                            Pago a Persona X
-                        </td>
-                        <td class="px-2 py-3">
-                            S/. 100.00
-                        </td>
-                        <td class="px-2 py-3">
-                            10/08/2023 3:00pm
-                        </td>
-                    </tr>
-                    <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
-                        <td class="px-2 py-3">
-                            01
-                        </td>
-                        <td class="px-2 py-3">
-                            Pago a Persona X
-                        </td>
-                        <td class="px-2 py-3">
-                            S/. 100.00
-                        </td>
-                        <td class="px-2 py-3">
-                            10/08/2023 3:00pm
-                        </td>
-                    </tr>
-                    <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
-                        <td class="px-2 py-3">
-                            01
-                        </td>
-                        <td class="px-2 py-3">
-                            Pago a Persona X
-                        </td>
-                        <td class="px-2 py-3">
-                            S/. 100.00
-                        </td>
-                        <td class="px-2 py-3">
-                            10/08/2023 3:00pm
-                        </td>
-                    </tr>
-                    <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
-                        <td class="px-2 py-3">
-                            01
-                        </td>
-                        <td class="px-2 py-3">
-                            Pago a Persona X
-                        </td>
-                        <td class="px-2 py-3">
-                            S/. 100.00
-                        </td>
-                        <td class="px-2 py-3">
-                            10/08/2023 3:00pm
-                        </td>
-                    </tr>
-                    <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
-                        <td class="px-2 py-3">
-                            01
-                        </td>
-                        <td class="px-2 py-3">
-                            Pago a Persona X
-                        </td>
-                        <td class="px-2 py-3">
-                            S/. 100.00
-                        </td>
-                        <td class="px-2 py-3">
-                            10/08/2023 3:00pm
-                        </td>
-                    </tr>
-                    <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
-                        <td class="px-2 py-3">
-                            01
-                        </td>
-                        <td class="px-2 py-3">
-                            Pago a Persona X
-                        </td>
-                        <td class="px-2 py-3">
-                            S/. 100.00
-                        </td>
-                        <td class="px-2 py-3">
-                            10/08/2023 3:00pm
-                        </td>
-                    </tr>
-                    
-                    <!--<tr *ngFor="let p of pedidos" class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
-                        <th  (click)="getDetallePedido(p)" scope="row" class="px-2 py-3 font-bold text-gray-900">
-                            {{p.idpedido}}
-                        </th>
-                        <td (click)="getDetallePedido(p)" class="px-2 py-3">
-                            <p [ngSwitch]="p?.estado?.toLowerCase()">
-                                <span *ngSwitchCase="'listo'" class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">{{p?.estado}}</span>
-                                <span *ngSwitchCase="'recibido'" class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">{{p?.estado}}</span>
-                            </p>
-                        </td>
-                        <td  (click)="getDetallePedido(p)" class="px-2 py-3">
-                            N° {{p.idmesa}}
-                        </td>
-                        <td  (click)="getDetallePedido(p)" class="px-2 py-3">
-                            {{p.fecha}}
-                        </td>
-                    </tr>-->
-                </tbody>
-            </table>
-            <div *ngIf="false" class="border-b w-full py-3 px-4 text-gray-400 text-center">
-                <p>No se han registrado pedidos aun</p>
-            </div>
-            <div class="flex justify-between items-center mt-3" [ngClass]="{'hidden':false}">
-                <div class="text-sm text-gray-400">
-                    <p>Mostrando <span>6</span> Resultados de <span>30</span></p>
-                </div>
-                <nav aria-label="">
-                    <ul class="flex items-center -space-x-px h-10 text-base">
-                      <li>
-                        <a (click)="previous()" class="flex items-center justify-center px-2 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 hover:border-sky-800 rounded-l-lg hover:bg-gray-800 hover:text-gray-700">
-                          <span class="sr-only">Previous</span>
-                          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-                          </svg>
-                        </a>
-                      </li>
-                      <li *ngFor="let p of pagination">
-                        <a (click)="toNumber(p)" class="flex items-center justify-center px-2 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:border-sky-800 hover:bg-gray-800 hover:text-gray-700" [ngClass]="{'text-sky-700':p==currentIndex.toString(),'rounded-l-lg':currentIndex==1&&currentIndex.toString()==p,'rounded-r-lg':currentIndex==pagination.length&&currentIndex.toString()==p}">{{p}}</a>
-                      </li>
-                      <li>
-                        <a (click)="next()" class="flex items-center justify-center px-2 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:border-sky-800 rounded-r-lg hover:bg-gray-800 hover:text-gray-700">
-                          <span class="sr-only">Next</span>
-                          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                          </svg>
-                        </a>
-                      </li>
-                    </ul>
-                </nav>
+            <div class="px-4 pb-4">
+                <form action="" (submit)="registrar()">
+                    <div class="py-2">
+                        <label for="name" class="flex items-start mb-2 text-sm text-sky-800 font-semibold">Nombre / Razon:</label>
+                        <input type="text" id="name" formControlName="nombres" class="bg-white border-1 border-sky-300 text-gray-900 text-sm rounded-md focus:ring-sky-500 focus:border-sky-300 block w-full p-2.5" placeholder="Ingrese nombre de la persona o razon" required>
+                    </div>
+                    <div class="py-2">
+                        <label for="name" class="flex items-start mb-2 text-sm text-sky-900 font-semibold">Monto:</label>
+                        <input type="number" min="0.0" id="monto" formControlName="monto" class="bg-white border-1 border-sky-300 text-gray-900 text-sm rounded-md focus:ring-sky-500 focus:border-sky-300 block w-full p-2.5" placeholder="Ingrese el monto del pago" required>
+                    </div>
+                    <div class="grid grid-cols-2 gap-x-6">
+                        <button type="submit" data-modal-hide="popup-modal" type="button" class="text-white mt-3 bg-sky-600 hover:bg-gray-500  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">Registrar</button>
+                        <button (click)="closeModal()" data-modal-hide="popup-modal" type="button" class="text-gray-500 mt-3 bg-white hover:bg-gray-500  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">Cerrar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    <div class="mt-8 ml-10">
-        <a class="bg-sky-700 px-4 py-3 rounded-md text-white hover:cursor-pointer hover:bg-sky-900">Registrar Pago</a>
+</div>
+<div class="py-4 flex items-center justify-center h-full">
+    <div class="w-full">
+        <h3 class="text-gray-500 text-lg mb-3">Registro de Pagos</h3>
+        <div class="px-4 py-4 w-11/12 mx-auto border border-gray-300 rounded-md shadow-sm">
+            <div class="flex justify-end">
+                <div class="mb-3 flex gap-10">
+                    <div class="flex flex-row gap-20 items-center justify-center">
+                        <a (click)="previousMonth()" class="rounded-md p-[8px] hover:bg-gray-200 hover:cursor-pointer">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                            </svg>
+                        </a>
+                        <p class="w-[100px] text-center">{{month}}</p>
+                        <a (click)="nextMonth()" class="rounded-md p-[8px] hover:bg-gray-200 hover:cursor-pointer">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div>
+                        <input type="date" name="fecha" id="fecha" class="border border-gray-300 rounded-md px-4 py-1">
+                    </div>
+                </div>
+            </div>
+            <div class="w-full relative  overflow-hidden">
+                <table class="w-full text-center text-sm text text-gray-500 mx-auto">
+                    <thead class="text-xs text-white uppercase bg-sky-950">
+                        <tr>
+                            <th scope="col" class="px-4 py-3">
+                                # Operacion
+                            </th>
+                            <th scope="col" class="px-2 py-3">
+                                Flujo
+                            </th>
+                            <th scope="col" class="px-2 py-3">
+                                Monto
+                            </th>
+                            <th scope="col" class="px-2 py-3">
+                                Fecha y Hora
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                Pago a Persona X
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                Pago a Persona X
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                Pago a Persona X
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                Pago a Persona X
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                Pago a Persona X
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                Pago a Persona X
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        
+                        <!--<tr *ngFor="let p of pedidos" class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <th  (click)="getDetallePedido(p)" scope="row" class="px-2 py-3 font-bold text-gray-900">
+                                {{p.idpedido}}
+                            </th>
+                            <td (click)="getDetallePedido(p)" class="px-2 py-3">
+                                <p [ngSwitch]="p?.estado?.toLowerCase()">
+                                    <span *ngSwitchCase="'listo'" class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">{{p?.estado}}</span>
+                                    <span *ngSwitchCase="'recibido'" class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">{{p?.estado}}</span>
+                                </p>
+                            </td>
+                            <td  (click)="getDetallePedido(p)" class="px-2 py-3">
+                                N° {{p.idmesa}}
+                            </td>
+                            <td  (click)="getDetallePedido(p)" class="px-2 py-3">
+                                {{p.fecha}}
+                            </td>
+                        </tr>-->
+                    </tbody>
+                </table>
+                <div *ngIf="false" class="border-b w-full py-3 px-4 text-gray-400 text-center">
+                    <p>No se han registrado pedidos aun</p>
+                </div>
+                <div class="flex justify-between items-center mt-3" [ngClass]="{'hidden':false}">
+                    <div class="text-sm text-gray-400">
+                        <p>Mostrando <span>6</span> Resultados de <span>30</span></p>
+                    </div>
+                    <nav aria-label="">
+                        <ul class="flex items-center -space-x-px h-10 text-base">
+                        <li>
+                            <a (click)="previous()" class="flex items-center justify-center px-2 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 hover:border-sky-800 rounded-l-lg hover:bg-gray-800 hover:text-gray-700">
+                            <span class="sr-only">Previous</span>
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                            </svg>
+                            </a>
+                        </li>
+                        <li *ngFor="let p of pagination">
+                            <a (click)="toNumber(p)" class="flex items-center justify-center px-2 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:border-sky-800 hover:bg-gray-800 hover:text-gray-700" [ngClass]="{'text-sky-700':p==currentIndex.toString(),'rounded-l-lg':currentIndex==1&&currentIndex.toString()==p,'rounded-r-lg':currentIndex==pagination.length&&currentIndex.toString()==p}">{{p}}</a>
+                        </li>
+                        <li>
+                            <a (click)="next()" class="flex items-center justify-center px-2 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:border-sky-800 rounded-r-lg hover:bg-gray-800 hover:text-gray-700">
+                            <span class="sr-only">Next</span>
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                            </svg>
+                            </a>
+                        </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="mt-8 ml-10">
+            <a (click)="showForm=true" class="bg-sky-700 px-4 py-3 rounded-md text-white hover:cursor-pointer hover:bg-sky-900">Registrar Pago</a>
+        </div>
     </div>
 </div>

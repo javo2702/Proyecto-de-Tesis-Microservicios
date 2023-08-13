@@ -12,6 +12,7 @@ import { authTokeninterceptorProvider } from './pages/auth/interceptors';
 import { BackendModule } from './backend/backend.module';
 import { ApiService } from './backend/services/api.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,7 @@ import { ApiService } from './backend/services/api.service';
     AuthModule,
     HttpClientModule,
     FakeBackendModule,
-    BackendModule
+    BackendModule,
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

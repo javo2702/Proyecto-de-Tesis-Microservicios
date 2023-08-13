@@ -1,0 +1,53 @@
+<div class="px-10 py-6">
+    <div class="rounded-md border border-gray-100 shadow-sm p-2">
+        <h3 class="text-start text-gray-400 pb-2 border-b border-gray-300">Formulario de Registro de Usuario</h3>
+        <form action="" class="grid grid-cols-2 gap-x-8" (submit)="registrar()">
+            <div class="py-2">
+                <label for="genero" class="flex items-start mb-2 text-sm text-sky-900 font-semibold">Genero:</label>
+                <select name="genero" id="genero" fromControlName="genero" class="bg-white border-1 border-sky-300 text-gray-900 text-sm rounded-md focus:ring-sky-500 focus:border-sky-300 block w-full p-2.5" required>
+                    <option value=-1>--Seleccione Genero--</option>
+                    <option value=1>Masculino</option>
+                    <option value=2>Femenino</option>
+                </select>
+            </div>
+            <div class="py-2">
+                <label for="fecha" class="flex items-start mb-2 text-sm text-sky-800 font-semibold">Fecha Registro:</label>
+                <input type="text" id="fecha" readonly formControlName="fecha" class="bg-white border-1 border-sky-300 text-gray-900 text-sm rounded-md focus:ring-sky-500 focus:border-sky-300 block w-full p-2.5" placeholder="Ingrese nombre de la persona o razon" required>
+            </div>
+            <div class="py-2">
+                <label for="dni" class="flex items-start mb-2 text-sm text-sky-800 font-semibold">DNI:</label>
+                <input type="text" id="dni" formControlName="dni" class="bg-white border-1 border-sky-300 text-gray-900 text-sm rounded-md focus:ring-sky-500 focus:border-sky-300 block w-full p-2.5" placeholder="Ingrese nombre de la persona o razon" required>
+            </div>
+            <div class="py-2">
+                <label for="name" class="flex items-start mb-2 text-sm text-sky-900 font-semibold">Nombres:</label>
+                <input type="text" id="name" formControlName="name" class="bg-white border-1 border-sky-300 text-gray-900 text-sm rounded-md focus:ring-sky-500 focus:border-sky-300 block w-full p-2.5" placeholder="Ingrese el monto del pago" required>
+            </div>
+            <div class="py-2">
+                <label for="a_paterno" class="flex items-start mb-2 text-sm text-sky-900 font-semibold">Apellido Paterno:</label>
+                <input type="text" id="a_paterno" formControlName="a_paterno" class="bg-white border-1 border-sky-300 text-gray-900 text-sm rounded-md focus:ring-sky-500 focus:border-sky-300 block w-full p-2.5" placeholder="Ingrese el monto del pago" required>
+            </div>
+            <div class="py-2">
+                <label for="a_materno" class="flex items-start mb-2 text-sm text-sky-900 font-semibold">Apellido Materno:</label>
+                <input type="text" id="a_materno" formControlName="a_materno" class="bg-white border-1 border-sky-300 text-gray-900 text-sm rounded-md focus:ring-sky-500 focus:border-sky-300 block w-full p-2.5" placeholder="Ingrese el monto del pago" required>
+            </div>
+            <div class="py-2">
+                <label for="telefono" class="flex items-start mb-2 text-sm text-sky-900 font-semibold">Telefono:</label>
+                <input type="text" id="telefono" formControlName="telefono" class="bg-white border-1 border-sky-300 text-gray-900 text-sm rounded-md focus:ring-sky-500 focus:border-sky-300 block w-full p-2.5" placeholder="Ingrese el monto del pago" required>
+            </div>
+            <div class="py-2">
+                <label for="rol" class="flex items-start mb-2 text-sm text-sky-900 font-semibold">Rol:</label>
+                <select name="rol" id="rol" fromControlName="rol" class="bg-white border-1 border-sky-300 text-gray-900 text-sm rounded-md focus:ring-sky-500 focus:border-sky-300 block w-full p-2.5" required>
+                    <option value=-1>--Seleccione Rol--</option>
+                    <option value=1>Cocinero</option>
+                    <option value=2>Cajero</option>
+                    <option value=3>Camarero</option>
+                    <option value=4>Administrador</option>
+                </select>
+            </div>
+            <div class="col-start-1 col-end-3 grid grid-cols-2 gap-x-6">
+                <button type="submit" data-modal-hide="popup-modal" type="button" class="text-white mt-3 bg-sky-600 hover:bg-gray-500  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">Registrar</button>
+                <button (click)="false" data-modal-hide="popup-modal" type="button" class="text-gray-500 mt-3 bg-white hover:bg-gray-500  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">Cerrar</button>
+            </div>
+        </form>
+    </div>
+</div>

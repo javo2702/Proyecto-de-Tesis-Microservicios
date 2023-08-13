@@ -5,9 +5,6 @@ import { AuthModule } from '../auth/auth.module';
 import { HeaderComponent } from './header/header.component';
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main/main.component';
-import { CtableComponent } from '../shared/componentes/ctable/ctable.component';
-
-
 
 @NgModule({
   declarations: [

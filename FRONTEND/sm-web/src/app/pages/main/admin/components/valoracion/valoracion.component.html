@@ -1,0 +1,284 @@
+<div class="flex flex-col gap-4 p-4">
+    <div class="rounded-md border border-gray-200 shadow py-4">
+        <h3 class="text-gray-500 text-lg">Valoraciones del servicio de atencion al cliente</h3>
+        <div id="chart" class="px-4 w-11/12 mx-auto">
+            <apx-chart
+              [series]="chartOptions.series!"
+              [chart]="chartOptions.chart!"
+              [dataLabels]="chartOptions.dataLabels!"
+              [plotOptions]="chartOptions.plotOptions!"
+              [xaxis]="chartOptions.xaxis!"
+            ></apx-chart>
+          </div>
+    </div>
+    <div class="rounded-md border border-gray-100  bg-white shadow px-10 py-4">
+        <div class="flex items-center justify-between px-8">
+            <h3 class="text-gray-500 text-lg">Valoraciones del servicio de atencion al cliente</h3>
+            <input type="date" name="fecha" id="fecha" class="border border-gray-300 rounded-md px-4 py-1">
+        </div>
+        <div class="w-full h-[430px] relative overflow-y-auto mt-3">
+            <table class="w-full text-center text-sm text text-gray-500 mx-auto">
+                <thead class="text-xs sticky top-0 left-0 z-10 text-white uppercase bg-sky-950">
+                    <tr>
+                        <th scope="col" class="px-4 py-3">
+                            Codigo
+                        </th>
+                        <th scope="col" class="px-2 py-3">
+                            Usuario
+                        </th>
+                        <th scope="col" class="px-2 py-3">
+                            Nombres y Apellidos
+                        </th>
+                        <th scope="col" class="px-2 py-3">
+                            Valoracion
+                        </th>
+                        <th scope="col" class="px-2 py-3">
+                            Opinion
+                        </th>
+                        <th scope="col" class="px-2 py-3">
+                            Fecha
+                        </th>
+                        <th scope="col" class="px-2 py-3">
+                            Clasificacion
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b hover:cursor-pointer">
+                        <td class="px-4 py-3">
+                            V0012
+                        </td>
+                        <td class="px-2 py-3">
+                            75137668
+                        </td>
+                        <td class="px-2 py-3">
+                            Javier Eduardo Valle Romero
+                        </td>
+                        <td class="px-2 py-3">
+                            5 Estrellas
+                        </td>
+                        <td class="px-2 py-3">
+                            El servicio estubo muy bueno
+                        </td>
+                        <td class="px-2 py-3">
+                            10/08/2021
+                        </td>
+                        <td class="px-2 py-3">
+                            Positiva
+                        </td>
+                    </tr>
+                    <tr class="border-b hover:cursor-pointer">
+                        <td class="px-4 py-3">
+                            V0012
+                        </td>
+                        <td class="px-2 py-3">
+                            75137668
+                        </td>
+                        <td class="px-2 py-3">
+                            Javier Eduardo Valle Romero
+                        </td>
+                        <td class="px-2 py-3">
+                            5 Estrellas
+                        </td>
+                        <td class="px-2 py-3">
+                            El servicio estubo muy bueno
+                        </td>
+                        <td class="px-2 py-3">
+                            10/08/2021
+                        </td>
+                        <td class="px-2 py-3">
+                            Positiva
+                        </td>
+                    </tr>
+                    <tr class="border-b hover:cursor-pointer">
+                        <td class="px-4 py-3">
+                            V0012
+                        </td>
+                        <td class="px-2 py-3">
+                            75137668
+                        </td>
+                        <td class="px-2 py-3">
+                            Javier Eduardo Valle Romero
+                        </td>
+                        <td class="px-2 py-3">
+                            5 Estrellas
+                        </td>
+                        <td class="px-2 py-3">
+                            El servicio estubo muy bueno
+                        </td>
+                        <td class="px-2 py-3">
+                            10/08/2021
+                        </td>
+                        <td class="px-2 py-3">
+                            Positiva
+                        </td>
+                    </tr>
+                    <tr class="border-b hover:cursor-pointer">
+                        <td class="px-4 py-3">
+                            V0012
+                        </td>
+                        <td class="px-2 py-3">
+                            75137668
+                        </td>
+                        <td class="px-2 py-3">
+                            Javier Eduardo Valle Romero
+                        </td>
+                        <td class="px-2 py-3">
+                            5 Estrellas
+                        </td>
+                        <td class="px-2 py-3">
+                            El servicio estubo muy bueno
+                        </td>
+                        <td class="px-2 py-3">
+                            10/08/2021
+                        </td>
+                        <td class="px-2 py-3">
+                            Positiva
+                        </td>
+                    </tr>
+                    <tr class="border-b hover:cursor-pointer">
+                        <td class="px-4 py-3">
+                            V0012
+                        </td>
+                        <td class="px-2 py-3">
+                            75137668
+                        </td>
+                        <td class="px-2 py-3">
+                            Javier Eduardo Valle Romero
+                        </td>
+                        <td class="px-2 py-3">
+                            5 Estrellas
+                        </td>
+                        <td class="px-2 py-3">
+                            El servicio estubo muy bueno
+                        </td>
+                        <td class="px-2 py-3">
+                            10/08/2021
+                        </td>
+                        <td class="px-2 py-3">
+                            Positiva
+                        </td>
+                    </tr>
+                    <tr class="border-b hover:cursor-pointer">
+                        <td class="px-4 py-3">
+                            V0012
+                        </td>
+                        <td class="px-2 py-3">
+                            75137668
+                        </td>
+                        <td class="px-2 py-3">
+                            Javier Eduardo Valle Romero
+                        </td>
+                        <td class="px-2 py-3">
+                            5 Estrellas
+                        </td>
+                        <td class="px-2 py-3">
+                            El servicio estubo muy bueno
+                        </td>
+                        <td class="px-2 py-3">
+                            10/08/2021
+                        </td>
+                        <td class="px-2 py-3">
+                            Positiva
+                        </td>
+                    </tr>
+                    <tr class="border-b hover:cursor-pointer">
+                        <td class="px-4 py-3">
+                            V0012
+                        </td>
+                        <td class="px-2 py-3">
+                            75137668
+                        </td>
+                        <td class="px-2 py-3">
+                            Javier Eduardo Valle Romero
+                        </td>
+                        <td class="px-2 py-3">
+                            5 Estrellas
+                        </td>
+                        <td class="px-2 py-3">
+                            El servicio estubo muy bueno
+                        </td>
+                        <td class="px-2 py-3">
+                            10/08/2021
+                        </td>
+                        <td class="px-2 py-3">
+                            Positiva
+                        </td>
+                    </tr>
+                    <tr class="border-b hover:cursor-pointer">
+                        <td class="px-4 py-3">
+                            V0012
+                        </td>
+                        <td class="px-2 py-3">
+                            75137668
+                        </td>
+                        <td class="px-2 py-3">
+                            Javier Eduardo Valle Romero
+                        </td>
+                        <td class="px-2 py-3">
+                            5 Estrellas
+                        </td>
+                        <td class="px-2 py-3">
+                            El servicio estubo muy bueno
+                        </td>
+                        <td class="px-2 py-3">
+                            10/08/2021
+                        </td>
+                        <td class="px-2 py-3">
+                            Positiva
+                        </td>
+                    </tr>
+                    <tr class="border-b hover:cursor-pointer">
+                        <td class="px-4 py-3">
+                            V0012
+                        </td>
+                        <td class="px-2 py-3">
+                            75137668
+                        </td>
+                        <td class="px-2 py-3">
+                            Javier Eduardo Valle Romero
+                        </td>
+                        <td class="px-2 py-3">
+                            5 Estrellas
+                        </td>
+                        <td class="px-2 py-3">
+                            El servicio estubo muy bueno
+                        </td>
+                        <td class="px-2 py-3">
+                            10/08/2021
+                        </td>
+                        <td class="px-2 py-3">
+                            Positiva
+                        </td>
+                    </tr>
+                    <tr class="border-b hover:cursor-pointer">
+                        <td class="px-4 py-3">
+                            V0012
+                        </td>
+                        <td class="px-2 py-3">
+                            75137668
+                        </td>
+                        <td class="px-2 py-3">
+                            Javier Eduardo Valle Romero
+                        </td>
+                        <td class="px-2 py-3">
+                            5 Estrellas
+                        </td>
+                        <td class="px-2 py-3">
+                            El servicio estubo muy bueno
+                        </td>
+                        <td class="px-2 py-3">
+                            10/08/2021
+                        </td>
+                        <td class="px-2 py-3">
+                            Positiva
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="false" class="border-b w-full py-3 px-4 text-gray-400 text-center">
+                <p>No se han registrado pedidos aun</p>
+            </div>
+        </div>
+    </div>
+</div>

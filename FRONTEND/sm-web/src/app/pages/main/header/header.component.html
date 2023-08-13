@@ -28,15 +28,15 @@
                   <img class="w-[100px]" src="./assets/icons/logo.png" alt="">
                 </div>
               </div>
-              <div class="hidden lg:flex flex-row">
-                  <p>MODULO DE </p>
-                  <nav class="navigation">
-                      <a *smShowForRoles="['Orders', 'Manager']" routerLink="/orders/tables" routerLinkActive="activelink">Pedidos</a>
-                      <a *smShowForRoles="['Kitchen', 'Manager']" routerLink="/kitchen" routerLinkActive="activelink">Cocina</a>
-                      <a *smShowForRoles="['Customer', 'Manager']" routerLink="/customer/menu" routerLinkActive="activelink">Clientes</a>
-                      <a *smShowForRoles="['Cashier', 'Manager']" routerLink="/cashier/home" routerLinkActive="activelink">Cajero</a>
-                      <a *smShowForRoles="['Manager']" routerLink="/admin/home" routerLinkActive="activelink">Administracion</a>
-                  </nav>
+              <div class="hidden text-sm lg:text-base uppercase lg:flex flex-row items-center justify-center gap-4">
+                  <p class="text-white">MODULO DE </p>
+                  <div class="flex flex-row gap-2">
+                      <a class="px-3 py-2 text-white hover:bg-gray-200 hover:text-black" *smShowForRoles="['Orders', 'Cashier' ,'Manager']" routerLink="/orders/tables" routerLinkActive="activelink">Pedidos</a>
+                      <a class="px-3 py-2 text-white hover:bg-gray-200 hover:text-black" *smShowForRoles="['Kitchen', 'Manager']" routerLink="/kitchen" routerLinkActive="activelink">Cocina</a>
+                      <a class="px-3 py-2 text-white hover:bg-gray-200 hover:text-black" *smShowForRoles="['Customer', 'Manager']" routerLink="/customer/menu" routerLinkActive="activelink">Clientes</a>
+                      <a class="px-3 py-2 text-white hover:bg-gray-200 hover:text-black" *smShowForRoles="['Cashier', 'Manager']" routerLink="/cashier/home" routerLinkActive="activelink">Cajero</a>
+                      <a class="px-3 py-2 text-white hover:bg-gray-200 hover:text-black" *smShowForRoles="['Manager']" routerLink="/admin/home" routerLinkActive="activelink">Administracion</a>
+                  </div>
               </div>
               <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <p class="text-white">{{user?.username}}</p>

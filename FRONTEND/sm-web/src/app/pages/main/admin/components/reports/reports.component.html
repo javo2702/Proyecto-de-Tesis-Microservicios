@@ -1,1 +1,650 @@
-<p>reports works!</p>
+<div id="popup-modal" tabindex="-1" [ngClass]="{'hidden':!showDetallesVentas}" class="fixed top-0 left-0 right-0 z-40 p-4 bg-black bg-opacity-10 overflow-x-hidden overflow-y-auto md:inset-0 h-full">
+    <div class="relative w-full max-h-full">
+        <div class="w-[680px] mt-[100px] bg-white rounded-lg shadow mx-auto">
+            <div class="flex flex-row justify-between items-center bg-sky-800 rounded-t-lg px-4 py-2 text-white">
+                <p>Reporte de Pagos <span class="px-6">[ {{fechaVentas}} ]</span></p>
+                <button (click)="showDetallesVentas=false" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center " data-modal-hide="popup-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <div class="px-4 pb-4">
+                <div>
+                    <div class="flex justify-between">
+                        <h3 class="my-2 text-lg text-gray-400">Monto Total: S/.<span class="font-semibold">100</span></h3>
+                        <h3 class="my-2 text-lg text-gray-400">Cajero: <span class="font-semibold">Jorge Romero</span></h3>
+                    </div>
+                    <div class="relative h-[400px] overflow-y-auto">
+                        <table class="w-full table-auto text-center text-sm text text-gray-500 mx-auto">
+                            <thead class="text-xs sticky top-0 left-0 right-0 z-10 text-white uppercase bg-sky-950">
+                                <tr>
+                                    <th scope="col" class="">
+                                        #
+                                    </th>
+                                    <th scope="col" class="py-3 w-[320px]">
+                                        Descripcion
+                                    </th>
+                                    <th scope="col" class="">
+                                        Monto
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3">
+                                        1
+                                    </td>
+                                    <td class="px-2 py-3">
+                                        <ul>
+                                            <li>1 - Ceviche Mixto Especial De la Casa 35</li>
+                                            <li>1 - Ceviche Mixto 35</li>
+                                        </ul>
+                                        
+                                        
+                                    </td>
+                                    <td class="py-3">35</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="px-2 py-3">
+                                        1
+                                    </td>
+                                    <td class="px-2 py-3">
+                                        1 - Ceviche Mixto 35
+                                    </td>
+                                    <td class="px-2 py-3">35</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="px-2 py-3">
+                                        1
+                                    </td>
+                                    <td class="px-2 py-3">
+                                        1 - Ceviche Mixto 35
+                                    </td>
+                                    <td class="px-2 py-3">35</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="px-2 py-3">
+                                        1
+                                    </td>
+                                    <td class="px-2 py-3">
+                                        1 - Ceviche Mixto 35
+                                    </td>
+                                    <td class="px-2 py-3">35</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="px-2 py-3">
+                                        1
+                                    </td>
+                                    <td class="px-2 py-3">
+                                        1 - Ceviche Mixto 35
+                                    </td>
+                                    <td class="px-2 py-3">35</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="px-2 py-3">
+                                        1
+                                    </td>
+                                    <td class="px-2 py-3">
+                                        1 - Ceviche Mixto 35
+                                    </td>
+                                    <td class="px-2 py-3">35</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="px-2 py-3">
+                                        1
+                                    </td>
+                                    <td class="px-2 py-3">
+                                        1 - Ceviche Mixto 35
+                                    </td>
+                                    <td class="px-2 py-3">35</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="px-2 py-3">
+                                        1
+                                    </td>
+                                    <td class="px-2 py-3">
+                                        1 - Ceviche Mixto 35
+                                    </td>
+                                    <td class="px-2 py-3">35</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="px-2 py-3">
+                                        1
+                                    </td>
+                                    <td class="px-2 py-3">
+                                        1 - Ceviche Mixto 35
+                                    </td>
+                                    <td class="px-2 py-3">35</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="grid grid-cols-2 gap-x-6">
+                        <button type="submit" data-modal-hide="popup-modal" type="button" class="flex flex-row justify-center items-center gap-2 text-white mt-3 bg-sky-600 hover:bg-gray-500  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                <path fill-rule="evenodd" d="M7.875 1.5C6.839 1.5 6 2.34 6 3.375v2.99c-.426.053-.851.11-1.274.174-1.454.218-2.476 1.483-2.476 2.917v6.294a3 3 0 003 3h.27l-.155 1.705A1.875 1.875 0 007.232 22.5h9.536a1.875 1.875 0 001.867-2.045l-.155-1.705h.27a3 3 0 003-3V9.456c0-1.434-1.022-2.7-2.476-2.917A48.716 48.716 0 0018 6.366V3.375c0-1.036-.84-1.875-1.875-1.875h-8.25zM16.5 6.205v-2.83A.375.375 0 0016.125 3h-8.25a.375.375 0 00-.375.375v2.83a49.353 49.353 0 019 0zm-.217 8.265c.178.018.317.16.333.337l.526 5.784a.375.375 0 01-.374.409H7.232a.375.375 0 01-.374-.409l.526-5.784a.373.373 0 01.333-.337 41.741 41.741 0 018.566 0zm.967-3.97a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H18a.75.75 0 01-.75-.75V10.5zM15 9.75a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V10.5a.75.75 0 00-.75-.75H15z" clip-rule="evenodd" />
+                            </svg>                              
+                            Descargar
+                        </button>
+                        <button (click)="showDetallesVentas=false" data-modal-hide="popup-modal" type="button" class="text-gray-500 mt-3 bg-white hover:bg-gray-500  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">Cerrar</button>
+                    </div>
+                </div>     
+            </div>
+        </div>
+    </div>
+</div>
+<div id="popup-modal" tabindex="-1" [ngClass]="{'hidden':!showDetallesPagos}" class="fixed top-0 left-0 right-0 z-40 p-4 bg-black bg-opacity-10 overflow-x-hidden overflow-y-auto md:inset-0 h-full">
+    <div class="relative w-full max-h-full">
+        <div class="w-[680px] mt-[100px] bg-white rounded-lg shadow mx-auto">
+            <div class="flex flex-row justify-between items-center bg-sky-800 rounded-t-lg px-4 py-2 text-white">
+                <p>Reporte de Pagos <span class="px-6">[ {{fechaPagos}} ]</span></p>
+                <button (click)="showDetallesPagos=false" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center " data-modal-hide="popup-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <div class="px-4 pb-4">
+                <div>
+                    <div class="flex justify-between">
+                        <h3 class="my-2 text-lg text-gray-400">Monto Total: S/.<span class="font-semibold">100</span></h3>
+                        <h3 class="my-2 text-lg text-gray-400">Responsable: <span class="font-semibold">Jorge Romero</span></h3>
+                    </div>
+                    <div class="relative h-[400px] overflow-y-auto">
+                        <table class="w-full table-auto text-center text-sm text text-gray-500 mx-auto">
+                            <thead class="text-xs sticky top-0 left-0 right-0 z-10 text-white uppercase bg-sky-950">
+                                <tr>
+                                    <th scope="col" class="py-3 w-[320px]">
+                                        Nombre / Razon
+                                    </th>
+                                    <th scope="col" class="">
+                                        Monto
+                                    </th>
+                                    <th scope="col" class="">
+                                        Fecha
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3">
+                                        Pago a Persona X
+                                    </td>
+                                    <td class="px-2 py-3">
+                                        100
+                                    </td>
+                                    <td class="py-3">10/10/2021 3:00pm</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3">
+                                        Pago a Persona X
+                                    </td>
+                                    <td class="px-2 py-3">
+                                        100
+                                    </td>
+                                    <td class="py-3">10/10/2021 3:00pm</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3">
+                                        Pago a Persona X
+                                    </td>
+                                    <td class="px-2 py-3">
+                                        100
+                                    </td>
+                                    <td class="py-3">10/10/2021 3:00pm</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3">
+                                        Pago a Persona X
+                                    </td>
+                                    <td class="px-2 py-3">
+                                        100
+                                    </td>
+                                    <td class="py-3">10/10/2021 3:00pm</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3">
+                                        Pago a Persona X
+                                    </td>
+                                    <td class="px-2 py-3">
+                                        100
+                                    </td>
+                                    <td class="py-3">10/10/2021 3:00pm</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3">
+                                        Pago a Persona X
+                                    </td>
+                                    <td class="px-2 py-3">
+                                        100
+                                    </td>
+                                    <td class="py-3">10/10/2021 3:00pm</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="grid grid-cols-2 gap-x-6">
+                        <button type="submit" data-modal-hide="popup-modal" type="button" class="flex flex-row justify-center items-center gap-2 text-white mt-3 bg-sky-600 hover:bg-gray-500  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                <path fill-rule="evenodd" d="M7.875 1.5C6.839 1.5 6 2.34 6 3.375v2.99c-.426.053-.851.11-1.274.174-1.454.218-2.476 1.483-2.476 2.917v6.294a3 3 0 003 3h.27l-.155 1.705A1.875 1.875 0 007.232 22.5h9.536a1.875 1.875 0 001.867-2.045l-.155-1.705h.27a3 3 0 003-3V9.456c0-1.434-1.022-2.7-2.476-2.917A48.716 48.716 0 0018 6.366V3.375c0-1.036-.84-1.875-1.875-1.875h-8.25zM16.5 6.205v-2.83A.375.375 0 0016.125 3h-8.25a.375.375 0 00-.375.375v2.83a49.353 49.353 0 019 0zm-.217 8.265c.178.018.317.16.333.337l.526 5.784a.375.375 0 01-.374.409H7.232a.375.375 0 01-.374-.409l.526-5.784a.373.373 0 01.333-.337 41.741 41.741 0 018.566 0zm.967-3.97a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H18a.75.75 0 01-.75-.75V10.5zM15 9.75a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V10.5a.75.75 0 00-.75-.75H15z" clip-rule="evenodd" />
+                            </svg>                              
+                            Descargar
+                        </button>
+                        <button (click)="showDetallesPagos=false" data-modal-hide="popup-modal" type="button" class="text-gray-500 mt-3 bg-white hover:bg-gray-500  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">Cerrar</button>
+                    </div>
+                </div>     
+            </div>
+        </div>
+    </div>
+</div>
+<div class="px-10 py-4 grid grid-cols-1 lg:grid-cols-2 gap-10 h-full">
+    <div class="w-full">
+        <h3 class="text-gray-500 text-lg mb-3">Reporte de Ventas</h3>
+        <div class="px-4 py-4 mx-auto border border-gray-300 rounded-md shadow-sm">
+            <div class="flex justify-center xl:justify-end">
+                <div class="mb-3 flex flex-col items-center xl:flex-row gap-y-2 gap-x-6 xl:gap-6 2xl:gap-10">
+                    <div class="flex flex-row gap-10 xl:gap-12 2xl:gap-20 items-center justify-center">
+                        <a (click)="previousMonth()" class="rounded-md p-[8px] hover:bg-gray-200 hover:cursor-pointer">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                            </svg>
+                        </a>
+                        <p class="w-[80px] 2xl:w-[100px] text-center">{{monthVentas}}</p>
+                        <a (click)="nextMonth()" class="rounded-md p-[8px] hover:bg-gray-200 hover:cursor-pointer">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div>
+                        <input type="date" name="fecha" id="fecha" class="border border-gray-300 rounded-md px-4 py-1">
+                    </div>
+                </div>
+            </div>
+            <div class="w-full relative  overflow-hidden">
+                <table class="w-full text-center text-sm text text-gray-500 mx-auto">
+                    <thead class="text-xs text-white uppercase bg-sky-950">
+                        <tr>
+                            <th scope="col" class="px-4 py-3">
+                                # Operacion
+                            </th>
+                            <th scope="col" class="px-2 py-3">
+                                Monto
+                            </th>
+                            <th scope="col" class="px-2 py-3">
+                                Fecha y Hora
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr (click)="showDetallesVentas=true" class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        
+                        <!--<tr *ngFor="let p of pedidos" class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <th  (click)="getDetallePedido(p)" scope="row" class="px-2 py-3 font-bold text-gray-900">
+                                {{p.idpedido}}
+                            </th>
+                            <td (click)="getDetallePedido(p)" class="px-2 py-3">
+                                <p [ngSwitch]="p?.estado?.toLowerCase()">
+                                    <span *ngSwitchCase="'listo'" class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">{{p?.estado}}</span>
+                                    <span *ngSwitchCase="'recibido'" class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">{{p?.estado}}</span>
+                                </p>
+                            </td>
+                            <td  (click)="getDetallePedido(p)" class="px-2 py-3">
+                                N° {{p.idmesa}}
+                            </td>
+                            <td  (click)="getDetallePedido(p)" class="px-2 py-3">
+                                {{p.fecha}}
+                            </td>
+                        </tr>-->
+                    </tbody>
+                </table>
+                <div *ngIf="false" class="border-b w-full py-3 px-4 text-gray-400 text-center">
+                    <p>No se han registrado pedidos aun</p>
+                </div>
+                <div class="flex justify-between items-center mt-3" [ngClass]="{'hidden':false}">
+                    <div class="text-sm text-gray-400">
+                        <p>Mostrando <span>6</span> Resultados de <span>30</span></p>
+                    </div>
+                    <nav aria-label="">
+                        <ul class="flex items-center -space-x-px h-10 text-base">
+                        <li>
+                            <a (click)="previous()" class="flex items-center justify-center px-2 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 hover:border-sky-800 rounded-l-lg hover:bg-gray-800 hover:text-gray-700">
+                            <span class="sr-only">Previous</span>
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                            </svg>
+                            </a>
+                        </li>
+                        <li *ngFor="let p of pagination">
+                            <a (click)="toNumber(p)" class="flex items-center justify-center px-2 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:border-sky-800 hover:bg-gray-800 hover:text-gray-700" [ngClass]="{'text-sky-700':p==currentIndex.toString(),'rounded-l-lg':currentIndex==1&&currentIndex.toString()==p,'rounded-r-lg':currentIndex==pagination.length&&currentIndex.toString()==p}">{{p}}</a>
+                        </li>
+                        <li>
+                            <a (click)="next()" class="flex items-center justify-center px-2 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:border-sky-800 rounded-r-lg hover:bg-gray-800 hover:text-gray-700">
+                            <span class="sr-only">Next</span>
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                            </svg>
+                            </a>
+                        </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-full">
+        <h3 class="text-gray-500 text-lg mb-3">Reporte de Ventas</h3>
+        <div class="px-4 py-4 mx-auto border border-gray-300 rounded-md shadow-sm">
+            <div class="flex justify-center xl:justify-end">
+                <div class="mb-3 flex flex-col items-center xl:flex-row gap-y-2 gap-x-6 xl:gap-6 2xl:gap-10">
+                    <div class="flex flex-row gap-10 xl:gap-12 2xl:gap-20 items-center justify-center">
+                        <a (click)="previousMonthPagos()" class="rounded-md p-[8px] hover:bg-gray-200 hover:cursor-pointer">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                            </svg>
+                        </a>
+                        <p class="w-[80px] 2xl:w-[100px] text-center">{{monthPagos}}</p>
+                        <a (click)="nextMonthPagos()" class="rounded-md p-[8px] hover:bg-gray-200 hover:cursor-pointer">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div>
+                        <input type="date" name="fecha" id="fecha" class="border border-gray-300 rounded-md px-4 py-1">
+                    </div>
+                </div>
+            </div>
+            <div class="w-full relative  overflow-hidden">
+                <table class="w-full text-center text-sm text text-gray-500 mx-auto">
+                    <thead class="text-xs text-white uppercase bg-sky-950">
+                        <tr>
+                            <th scope="col" class="px-4 py-3">
+                                # Operacion
+                            </th>
+                            <th scope="col" class="px-2 py-3">
+                                Monto
+                            </th>
+                            <th scope="col" class="px-2 py-3">
+                                Fecha y Hora
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr (click)="showDetallesPagos=true" class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <td class="px-2 py-3">
+                                01
+                            </td>
+                            <td class="px-2 py-3">
+                                S/. 100.00
+                            </td>
+                            <td class="px-2 py-3">
+                                10/08/2023 3:00pm
+                            </td>
+                        </tr>
+                        
+                        <!--<tr *ngFor="let p of pedidos" class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                            <th  (click)="getDetallePedido(p)" scope="row" class="px-2 py-3 font-bold text-gray-900">
+                                {{p.idpedido}}
+                            </th>
+                            <td (click)="getDetallePedido(p)" class="px-2 py-3">
+                                <p [ngSwitch]="p?.estado?.toLowerCase()">
+                                    <span *ngSwitchCase="'listo'" class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">{{p?.estado}}</span>
+                                    <span *ngSwitchCase="'recibido'" class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">{{p?.estado}}</span>
+                                </p>
+                            </td>
+                            <td  (click)="getDetallePedido(p)" class="px-2 py-3">
+                                N° {{p.idmesa}}
+                            </td>
+                            <td  (click)="getDetallePedido(p)" class="px-2 py-3">
+                                {{p.fecha}}
+                            </td>
+                        </tr>-->
+                    </tbody>
+                </table>
+                <div *ngIf="false" class="border-b w-full py-3 px-4 text-gray-400 text-center">
+                    <p>No se han registrado pedidos aun</p>
+                </div>
+                <div class="flex justify-between items-center mt-3" [ngClass]="{'hidden':false}">
+                    <div class="text-sm text-gray-400">
+                        <p>Mostrando <span>6</span> Resultados de <span>30</span></p>
+                    </div>
+                    <nav aria-label="">
+                        <ul class="flex items-center -space-x-px h-10 text-base">
+                        <li>
+                            <a (click)="previous()" class="flex items-center justify-center px-2 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 hover:border-sky-800 rounded-l-lg hover:bg-gray-800 hover:text-gray-700">
+                            <span class="sr-only">Previous</span>
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                            </svg>
+                            </a>
+                        </li>
+                        <li *ngFor="let p of pagination">
+                            <a (click)="toNumber(p)" class="flex items-center justify-center px-2 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:border-sky-800 hover:bg-gray-800 hover:text-gray-700" [ngClass]="{'text-sky-700':p==currentIndex.toString(),'rounded-l-lg':currentIndex==1&&currentIndex.toString()==p,'rounded-r-lg':currentIndex==pagination.length&&currentIndex.toString()==p}">{{p}}</a>
+                        </li>
+                        <li>
+                            <a (click)="next()" class="flex items-center justify-center px-2 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:border-sky-800 rounded-r-lg hover:bg-gray-800 hover:text-gray-700">
+                            <span class="sr-only">Next</span>
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                            </svg>
+                            </a>
+                        </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

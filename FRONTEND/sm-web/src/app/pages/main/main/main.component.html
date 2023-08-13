@@ -5,7 +5,7 @@
         <div class="row-custom w-50">
             <p>MODULO DE </p>
             <nav class="navigation">
-                <a *smShowForRoles="['Orders', 'Manager']" routerLink="/orders/tables" class="activelink item-link">Pedidos</a>
+                <a *smShowForRoles="['Orders','Cashier', 'Manager']" routerLink="/orders/tables" class="activelink item-link">Pedidos</a>
                 <a *smShowForRoles="['Kitchen', 'Manager']" routerLink="/kitchen" class="activelink item-link">Cocina</a>
                 <a *smShowForRoles="['Customer', 'Manager']" routerLink="/customer" class="activelink item-link">Clientes</a>
                 <a *smShowForRoles="['Cashier', 'Manager']" routerLink="/cashier/home"  class="activelink item-link">Cajero</a>

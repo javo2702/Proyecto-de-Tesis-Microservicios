@@ -6,7 +6,9 @@ import { UsersComponent } from './components/users/users.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { hasRole } from '../../auth/guards/has-role.guard';
 import { RouterModule } from '@angular/router';
-
+import { NgApexchartsModule } from "ng-apexcharts";
+import { RegistrarComponent } from './components/registrar/registrar.component';
+import { ValoracionComponent } from './components/valoracion/valoracion.component';
 const routes = [
   { 
     canActivate: [hasRole(['Manager'])],
@@ -26,6 +28,14 @@ const routes = [
         path: 'reports',
         component: ReportsComponent
       },
+      {
+        path: 'valoracion',
+        component: ValoracionComponent
+      },
+      {
+        path: 'users/registrar',
+        component: RegistrarComponent
+      },
     ],
   }
 ];
@@ -33,10 +43,14 @@ const routes = [
 
 @NgModule({
   declarations: [
-    AdminComponent
+    AdminComponent,
+    HomeComponent,
+    UsersComponent,
+    ReportsComponent,
+    ValoracionComponent
   ],
   imports: [
-    CommonModule,RouterModule.forChild(routes)
+    CommonModule,RouterModule.forChild(routes),NgApexchartsModule,
   ]
 })
 export class AdminModule { }

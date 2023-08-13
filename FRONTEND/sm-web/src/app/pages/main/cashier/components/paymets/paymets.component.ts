@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./paymets.component.css']
 })
 export class PaymetsComponent {
+  showForm:boolean = false
   currentIndex:number =1
   pagination:string[] = []
   fechaActual: Date = new Date()
@@ -38,4 +39,10 @@ export class PaymetsComponent {
   previous(){}
   toNumber(p:string){}
   next(){}
+  registrar(){
+    
+  }
+  closeModal(){
+    this.showForm=false;
+  }
 }
