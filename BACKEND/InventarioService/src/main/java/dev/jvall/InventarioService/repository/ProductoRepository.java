@@ -16,4 +16,45 @@ public interface ProductoRepository extends JpaRepository<Producto,Integer> {
     List<Producto> getDrinkList();
     @Query(value="{call show_product(:id_product)};", nativeQuery=true)
     Producto getProductById(@Param("id_product")int id_product);
+    @Query(value="{call create_product(" +
+            ":nombre," +
+            ":descripcion," +
+            ":precio," +
+            ":estado," +
+            ":descuento," +
+            ":idcategoria," +
+            ":imagen" + ")};", nativeQuery=true)
+    Producto createProduct(
+            @Param("nombre")String nombre,
+            @Param("descripcion")String descripcion,
+            @Param("precio")double precio,
+            @Param("estado")String estado,
+            @Param("descuento")double descuento,
+            @Param("idcategoria")int idcategoria,
+            @Param("imagen")String imagen
+    );
+    @Query(value="{call edit_product(" +
+            ":idproducto,"+
+            ":nombre," +
+            ":descripcion," +
+            ":precio," +
+            ":estado," +
+            ":descuento," +
+            ":idcategoria," +
+            ":imagen" + ")};", nativeQuery=true)
+    Producto editProduct(
+            @Param("idproducto")int idproducto,
+            @Param("nombre")String nombre,
+            @Param("descripcion")String descripcion,
+            @Param("precio")double precio,
+            @Param("estado")String estado,
+            @Param("descuento")double descuento,
+            @Param("idcategoria")int idcategoria,
+            @Param("imagen")String imagen
+    );
+    @Query(value="{call unsubscribe_product(" +
+            ":idproducto"+ ")};", nativeQuery=true)
+    Producto unsubscribeProduct(
+            @Param("idproducto")int idproducto
+    );
 }

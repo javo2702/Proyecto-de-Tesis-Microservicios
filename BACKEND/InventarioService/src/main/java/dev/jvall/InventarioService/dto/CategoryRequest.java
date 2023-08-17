@@ -9,13 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductoRequest {
+public class CategoryRequest {
     private String nombre;
     private String descripcion;
-    private double precio;
     private String estado;
-    private double descuento;
-    private int idcategoria;
-    private String imagen;
-
 }

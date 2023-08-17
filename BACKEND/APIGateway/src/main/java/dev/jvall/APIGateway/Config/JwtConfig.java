@@ -14,8 +14,8 @@ import lombok.ToString;
 // Also, if, at any time, you tried to instantiate an object that's not defined as a bean
 // Don't expect Spring will autowire the fields inside that class object.
 
-@Getter 		// lombok will create getters auto.
-@ToString		// [IMP] You need to install lombok jar file: https://stackoverflow.com/a/11807022
+//@Getter 		// lombok will create getters auto.
+//@ToString		// [IMP] You need to install lombok jar file: https://stackoverflow.com/a/11807022
 public class JwtConfig {
 
     // Spring doesn't inject/autowire to "static" fields.

@@ -1,5 +1,6 @@
 package dev.jvall.InventarioService.service;
 
+import dev.jvall.InventarioService.dto.ProductoRequest;
 import dev.jvall.InventarioService.model.Producto;
 import dev.jvall.InventarioService.repository.ProductoRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,5 +25,33 @@ public class ProductoService {
     }
     public Producto getProductById(int idproduct){
         return productoRepository.getProductById(idproduct);
+    }
+    public Producto createProducto(ProductoRequest producto){
+        return productoRepository.createProduct(
+            producto.getNombre(),
+            producto.getDescripcion(),
+            producto.getPrecio(),
+            producto.getEstado(),
+            producto.getDescuento(),
+            producto.getIdcategoria(),
+            producto.getImagen()
+        );
+    }
+    public Producto editProducto(int id,ProductoRequest producto){
+        return productoRepository.editProduct(
+                id,
+                producto.getNombre(),
+                producto.getDescripcion(),
+                producto.getPrecio(),
+                producto.getEstado(),
+                producto.getDescuento(),
+                producto.getIdcategoria(),
+                producto.getImagen()
+        );
+    }
+    public Producto unsubscribeProduct(int idproducto){
+        return productoRepository.unsubscribeProduct(
+                idproducto
+        );
     }
 }

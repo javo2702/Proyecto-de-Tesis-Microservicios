@@ -17,4 +17,7 @@ public interface MesaRepository extends JpaRepository<Mesa,Integer> {
     List<Mesa>  restoreTableState(@Param("idmesa_elegida")int idmesa_elegida);
     @Query(value = "{call get_table(:idtable)};", nativeQuery = true)
     Mesa getTableDetails(@Param("idtable")int idtable);
+
+    @Query(value = "{call restore_tables()};", nativeQuery = true)
+    List<Mesa>  restoreTables();
 }

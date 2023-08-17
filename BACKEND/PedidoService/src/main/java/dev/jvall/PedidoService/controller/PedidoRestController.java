@@ -169,4 +169,13 @@ public class PedidoRestController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PutMapping("/table/restoretables")
+    public ResponseEntity<List<Mesa>> restoreTables(){
+        try{
+            List<Mesa> tableListRestore = mesaService.restoreTables();
+            return new ResponseEntity<>(tableListRestore,HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

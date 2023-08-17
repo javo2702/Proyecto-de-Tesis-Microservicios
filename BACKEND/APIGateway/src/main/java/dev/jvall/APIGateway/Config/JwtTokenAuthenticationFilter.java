@@ -11,9 +11,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+//import org.springframework.security.core.authority.SimpleGrantedAuthority;
+//import org.springframework.security.core.context.SecurityContextHolder;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -63,17 +63,17 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
                 // 5. Create auth object
                 // UsernamePasswordAuthenticationToken: A built-in object, used by spring to represent the current authenticated / being authenticated user.
                 // It needs a list of authorities, which has type of GrantedAuthority interface, where SimpleGrantedAuthority is an implementation of that interface
-                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-                        username, null, authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
+                //UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                //        username, null, authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
 
                 // 6. Authenticate the user
                 // Now, user is authenticated
-                SecurityContextHolder.getContext().setAuthentication(auth);
+                //SecurityContextHolder.getContext().setAuthentication(auth);
             }
 
         } catch (Exception e) {
             // In case of failure. Make sure it's clear; so guarantee user won't be authenticated
-            SecurityContextHolder.clearContext();
+            //SecurityContextHolder.clearContext();
         }
 
         // go to the next filter in the filter chain

@@ -25,4 +25,7 @@ public class MesaService {
     public Mesa getTableDetails(int idmesa){
         return mesaRepository.getTableDetails(idmesa);
     }
+    public List<Mesa>  restoreTables(){
+        return mesaRepository.restoreTables();
+    }
 }
