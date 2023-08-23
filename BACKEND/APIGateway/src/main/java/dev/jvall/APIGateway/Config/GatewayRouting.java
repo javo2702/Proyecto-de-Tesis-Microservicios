@@ -20,6 +20,8 @@ public class GatewayRouting implements WebFluxConfigurer {
         return builder.routes()
             .route("orderId", r->r.path("/order/**").uri("lb://pedido-service")) //dynamic routing
                 .route("inventaryId", r->r.path("/inventary/**").uri("lb://inventario-service")) //dynamic routing
+                .route("transactionId", r->r.path("/transaction/**").uri("lb://transaccion-service")) //dynamic routing
+                .route("valoracionId", r->r.path("/valoration/**").uri("lb://valoracion-service")) //dynamic routing
             .build();
     }
 }
