@@ -11,7 +11,7 @@
                 </button>
             </div>
             <div class="px-4 pb-4">
-                <form action="" (submit)="registrar()">
+                <form action="" (submit)="registrar()" [formGroup]="registerForm">
                     <div class="py-2">
                         <label for="name" class="flex items-start mb-2 text-sm text-sky-800 font-semibold">Nombre / Razon:</label>
                         <input type="text" id="name" formControlName="nombres" class="bg-white border-1 border-sky-300 text-gray-900 text-sm rounded-md focus:ring-sky-500 focus:border-sky-300 block w-full p-2.5" placeholder="Ingrese nombre de la persona o razon" required>
@@ -49,9 +49,19 @@
                         </a>
                     </div>
                     <div>
-                        <input type="date" name="fecha" id="fecha" class="border border-gray-300 rounded-md px-4 py-1">
+                        <form>
+                            <input (ngModelChange)="changeDate($event)" 
+                                type="date" 
+                                name="fecha" 
+                                id="fecha"  
+                                [(ngModel)]="fecha" 
+                                class="border border-gray-300 rounded-md px-4 py-1">
+                        </form>
                     </div>
                 </div>
+            </div>
+            <div>
+               ------- {{fechaInputValue}}  ----------
             </div>
             <div class="w-full relative  overflow-hidden">
                 <table class="w-full text-center text-sm text text-gray-500 mx-auto">

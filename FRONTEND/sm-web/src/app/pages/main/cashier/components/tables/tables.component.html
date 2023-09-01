@@ -38,7 +38,7 @@
                 <h5>
                     Informacion de la Mesa 
                 </h5>
-                <h5>[]</h5> 
+                <h5>[{{pedido?.numero}}]</h5> 
             </div>
             <button (click)="showDetailsTable=false" type="button" data-drawer-hide="drawer-example" aria-controls="drawer-example" class="text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex items-center justify-center" >
                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -52,11 +52,11 @@
                 <div class="px-3">
                     <div class="row-custom">
                         <p><strong>Camarero:</strong></p>
-                        <p class="capitalize">{{user?.username}}</p>
+                        <p class="capitalize">{{pedido?.idmozo}}</p>
                     </div>
                     <div class="row-custom">
                         <p><strong>N° Mesa:</strong></p>
-                        <p>N° {{table}}</p>
+                        <p>{{pedido?.numero}}</p>
                     </div>
                 </div>
                 <div class="w-full relative overflow-y-auto max-h-[585px] border-b border-gray-200">
@@ -78,9 +78,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of order" class="border-b border-gray-200">
+                            <tr *ngFor="let item of orden" class="border-b border-gray-200">
                                 <td class="px-2 py-4">
-                                    <div class="row-custom-center">
+                                    <div class="flex justify-center">
                                         <p>{{item.cantidad}}</p>
                                     </div>
                                 </td>
@@ -100,7 +100,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div *ngIf="order.length==0" class="border-b w-full py-2 px-4 text-gray-400 text-center">
+                    <div *ngIf="orden.length==0" class="border-b w-full py-2 px-4 text-gray-400 text-center">
                         <p>Ocurrió un problema al tratar de obtener los datos</p>
                     </div>
                 </div>
@@ -122,7 +122,6 @@
     </div>
     <div class="bg-sky-700 py-2 px-4 flex flex-col justify-center"> 
         <p class="text-white">Disposicion de mesas</p>
-        <a (click)="showDetailsTable=true">abrir side bar</a>
     </div>
     <div class="grid grid-cols-table">
         <div class="flex flex-col items-center justify-center gap-12" [ngClass]="{'bg-black bg-opacity-25':showDetailsTable}">

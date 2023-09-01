@@ -8,6 +8,8 @@ import { HttpClient } from '@angular/common/http';
 import { Categoria } from 'src/app/backend/interfaces/categoria';
 import { DetallesPedidoRequest, PedidoRequest, PedidoResponse } from 'src/app/backend/interfaces/pedido';
 import { format, addHours } from 'date-fns';
+import { PedidoService } from 'src/app/backend/services/pedido.service';
+import { InventarioService } from 'src/app/backend/services/inventario.service';
 
 @Component({
   selector: 'app-register',
@@ -38,7 +40,9 @@ export class RegisterComponent implements OnInit, AfterViewInit{
     private route: ActivatedRoute,
     private router:Router,
     private authService: AuthService,
-    private apiService: ApiService,
+    //private apiService: ApiService,
+    private pedidoService: PedidoService,
+    private inventarioService: InventarioService,
     public http: HttpClient,
     private cdr:ChangeDetectorRef
   ) {
@@ -55,7 +59,7 @@ export class RegisterComponent implements OnInit, AfterViewInit{
     this.getCategories()
   }
   getProducts(){
-    this.apiService.getProductList()
+    this.inventarioService.getProductList()
       .then(productos => {
         this.productosapi = productos
         this.productoscopy = this.productosapi
@@ -75,7 +79,7 @@ export class RegisterComponent implements OnInit, AfterViewInit{
       });
   }
   getCategories(){
-    this.apiService.getCategoryList()
+    this.inventarioService.getCategoryList()
       .then(categorias => {
         this.categoriasapi = categorias;
         this.getProductsByCategory(this.categoriasapi![0])
@@ -167,7 +171,7 @@ export class RegisterComponent implements OnInit, AfterViewInit{
       detalles_pedido:detalles
     }
     console.log(pedido)
-    this.apiService.setPedido(pedido)
+    this.pedidoService.setPedido(pedido)
       .then(pedidoRegistrado=>{
         console.log(pedidoRegistrado)
         this.orderRegistered = pedidoRegistrado

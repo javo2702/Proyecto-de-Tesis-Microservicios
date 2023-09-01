@@ -22,10 +22,12 @@ public class ValoracionRestController {
     ValoracionService valoracionService;
     @PostMapping("/lista-valoracion")
     public ResponseEntity<List<Valoracion>> getTransaccionListOrder(@RequestBody FiltroRequest filtro){
+        System.out.println(filtro.getFecha());
         return ResponseEntity.ok(valoracionService.getValoracionList(filtro.getFecha()));
     }
     @PostMapping("/save-valoracion")
     public ResponseEntity<Valoracion> saveValoracion(@RequestBody ValoracionRequest valoracion){
+        System.out.println(valoracion);
         return ResponseEntity.ok(valoracionService.saveValoracion(valoracion));
     }
 }

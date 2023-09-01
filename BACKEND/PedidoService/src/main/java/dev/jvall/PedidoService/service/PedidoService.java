@@ -33,6 +33,12 @@ public class PedidoService {
     public Pedido showOrder(int idpedido){
         return pedidoRepository.showOrder(idpedido);
     }
+    public Pedido showOrderTable(int idtable){
+        return pedidoRepository.showOrderTable(idtable);
+    }
+    public Pedido endOrderState(int idpedido){
+        return pedidoRepository.endOrderState(idpedido);
+    }
     public Pedido setOrderClient(int idpedido, int idcliente){
         return pedidoRepository.setOrderClient(idpedido,idcliente);
     }

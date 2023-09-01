@@ -1,0 +1,38 @@
+2023-08-27 23:51:44 [main] INFO  d.j.T.TransaccionServiceApplication - Starting TransaccionServiceApplication using Java 17.0.5 with PID 20752 (C:\Users\jvall\Desktop\PROYECTO DE TESIS\BACKEND\TransaccionService\target\classes started by jvall in C:\Users\jvall\Desktop\PROYECTO DE TESIS\BACKEND\TransaccionService)
+2023-08-27 23:51:44 [main] INFO  d.j.T.TransaccionServiceApplication - No active profile set, falling back to 1 default profile: "default"
+2023-08-27 23:51:45 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=355fb57c-d24d-3646-80f9-ae2445dd917d
+2023-08-27 23:51:46 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9081 (http)
+2023-08-27 23:51:46 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-08-27 23:51:46 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.12]
+2023-08-27 23:51:46 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-08-27 23:51:46 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1724 ms
+2023-08-27 23:51:47 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestTemplate.
+2023-08-27 23:51:47 [main] WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2023-08-27 23:51:47 [main] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2023-08-27 23:51:47 [main] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2023-08-27 23:51:47 [main] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2023-08-27 23:51:47 [main] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+2023-08-27 23:51:47 [main] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2023-08-27 23:51:47 [main] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2023-08-27 23:51:47 [main] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+2023-08-27 23:51:47 [main] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2023-08-27 23:51:47 [main] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+2023-08-27 23:51:47 [main] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2023-08-27 23:51:48 [main] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+2023-08-27 23:51:48 [main] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2023-08-27 23:51:48 [main] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2023-08-27 23:51:48 [main] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1693198308207 with initial instances count: 2
+2023-08-27 23:51:48 [main] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application TRANSACCION-SERVICE with eureka with status UP
+2023-08-27 23:51:48 [main] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1693198308213, current=UP, previous=STARTING]
+2023-08-27 23:51:48 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_TRANSACCION-SERVICE/transaccion-service:c805f5bb5f54b913455c8f85eea442f3: registering service...
+2023-08-27 23:51:48 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 9081 (http) with context path ''
+2023-08-27 23:51:48 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 9081
+2023-08-27 23:51:48 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_TRANSACCION-SERVICE/transaccion-service:c805f5bb5f54b913455c8f85eea442f3 - registration status: 204
+2023-08-27 23:51:48 [main] INFO  d.j.T.TransaccionServiceApplication - Started TransaccionServiceApplication in 4.807 seconds (process running for 5.364)
+2023-08-27 23:52:26 [http-nio-9081-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-08-27 23:52:26 [http-nio-9081-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-08-27 23:52:26 [http-nio-9081-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-08-27 23:52:26 [http-nio-9081-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-08-27 23:52:27 [http-nio-9081-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@68089f64
+2023-08-27 23:52:27 [http-nio-9081-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-08-27 23:56:47 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration

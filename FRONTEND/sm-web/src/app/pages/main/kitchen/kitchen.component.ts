@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { DetallesPedidoResponse, PedidoResponse } from 'src/app/backend/interfaces/pedido';
 import { ApiService } from 'src/app/backend/services/api.service';
 import { format } from 'date-fns';
+import { PedidoService } from 'src/app/backend/services/pedido.service';
+import { InventarioService } from 'src/app/backend/services/inventario.service';
 
 @Component({
   selector: 'app-kitchen',
@@ -34,7 +36,9 @@ export class KitchenComponent implements OnInit{
   notificationType:string="success"
   loading:boolean = true
   constructor(
-    private apiService: ApiService,
+    //private apiService: ApiService,
+    private pedidoService: PedidoService,
+    private inventarioService: InventarioService,
     private cdr:ChangeDetectorRef
   ) {
    // this.getProducts()
@@ -49,10 +53,10 @@ export class KitchenComponent implements OnInit{
     let detallesPedidos:Order[] = []
     const currentDate = new Date()
     const formattedDate = format(currentDate, 'yyyy-MM-dd');
-    this.apiService.getPedidos(formattedDate)
+    this.pedidoService.getPedidos(formattedDate)
       .then(pedidos => {
         pedidos.forEach((p)=>{
-          this.apiService.getPedidoDetalle(p.idpedido)
+          this.pedidoService.getPedidoDetalle(p.idpedido)
           .then(pedido=>{
             let pp = this.getDetallePedido(pedido)
             detallesPedidos.push(pp)
@@ -77,7 +81,7 @@ export class KitchenComponent implements OnInit{
   getDetallePedido(p:Order):Order{
     let descripcion = ""
     p.detalles?.forEach((d)=>{
-      this.apiService.getProduct(d.idproducto)
+      this.inventarioService.getProduct(d.idproducto)
         .then((producto)=>{
           descripcion = descripcion + d.cantidad + " " + producto.nombre + " - " + producto.precio + "<br/>"
           p.desc = descripcion
@@ -103,10 +107,10 @@ export class KitchenComponent implements OnInit{
     }
     const currentDate = new Date()
     const formattedDate = format(currentDate, 'yyyy-MM-dd');
-    this.apiService.changeStatePedido(idpedido,pedido,formattedDate)
+    this.pedidoService.changeStatePedido(idpedido,pedido,formattedDate)
     .then(pedidos => {
       pedidos.forEach((p)=>{
-        this.apiService.getPedidoDetalle(p.idpedido)
+        this.pedidoService.getPedidoDetalle(p.idpedido)
         .then(pedido=>{
           let pp = this.getDetallePedido(pedido)
           detallesPedidos.push(pp)
@@ -147,10 +151,10 @@ export class KitchenComponent implements OnInit{
     this.showConfirmationAlert = false
     const currentDate = new Date()
     const formattedDate = format(currentDate, 'yyyy-MM-dd');
-    this.apiService.deletePedido(this.pedidoTemp!.idpedido,this.pedidoTemp!.idmesa,formattedDate)
+    this.pedidoService.deletePedido(this.pedidoTemp!.idpedido,this.pedidoTemp!.idmesa,formattedDate)
       .then((pedidos)=>{
         pedidos.forEach((p)=>{
-          this.apiService.getPedidoDetalle(p.idpedido)
+          this.pedidoService.getPedidoDetalle(p.idpedido)
           .then(pedido=>{
             let pp = this.getDetallePedido(pedido)
             detallesPedidos.push(pp)

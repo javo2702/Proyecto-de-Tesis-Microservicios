@@ -1,0 +1,37 @@
+# serivce name
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: usuario-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_sm_usuario?
+    username: root
+    password: toor
+#Tomcat Embedded Server Configuration
+server:
+  port: 9085
+
+logging:
+  lever:
+    root: INFO
+    org.springframework.web: INFO
+    com.howtodoinjava: INFO
+    org.hibernate: INFO
+  file:
+    name: /opt/log/usuario.log
+    max-history: 5
+  pattern:
+    rolling-file-name: usuario-%d{yyyy-MM-dd}.%i.log
+    console: "%d{yyyy-MM--dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+#Eureka Configuration Properties
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${random.value}
+
+

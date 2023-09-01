@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/backend/services/api.service';
+import { PedidoService } from 'src/app/backend/services/pedido.service';
 
 @Component({
   selector: 'app-mesas',
@@ -22,7 +23,8 @@ export class MesasComponent implements OnInit{
 
   constructor(
     private router:Router,
-    private apiService: ApiService,
+    //private apiService: ApiService,
+    private pedidoService: PedidoService,
     private cdr:ChangeDetectorRef
   ){
 
@@ -32,12 +34,13 @@ export class MesasComponent implements OnInit{
     this.getMesas()
   }
   getMesas(){
-    this.apiService.getTables()
+    this.pedidoService.getTables()
       .then(mesas=>{
         mesas.forEach((m)=>{
           if(m.estado==="disponible"){
             this.mesasDisponibles.push(
               {
+                id:m.idmesa,
                 numero:m.numero,
                 tipo:m.ubcacion,
                 estado:m.estado,
@@ -48,6 +51,7 @@ export class MesasComponent implements OnInit{
           } else{
             this.mesasDisponibles.push(
               {
+                id:m.idmesa,
                 numero:m.numero,
                 tipo:m.ubcacion,
                 estado:m.estado,
@@ -100,6 +104,7 @@ export class MesasComponent implements OnInit{
 
 }
 export interface Table{
+  id:number,
   numero: number,
   tipo:string,
   image:string,

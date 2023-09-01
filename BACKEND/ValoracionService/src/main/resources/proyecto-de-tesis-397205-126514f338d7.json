@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "proyecto-de-tesis-397205",
+  "private_key_id": "126514f338d772a3dbfbf6930309a58337460314",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDQqvKQZvBhSkgc\nsshdPvvEHbw6BrvZ6jnNsrq7nVpQ8hE3JvItn/OcXOYNUWUH37dbdTOhu4mgnfYa\nsq4FLTT2BiJ720uA8Bw0DFTkL8ZmsmX8dY8zLOKoNAfegmaz9+8vy0aUvE+oA4SR\nncnu+tsxBaT771HIjL1SOtw1nCg3+PNQ48Pdcj5f6NhLcKRn0Uhc834TegCb7HfU\nKcRS3s36xYARD1CJcwN9WLmdv98A0QLG3s8XT6O8UrKyoDIC2N0HF31VLS7MXfgX\n76gFEGRQgcsPUbKcL0P9d+xeQs0+mtLQCiKPq5RjXHXcyiRL8AczvJcXebK2iATs\nF8AHj2zPAgMBAAECggEAAMLO1aX6dHBf6PLh9i0Xn/R3zkJeBwJqqYxgT/TX8nmf\nhHL46R+vNL/F+wBz/N5c/dFkmc9kRhitYBWMuuoaSldlYsw+7z5w6+Orn5VpBNDb\nvFr1ZbthLDncWXxiQX/C+IqmPD6fj75Linhn1x5FFF2v51dNFg0lV5ptWSizoNie\n4u+mh7mjo+QBUJ0HkuGOFCC8NMaH6pKZi58311DPfR5UCjryCwA6l/t65sPPXkl7\ntOgYOC/S65b9kqfEnr6vBdssnoNify1h3zyd2GknA8o9RgtESZM5Gigdcc2sU135\n2epBipOuE+AeRJuAUYS32Gr9XE8oxExKuU198c6PWQKBgQDqkDdEXvY7QbsMsZSy\nicSIJceElnd35eFaG9Ba2FEz9dwBh3GzOAWjNkNloU6CWYoiJVqas4yV7m+za+Gd\nHRtVXTi+qlfTEp/D4zMcVCbXuLXGIy92S2x88XpJFhdVls4v35a7rcu3MVHTMkNG\n4IodM1R12q8HaYJLoNM0JkbctQKBgQDjvOKgS/W6yN5PwjFvSQZeAuLHq1mgKj5n\nY/u6UBTGAvc/0FNp9hcMgNhl7tPDYL3Hk836P0wLOAYrkm3zrbdaGQ5vvQnVO3qr\ngmfWpA+nbtJgvGzcFU1MiAJZdhow6vUbBcItOGYgFOlG18LtdyQverE0Mpg+oIHz\nkbstTO1Z8wKBgF/HvdmcUT2HLKMVTFvPJ8JUcvEwI96ArxGFdAH0fMwT4993+DSv\ndpXbzY+NW6qcd2xUBnhPQuPiNhh0v+7Q+N1VsJsiobQd0cFCYBd8QVQrJ4adzX6n\nc8hdLorzi1m2t8ESstE2OY43hGsSBijF/X/I+v8Y6gnDyqGpLTUJQDxVAoGBAJRu\nuRsXRzsNzvAXNxc8dlzx7pOLWCgvQGss3JZLua5xomtCQgvPLKimleSiK/2s4STi\nbh8MAGlTg5oEn4tyjw23RRSJFo6XbNW6cimQ1u8fKRmJ1j3/2FjoUPe0JU/64/RP\n5YaJuu5wErdsy4zw2XHkuvi1fUtcXDa/pkrZV94HAoGASyJLHsJKvmJRUjMKkzML\n0MAe8m1QzC45rCxG5f3zU9VwMF6tiXRRb8bSMW42xhpzn4KvAxaI9o6K1cjTHyQG\neAtUen56DpeR8ivib94m2PLT2NJIQPYC3mauo9CJyNRM8onehAlisgpCNR1ZejSe\nnSvFLmgmL7iYAuftexbqc98=\n-----END PRIVATE KEY-----\n",
+  "client_email": "jvall-640@proyecto-de-tesis-397205.iam.gserviceaccount.com",
+  "client_id": "113341315963164435241",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/jvall-640%40proyecto-de-tesis-397205.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

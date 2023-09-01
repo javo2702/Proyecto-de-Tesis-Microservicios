@@ -6,6 +6,8 @@ import { HomeComponent } from './components/home/home.component';
 import { CashierComponent } from './cashier.component';
 import { RouterModule } from '@angular/router';
 import { hasRole } from '../../auth/guards/has-role.guard';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DateInputDirective } from 'src/app/shared/directives/date-input.directive';
 
 const routes = [
   { 
@@ -36,10 +38,12 @@ const routes = [
     TablesComponent,
     PaymetsComponent,
     HomeComponent,
-    CashierComponent
+    CashierComponent,
+    DateInputDirective,
   ],
   imports: [
-    CommonModule,RouterModule.forChild(routes)
+    CommonModule,RouterModule.forChild(routes),
+    ReactiveFormsModule,FormsModule
   ]
 })
 export class CashierModule { }

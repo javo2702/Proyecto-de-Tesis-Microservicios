@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria } from 'src/app/backend/interfaces/categoria';
 import { Producto } from 'src/app/backend/interfaces/producto';
 import { ApiService } from 'src/app/backend/services/api.service';
+import { InventarioService } from 'src/app/backend/services/inventario.service';
 import { AuthService } from 'src/app/pages/auth/auth.service';
 
 @Component({
@@ -32,7 +33,8 @@ export class MenuComponent implements OnInit{
     private route: ActivatedRoute,
     private router:Router,
     private authService: AuthService,
-    private apiService: ApiService,
+    //rivate apiService: ApiService,
+    private inventarioService: InventarioService,
     public http: HttpClient,
     private cdr:ChangeDetectorRef
   ) {
@@ -43,7 +45,7 @@ export class MenuComponent implements OnInit{
     this.getCategories()
   }
   getFood(){
-    this.apiService.getFoodList()
+    this.inventarioService.getFoodList()
       .then(productos => {
         this.platos = productos
         this.platosCopy = this.platos
@@ -56,7 +58,7 @@ export class MenuComponent implements OnInit{
       });
   }
   getDrink(){
-    this.apiService.getDrinkList()
+    this.inventarioService.getDrinkList()
       .then(productos => {
         this.bebidos = productos
         this.bebidosCopy = this.bebidos
@@ -67,7 +69,7 @@ export class MenuComponent implements OnInit{
       });
   }
   getCategories(){
-    this.apiService.getCategoryList()
+    this.inventarioService.getCategoryList()
       .then(categorias => {
         this.categoriasapi = categorias;
         this.categoriacopy1 = this.categoriasapi

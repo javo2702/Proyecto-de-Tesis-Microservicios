@@ -4,6 +4,14 @@ import { Table } from '../../../orders/components/mesas/mesas.component';
 import { Router } from '@angular/router';
 import { User } from 'src/app/pages/auth/model/user.interface';
 import { OrderItem } from '../../../orders/components/register/register.component';
+import { CajeroService } from 'src/app/backend/services/cajero.service';
+import { PedidoResponse } from 'src/app/backend/interfaces/pedido';
+import { Order } from '../../../orders/components/pedidos/pedidos.component';
+import { InventarioService } from 'src/app/backend/services/inventario.service';
+import { PedidoService } from 'src/app/backend/services/pedido.service';
+import { TransaccionService } from 'src/app/backend/services/transaccion.service';
+import { TransaccionRequest } from 'src/app/backend/interfaces/transaccion';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-tables',
@@ -11,6 +19,10 @@ import { OrderItem } from '../../../orders/components/register/register.componen
   styleUrls: ['./tables.component.css']
 })
 export class TablesComponent {
+  fecha: Date = new Date()
+  descripcion: string = ""
+  monto: number = 0
+  mensaje:string = ""
   user: User | null = null;
   order: OrderItem[] = []
   showPrincipal:boolean = false
@@ -25,9 +37,18 @@ export class TablesComponent {
   mesasDisponibles:Table[] = []
   mesasCopy:Table[]=[]
 
+  //pedido
+  pedido: PedidoResponse | undefined
+  selectedPedido:Order | undefined
+  orden: OrderItem[] = []
+
   constructor(
     private router:Router,
-    private apiService: ApiService,
+    //private apiService: ApiService,
+    //private cajeroService:CajeroService,
+    private inventarioService: InventarioService,
+    private pedidoService: PedidoService,
+    private transaccionService: TransaccionService,
     private cdr:ChangeDetectorRef
   ){
 
@@ -37,12 +58,13 @@ export class TablesComponent {
     this.getMesas()
   }
   getMesas(){
-    this.apiService.getTables()
+    this.pedidoService.getTables()
       .then(mesas=>{
         mesas.forEach((m)=>{
           if(m.estado==="disponible"){
             this.mesasDisponibles.push(
               {
+                id:m.idmesa,
                 numero:m.numero,
                 tipo:m.ubcacion,
                 estado:m.estado,
@@ -53,6 +75,7 @@ export class TablesComponent {
           } else{
             this.mesasDisponibles.push(
               {
+                id:m.idmesa,
                 numero:m.numero,
                 tipo:m.ubcacion,
                 estado:m.estado,
@@ -74,6 +97,38 @@ export class TablesComponent {
   navigateRegister(i:Table) {
     if(i.estado!=="disponible"){
       this.showDetailsTable = true
+      this.orden = []
+      this.pedidoService.getPedidoDetalleMesa(i.id)
+      .then(pedido=>{
+        this.pedido = pedido
+      })
+      .then(()=>{
+        if(this.pedido){
+          this.pedido.detalles?.forEach((d)=>{
+            this.inventarioService.getProduct(d.idproducto)
+              .then((producto)=>{
+                this.descripcion += d.cantidad + " " + producto.nombre + " - " + producto.precio + " \n"
+                this.monto += producto.precio * d.cantidad
+                this.orden.push(
+                  {
+                    cantidad:d.cantidad,
+                    productoId: d.idproducto,
+                    descripcion: producto.nombre,
+                    subtotal: producto.precio * d.cantidad
+                  }
+                )
+                this.cdr.detectChanges()
+              })
+              .catch(error => {
+                console.error(error);
+              });
+          })
+        }
+        this.cdr.detectChanges
+      })
+      .catch(error => {
+        console.error(error);
+      });
       //this.router.navigate(['/orders/tables/register'],{queryParams:{tableSeletected:i.numero}})
     } else{
       this.showWarning = true
@@ -101,6 +156,74 @@ export class TablesComponent {
     })
   }
   cobrar(){
-    
+    let transaccion:TransaccionRequest = {
+      monto: this.monto,
+      fecha: format(this.fecha, 'yyyy-MM-dd HH:mm:ss'),
+      idorigen: this.pedido?.idpedido,
+      idtipo: 1,
+      descripcion: this.descripcion
+    }
+    this.transaccionService.registrarOrder(transaccion).then(
+      (response)=>{
+        this.mensaje = "Se ha registrado el pago del pedido [ "+ this.pedido?.idpedido + " ] de manera exitosa"
+        this.pedidoService.endOrderState(this.pedido?.idpedido!)
+        .then((response)=>{
+          console.log(response);
+          this.mesasDisponibles = []
+          this.pedidoService.restoreTableState(this.pedido?.idmesa!)
+          .then((mesas)=>{
+            mesas.forEach((m)=>{
+              if(m.estado==="disponible"){
+                this.mesasDisponibles.push(
+                  {
+                    id:m.idmesa,
+                    numero:m.numero,
+                    tipo:m.ubcacion,
+                    estado:m.estado,
+                    image:
+                    '/assets/icons/mesa-disponible.png'
+                  }
+                )
+              } else{
+                this.mesasDisponibles.push(
+                  {
+                    id:m.idmesa,
+                    numero:m.numero,
+                    tipo:m.ubcacion,
+                    estado:m.estado,
+                    image:
+                    '/assets/icons/mesa-ocupada.png'
+                  }
+                )
+              }
+              this.mesasCopy = this.mesasDisponibles
+              this.cdr.detectChanges()
+            })
+          })
+          .then(()=>{
+            this.getTablesByLocation("principal")
+            this.registrarTransaccionOrden()
+            this.cdr.detectChanges()
+          })
+          .catch(error => {
+            console.error(error);
+          });
+          this.showDetailsTable = false;
+          this.pedido = undefined
+          this.orden = []
+          this.cdr.detectChanges()
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      }
+    )
+    .catch(error => {
+      this.mensaje = "Hubo un problema al registrar el pago del pedido [ "+ this.pedido?.idpedido + " ] "
+      console.error(error);
+    });
+  }
+  registrarTransaccionOrden(){
+
   }
 }

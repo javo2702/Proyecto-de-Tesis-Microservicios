@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -12,6 +12,10 @@ import { authTokeninterceptorProvider } from './pages/auth/interceptors';
 import { BackendModule } from './backend/backend.module';
 import { ApiService } from './backend/services/api.service';
 
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+import { DateInputDirective } from './shared/directives/date-input.directive';
+registerLocaleData(localeEs,'es');
 
 @NgModule({
   declarations: [
@@ -25,7 +29,12 @@ import { ApiService } from './backend/services/api.service';
     FakeBackendModule,
     BackendModule,
   ],
-  providers: [ApiService],
+  providers: [
+    {
+      provide: LOCALE_ID, useValue: 'es'
+    },
+    ApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

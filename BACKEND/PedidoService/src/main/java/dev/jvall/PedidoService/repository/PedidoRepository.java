@@ -31,6 +31,14 @@ public interface PedidoRepository extends JpaRepository<Pedido,Integer> {
     Pedido showOrder(
             @Param("idpedido_show")int idpedido_show
     );
+    @Query(value = "{call show_order_table(:idtable)};", nativeQuery = true)
+    Pedido showOrderTable(
+            @Param("idtable")int idtable
+    );
+    @Query(value = "{call end_order_state(:idpedidoin)};", nativeQuery = true)
+    Pedido endOrderState(
+            @Param("idpedidoin")int idpedidoin
+    );
     @Query(value = "{call set_order_client(:idpedido_cliente,:idcliente_cliente)};", nativeQuery = true)
     Pedido setOrderClient(
             @Param("idpedido_cliente")int idpedido_cliente,

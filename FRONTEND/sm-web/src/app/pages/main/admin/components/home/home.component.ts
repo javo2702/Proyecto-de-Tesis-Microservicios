@@ -1,4 +1,5 @@
-import { Component, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
+import { format } from "date-fns";
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -12,6 +13,9 @@ import {
   ApexNonAxisChartSeries,
   ApexResponsive,
 } from "ng-apexcharts";
+import { FiltroVentas } from "src/app/backend/interfaces/filtro";
+import { Transaccion } from "src/app/backend/interfaces/transaccion";
+import { TransaccionService } from "src/app/backend/services/transaccion.service";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -34,119 +38,16 @@ export type ChartOptionsPie = {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   @ViewChild("chart") chart!: ChartComponent;
-  public chartOptions: Partial<ChartOptions>;
-  public chartOptionsPie: Partial<ChartOptionsPie>;
+  public chartOptions!: Partial<ChartOptions>;
+  public chartOptionsPie!: Partial<ChartOptionsPie>;
+  mensaje: string = ""
+  ventasSemanales: Transaccion[] = []
+  ventas: number[] = [0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+  constructor(private transaccionService: TransaccionService,private cdr:ChangeDetectorRef) {    
+    this.graficoVentas()
 
-  constructor() {
-    this.chartOptions = {
-      series: [
-        {
-          name: "Ventas",
-          data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2]
-        }
-      ],
-      chart: {
-        height: 350,
-        type: "bar"
-      },
-      dataLabels: {
-        enabled: true,
-        formatter: function(val) {
-          return "S/. " + val;
-        },
-        offsetY: -20,
-        style: {
-          fontSize: "12px",
-          colors: ["#304758"]
-        }
-      },
-      plotOptions: {
-        bar: {
-          dataLabels: {
-            position: "top" // top, center, bottom
-          },
-          horizontal: false,
-          columnWidth: "70%",
-          borderRadiusApplication: "end",
-          borderRadius: 8,
-        }
-      },
-      yaxis: {
-        axisBorder: {
-          show: false
-        },
-        axisTicks: {
-          show: false
-        },
-        labels: {
-          show: false,
-          formatter: function(val) {
-            return val + "%";
-          }
-        }
-      },
-      xaxis: {
-        categories: [
-          "Lunes",
-          "Martes",
-          "Miercoles",
-          "Jueves",
-          "Viernes",
-          "Sabado",
-          "Domingo"
-        ],
-        position: "top",
-        labels: {
-          offsetY: -18
-        },
-        axisBorder: {
-          show: false
-        },
-        axisTicks: {
-          show: false
-        },
-        crosshairs: {
-          fill: {
-            type: "gradient",
-            gradient: {
-              colorFrom: "#D8E3F0",
-              colorTo: "#BED1E6",
-              stops: [0, 100],
-              opacityFrom: 0.4,
-              opacityTo: 0.5
-            }
-          }
-        },
-        tooltip: {
-          enabled: true,
-          offsetY: -35
-        }
-      },
-      fill: {
-        type: "gradient",
-        gradient: {
-          shade: "light",
-          type: "horizontal",
-          shadeIntensity: 0.25,
-          gradientToColors: undefined,
-          inverseColors: true,
-          opacityFrom: 1,
-          opacityTo: 1,
-          stops: [50, 0, 100, 100]
-        }
-      },
-      title: {
-        text: "Ventas por semana",
-        floating: false,
-        offsetY: 320,
-        align: "center",
-        style: {
-          color: "#444",
-        }
-      }
-    };
     this.chartOptionsPie = {
       series: [44, 55, 13, 43, 22],
       chart: {
@@ -190,5 +91,143 @@ export class HomeComponent {
         }
       ]
     };
+  }
+  graficoVentas(){
+    this.chartOptions = {
+      series: [
+        {
+          name: "Ventas",
+          data: this.ventas
+        }
+      ],
+      chart: { height: 350, type: "bar" },
+      dataLabels: {
+        enabled: true,
+        formatter: function(val) {
+          return "S/. " + val;
+        },
+        offsetY: -20,
+        style: {
+          fontSize: "12px",
+          colors: ["#304758"]
+        }
+      },
+      plotOptions: {
+        bar: {
+          dataLabels: {
+            position: "top" // top, center, bottom
+          },
+          horizontal: false,
+          columnWidth: "70%",
+          borderRadiusApplication: "end",
+          borderRadius: 8,
+        }
+      },
+      yaxis: {
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        labels: {
+          show: false,
+          formatter: function(val) {
+            return val + "%";
+          }
+        }
+      },
+      xaxis: {
+        categories: [ "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" ],
+        position: "top",
+        labels: { offsetY: -18 },
+        axisBorder: { show: false },
+        axisTicks: { show: false },
+        crosshairs: {
+          fill: {
+            type: "gradient",
+            gradient: {
+              colorFrom: "#D8E3F0",
+              colorTo: "#BED1E6",
+              stops: [0, 100],
+              opacityFrom: 0.4,
+              opacityTo: 0.5
+            }
+          }
+        },
+        tooltip: { enabled: true, offsetY: -35}
+      },
+      fill: {
+        type: "gradient",
+        gradient: {
+          shade: "light",
+          type: "horizontal",
+          shadeIntensity: 0.25,
+          gradientToColors: undefined,
+          inverseColors: true,
+          opacityFrom: 1,
+          opacityTo: 1,
+          stops: [50, 0, 100, 100]
+        }
+      },
+      title: {
+        text: "Ventas por semana",
+        floating: false,
+        offsetY: 320,
+        align: "center",
+        style: {
+          color: "#444",
+        }
+      }
+    };
+  }
+  ngOnInit(): void {
+    this.graficoVentas()
+    this.getVentasSemanales(new Date('2023-08-23 12:00:00'))
+  }
+  getVentasSemanales(fecha:Date){
+    /*let fecha = new Date('2023-08-23 12:00:00')
+    console.log(format(fecha, 'yyyy-MM-dd'))
+    console.log(fecha.getDate())
+    console.log(fecha.getDay())
+    console.log(format(new Date(new Date().setDate(fecha.getDate() - (fecha.getDay()-1))),'yyyy-MM-dd'))
+    console.log(format(new Date(new Date().setDate(fecha.getDate() + (7-fecha.getDay()))),'yyyy-MM-dd'))
+    */
+    var filtro: FiltroVentas = {
+      fechaini: format(new Date(new Date().setDate(fecha.getDate() - (fecha.getDay()-1))),'yyyy-MM-dd'),
+      fechafin: format(new Date(new Date().setDate(fecha.getDate() + (7-fecha.getDay()))),'yyyy-MM-dd')
+    }
+    this.transaccionService.getVentasSemanales(filtro)
+    .then(transacciones=>{
+        this.ventasSemanales = transacciones
+        this.cdr.detectChanges();
+    })
+    .then(()=>{
+      this.llenarGrafico()
+    })
+    .catch(error=>{
+      console.log(error)
+      this.mensaje = error
+    })
+  }
+  llenarGrafico():void{
+    let fecha_aux = format(new Date(this.ventasSemanales[0].fecha), 'yyyy-MM-dd')
+    let cantidad = 0
+    this.ventasSemanales.forEach((v)=>{
+      if(format(new Date(v.fecha), 'yyyy-MM-dd')==fecha_aux){
+        this.ventas[cantidad] = this.ventas[cantidad] + v.monto  
+      } else{
+        cantidad += 1
+        fecha_aux = format(new Date(v.fecha), 'yyyy-MM-dd')
+      }
+    })
+    this.actualizarVentas()
+  }
+  actualizarVentas():void{
+    this.chartOptions.series = [
+      {name: "Ventas",data: this.ventas}
+    ];
+    this.chartOptions = {...this.chartOptions}
+    this.cdr.detectChanges()
   }
 }

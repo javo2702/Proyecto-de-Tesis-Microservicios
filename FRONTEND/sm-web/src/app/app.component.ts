@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import {Observable} from "rxjs";
+import { formatDate } from '@angular/common';
+import { Notificacion } from './backend/interfaces/notification';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +11,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'sm-web';
+
+
 }

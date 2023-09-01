@@ -1,6 +1,6 @@
 <div class="flex flex-col gap-4 p-4">
     <div class="rounded-md border border-gray-200 shadow py-4">
-        <h3 class="text-gray-500 text-lg">Valoraciones del servicio de atencion al cliente</h3>
+        <h3 class="text-gray-500 text-lg">Valoraciones del servicio de atencion al cliente <span>[{{fecha}}]</span></h3>
         <div id="chart" class="px-4 w-11/12 mx-auto">
             <apx-chart
               [series]="chartOptions.series!"
@@ -44,240 +44,34 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="border-b hover:cursor-pointer">
+                    <tr *ngFor="let v of listaValoraciones" class="border-b hover:cursor-pointer">
                         <td class="px-4 py-3">
-                            V0012
+                            {{v.idvaloracion}}
                         </td>
                         <td class="px-2 py-3">
-                            75137668
+                            {{v.usuario}}
                         </td>
                         <td class="px-2 py-3">
-                            Javier Eduardo Valle Romero
+                            {{v.nombres}}
                         </td>
                         <td class="px-2 py-3">
-                            5 Estrellas
+                            {{v.valoracion}} Estrellas
                         </td>
                         <td class="px-2 py-3">
-                            El servicio estubo muy bueno
+                            {{v.opinion}}
                         </td>
                         <td class="px-2 py-3">
-                            10/08/2021
+                            {{v.fecha}}
                         </td>
                         <td class="px-2 py-3">
-                            <span class="text-xs font-medium mr-2 px-2 py-1 rounded-md" [ngClass]="{'bg-green-100  text-green-800':true,'bg-red-100 text-red-800':false}">Positiva</span>
-                        </td>
-                    </tr>
-                    <tr class="border-b hover:cursor-pointer">
-                        <td class="px-4 py-3">
-                            V0012
-                        </td>
-                        <td class="px-2 py-3">
-                            75137668
-                        </td>
-                        <td class="px-2 py-3">
-                            Javier Eduardo Valle Romero
-                        </td>
-                        <td class="px-2 py-3">
-                            5 Estrellas
-                        </td>
-                        <td class="px-2 py-3">
-                            El servicio estubo muy bueno
-                        </td>
-                        <td class="px-2 py-3">
-                            10/08/2021
-                        </td>
-                        <td class="px-2 py-3">
-                            <span class="text-xs font-medium mr-2 px-2 py-1 rounded-md" [ngClass]="{'bg-green-100  text-green-800':true,'bg-red-100 text-red-800':false}">Positiva</span>
-                        </td>
-                    </tr>
-                    <tr class="border-b hover:cursor-pointer">
-                        <td class="px-4 py-3">
-                            V0012
-                        </td>
-                        <td class="px-2 py-3">
-                            75137668
-                        </td>
-                        <td class="px-2 py-3">
-                            Javier Eduardo Valle Romero
-                        </td>
-                        <td class="px-2 py-3">
-                            5 Estrellas
-                        </td>
-                        <td class="px-2 py-3">
-                            El servicio estubo muy bueno
-                        </td>
-                        <td class="px-2 py-3">
-                            10/08/2021
-                        </td>
-                        <td class="px-2 py-3">
-                            <span class="text-xs font-medium mr-2 px-2 py-1 rounded-md" [ngClass]="{'bg-green-100  text-green-800':true,'bg-red-100 text-red-800':false}">Positiva</span>
-                        </td>
-                    </tr>
-                    <tr class="border-b hover:cursor-pointer">
-                        <td class="px-4 py-3">
-                            V0012
-                        </td>
-                        <td class="px-2 py-3">
-                            75137668
-                        </td>
-                        <td class="px-2 py-3">
-                            Javier Eduardo Valle Romero
-                        </td>
-                        <td class="px-2 py-3">
-                            5 Estrellas
-                        </td>
-                        <td class="px-2 py-3">
-                            El servicio estubo muy bueno
-                        </td>
-                        <td class="px-2 py-3">
-                            10/08/2021
-                        </td>
-                        <td class="px-2 py-3">
-                            <span class="text-xs font-medium mr-2 px-2 py-1 rounded-md" [ngClass]="{'bg-green-100  text-green-800':true,'bg-red-100 text-red-800':false}">Positiva</span>
-                        </td>
-                    </tr>
-                    <tr class="border-b hover:cursor-pointer">
-                        <td class="px-4 py-3">
-                            V0012
-                        </td>
-                        <td class="px-2 py-3">
-                            75137668
-                        </td>
-                        <td class="px-2 py-3">
-                            Javier Eduardo Valle Romero
-                        </td>
-                        <td class="px-2 py-3">
-                            5 Estrellas
-                        </td>
-                        <td class="px-2 py-3">
-                            El servicio estubo muy bueno
-                        </td>
-                        <td class="px-2 py-3">
-                            10/08/2021
-                        </td>
-                        <td class="px-2 py-3">
-                            <span class="text-xs font-medium mr-2 px-2 py-1 rounded-md" [ngClass]="{'bg-green-100  text-green-800':true,'bg-red-100 text-red-800':false}">Positiva</span>
-                        </td>
-                    </tr>
-                    <tr class="border-b hover:cursor-pointer">
-                        <td class="px-4 py-3">
-                            V0012
-                        </td>
-                        <td class="px-2 py-3">
-                            75137668
-                        </td>
-                        <td class="px-2 py-3">
-                            Javier Eduardo Valle Romero
-                        </td>
-                        <td class="px-2 py-3">
-                            5 Estrellas
-                        </td>
-                        <td class="px-2 py-3">
-                            El servicio estubo muy bueno
-                        </td>
-                        <td class="px-2 py-3">
-                            10/08/2021
-                        </td>
-                        <td class="px-2 py-3">
-                            <span class="text-xs font-medium mr-2 px-2 py-1 rounded-md" [ngClass]="{'bg-green-100  text-green-800':true,'bg-red-100 text-red-800':false}">Positiva</span>
-                        </td>
-                    </tr>
-                    <tr class="border-b hover:cursor-pointer">
-                        <td class="px-4 py-3">
-                            V0012
-                        </td>
-                        <td class="px-2 py-3">
-                            75137668
-                        </td>
-                        <td class="px-2 py-3">
-                            Javier Eduardo Valle Romero
-                        </td>
-                        <td class="px-2 py-3">
-                            5 Estrellas
-                        </td>
-                        <td class="px-2 py-3">
-                            El servicio estubo muy bueno
-                        </td>
-                        <td class="px-2 py-3">
-                            10/08/2021
-                        </td>
-                        <td class="px-2 py-3">
-                            <span class="text-xs font-medium mr-2 px-2 py-1 rounded-md" [ngClass]="{'bg-green-100  text-green-800':true,'bg-red-100 text-red-800':false}">Positiva</span>
-                        </td>
-                    </tr>
-                    <tr class="border-b hover:cursor-pointer">
-                        <td class="px-4 py-3">
-                            V0012
-                        </td>
-                        <td class="px-2 py-3">
-                            75137668
-                        </td>
-                        <td class="px-2 py-3">
-                            Javier Eduardo Valle Romero
-                        </td>
-                        <td class="px-2 py-3">
-                            5 Estrellas
-                        </td>
-                        <td class="px-2 py-3">
-                            El servicio estubo muy bueno
-                        </td>
-                        <td class="px-2 py-3">
-                            10/08/2021
-                        </td>
-                        <td class="px-2 py-3">
-                            <span class="text-xs font-medium mr-2 px-2 py-1 rounded-md" [ngClass]="{'bg-green-100  text-green-800':true,'bg-red-100 text-red-800':false}">Positiva</span>
-                        </td>
-                    </tr>
-                    <tr class="border-b hover:cursor-pointer">
-                        <td class="px-4 py-3">
-                            V0012
-                        </td>
-                        <td class="px-2 py-3">
-                            75137668
-                        </td>
-                        <td class="px-2 py-3">
-                            Javier Eduardo Valle Romero
-                        </td>
-                        <td class="px-2 py-3">
-                            5 Estrellas
-                        </td>
-                        <td class="px-2 py-3">
-                            El servicio estubo muy bueno
-                        </td>
-                        <td class="px-2 py-3">
-                            10/08/2021
-                        </td>
-                        <td class="px-2 py-3">
-                            <span class="text-xs font-medium mr-2 px-2 py-1 rounded-md" [ngClass]="{'bg-green-100  text-green-800':true,'bg-red-100 text-red-800':false}">Positiva</span>
-                        </td>
-                    </tr>
-                    <tr class="border-b hover:cursor-pointer">
-                        <td class="px-4 py-3">
-                            V0012
-                        </td>
-                        <td class="px-2 py-3">
-                            75137668
-                        </td>
-                        <td class="px-2 py-3">
-                            Javier Eduardo Valle Romero
-                        </td>
-                        <td class="px-2 py-3">
-                            5 Estrellas
-                        </td>
-                        <td class="px-2 py-3">
-                            El servicio estubo muy bueno
-                        </td>
-                        <td class="px-2 py-3">
-                            10/08/2021
-                        </td>
-                        <td class="px-2 py-3">
-                            <span class="text-xs font-medium mr-2 px-2 py-1 rounded-md" [ngClass]="{'bg-green-100  text-green-800':true,'bg-red-100 text-red-800':false}">Positiva</span>
+                            <span class="text-xs font-medium mr-2 px-2 py-1 rounded-md" [ngClass]="{'bg-green-100  text-green-800':v.clasificacion!.toLowerCase()=='positivo','bg-red-100 text-red-800':v.clasificacion!.toLowerCase()=='negativo','bg-gray-100 text-gray-800':v.clasificacion!.toLowerCase()=='neutral'}">{{v.clasificacion}}</span>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <div *ngIf="false" class="border-b w-full py-3 px-4 text-gray-400 text-center">
-                <p>No se han registrado pedidos aun</p>
+            <div *ngIf="listaValoraciones.length == 0" class="border-b w-full py-3 px-4 text-gray-400 text-center">
+                <p [ngClass]="{'text-white':message==''}">No se han registrado pedidos aun</p>
+                <p class="text-red-400">{{message}}</p>
             </div>
         </div>
     </div>

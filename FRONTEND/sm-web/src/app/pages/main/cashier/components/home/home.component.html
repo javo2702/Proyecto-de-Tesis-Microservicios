@@ -64,102 +64,36 @@
                             <th scope="col" class="px-2 py-3">
                                 Fecha y Hora
                             </th>
+                            <th scope="col" class="px-2 py-3">
+                                Tipo
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                        <tr *ngFor="let t of transacciones" class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
                             <td class="px-2 py-3">
-                                01
+                                {{t.idtransaccion}}
                             </td>
                             <td class="px-2 py-3">
-                                Pago a Persona X
+                                {{t.descripcion}}
                             </td>
                             <td class="px-2 py-3">
-                                S/. 100.00
+                                S/.{{t.monto}}
                             </td>
                             <td class="px-2 py-3">
-                                10/08/2023 3:00pm
+                                {{t.fecha}}
+                            </td>
+                            <td class="px-2 py-3">
+                                {{t.tipo}}
                             </td>
                         </tr>
-                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
-                            <td class="px-2 py-3">
-                                01
-                            </td>
-                            <td class="px-2 py-3">
-                                Pago a Persona X
-                            </td>
-                            <td class="px-2 py-3">
-                                S/. 100.00
-                            </td>
-                            <td class="px-2 py-3">
-                                10/08/2023 3:00pm
-                            </td>
-                        </tr>
-                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
-                            <td class="px-2 py-3">
-                                01
-                            </td>
-                            <td class="px-2 py-3">
-                                Pago a Persona X
-                            </td>
-                            <td class="px-2 py-3">
-                                S/. 100.00
-                            </td>
-                            <td class="px-2 py-3">
-                                10/08/2023 3:00pm
-                            </td>
-                        </tr>
-                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
-                            <td class="px-2 py-3">
-                                01
-                            </td>
-                            <td class="px-2 py-3">
-                                Pago a Persona X
-                            </td>
-                            <td class="px-2 py-3">
-                                S/. 100.00
-                            </td>
-                            <td class="px-2 py-3">
-                                10/08/2023 3:00pm
-                            </td>
-                        </tr>
-                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
-                            <td class="px-2 py-3">
-                                01
-                            </td>
-                            <td class="px-2 py-3">
-                                Pago a Persona X
-                            </td>
-                            <td class="px-2 py-3">
-                                S/. 100.00
-                            </td>
-                            <td class="px-2 py-3">
-                                10/08/2023 3:00pm
-                            </td>
-                        </tr>
-                        <!--<tr *ngFor="let p of pedidos" class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
-                            <th  (click)="getDetallePedido(p)" scope="row" class="px-2 py-3 font-bold text-gray-900">
-                                {{p.idpedido}}
-                            </th>
-                            <td (click)="getDetallePedido(p)" class="px-2 py-3">
-                                <p [ngSwitch]="p?.estado?.toLowerCase()">
-                                    <span *ngSwitchCase="'listo'" class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">{{p?.estado}}</span>
-                                    <span *ngSwitchCase="'recibido'" class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">{{p?.estado}}</span>
-                                </p>
-                            </td>
-                            <td  (click)="getDetallePedido(p)" class="px-2 py-3">
-                                N° {{p.idmesa}}
-                            </td>
-                            <td  (click)="getDetallePedido(p)" class="px-2 py-3">
-                                {{p.fecha}}
-                            </td>
-                        </tr>-->
                     </tbody>
                 </table>
-                <div *ngIf="false" class="border-b w-full py-3 px-4 text-gray-400 text-center">
+                <div *ngIf="transacciones.length==0" class="border-b w-full py-3 px-4 text-gray-400 text-center">
                     <p>No se han registrado pedidos aun</p>
+                    <p [ngClass]="{'hidden':mensaje==''}">{{mensaje}}</p>
                 </div>
-                <div class="flex justify-between items-center mt-3" [ngClass]="{'hidden':false}">
+                <div class="flex justify-between items-center mt-3" [ngClass]="{'hidden':transacciones.length==0}">
                     <div class="text-sm text-gray-400">
                         <p>Mostrando <span>6</span> Resultados de <span>30</span></p>
                     </div>

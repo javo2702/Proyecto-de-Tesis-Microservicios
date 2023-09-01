@@ -1,5 +1,6 @@
 package dev.jvall.ValoracionService.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,9 +11,8 @@ import lombok.NoArgsConstructor;
 public class ValoracionRequest {
     private String usuario;
     private String nombres;
-    private Integer valoracion;
+    private int valoracion;
     private String opinion;
     private String clasificacion;
-    private Integer idpedidoin;
-
+    private int idpedidoin;
 }

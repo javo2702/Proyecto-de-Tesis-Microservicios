@@ -1,24 +1,27 @@
 package dev.jvall.PedidoService.controller;
 
-import dev.jvall.PedidoService.dto.PedidoDetalleRequest;
-import dev.jvall.PedidoService.dto.PedidoDetalleResponse;
-import dev.jvall.PedidoService.dto.PedidoRequest;
-import dev.jvall.PedidoService.dto.PedidoResponse;
+import dev.jvall.PedidoService.dto.*;
 import dev.jvall.PedidoService.model.Mesa;
 import dev.jvall.PedidoService.model.Pedido;
 import dev.jvall.PedidoService.model.PedidoDetalle;
 import dev.jvall.PedidoService.service.MesaService;
+import dev.jvall.PedidoService.service.NotificationService;
 import dev.jvall.PedidoService.service.PedidoDetalleService;
 import dev.jvall.PedidoService.service.PedidoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 //@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/order")
@@ -26,6 +29,9 @@ import java.util.List;
 public class PedidoRestController {
     @Value("${server.port}")
     private String port;
+
+    @Autowired
+    private final SSEController sseController;
 
     private final PedidoService pedidoService;
     private final PedidoDetalleService pedidoDetalleService;
@@ -37,7 +43,6 @@ public class PedidoRestController {
     }
     @GetMapping("/orderlist")
     public ResponseEntity<List<Pedido>> getOrderList(@RequestParam String fecha){
-        System.out.println(fecha);
         try{
             List<Pedido> orderlist = pedidoService.getOrderList("%"+fecha+"%");
             return new ResponseEntity<>(orderlist, HttpStatus.OK);
@@ -50,6 +55,23 @@ public class PedidoRestController {
     public ResponseEntity<PedidoResponse> getOrderDetail(@PathVariable int orderid){
         try{
             Pedido order = pedidoService.showOrder(orderid);
+            List<PedidoDetalle> detallesOrder = pedidoDetalleService.showOrderDetails(order.getIdpedido());
+            Mesa orderTable = mesaService.getTableDetails(order.getIdmesa());
+            PedidoResponse pedResp = new PedidoResponse(
+                    order.getIdpedido(), order.getFecha(), order.getMonto(), order.getEstado(),
+                    order.getIdcliente(), order.getIdmozo(), order.getIdcomprobante(), order.getIdmesa(),
+                    orderTable.getNumero(), orderTable.getEstado(), detallesOrder
+            );
+            return new ResponseEntity<>(pedResp, HttpStatus.OK);
+        } catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/orderlist/{tableid}/detalles/table")
+    public ResponseEntity<PedidoResponse> getOrderDetailTable(@PathVariable int tableid){
+        try{
+            Pedido order = pedidoService.showOrderTable(tableid);
             List<PedidoDetalle> detallesOrder = pedidoDetalleService.showOrderDetails(order.getIdpedido());
             Mesa orderTable = mesaService.getTableDetails(order.getIdmesa());
             PedidoResponse pedResp = new PedidoResponse(
@@ -83,6 +105,17 @@ public class PedidoRestController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PutMapping("/orderlist/order/{orderid}/end-state")
+    public ResponseEntity<Response> endOrderState(@PathVariable int orderid){
+        try{
+            Pedido orderUpdated = pedidoService.endOrderState(orderid);
+            sseController.sendNotification("Se ha pagado el pedido "+orderid);
+            return new ResponseEntity<>(new Response("Estado del pedido "+orderid+": Pagado"), HttpStatus.OK);
+        } catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     @DeleteMapping("/orderlist/order/{orderid}/detalles/delete")
     public ResponseEntity<PedidoResponse> deleteOrderDetail(@PathVariable int orderid,@RequestBody PedidoDetalleRequest detalle){
         try{
@@ -104,6 +137,7 @@ public class PedidoRestController {
     }
     @PostMapping("/orderlist/save")
     public ResponseEntity<Pedido> saveOrder(@RequestBody PedidoRequest pedido){
+        sseController.sendNotification("Se ha registrado un nuevo pedido");
         try{
             Pedido ordersaved = pedidoService.saveOrder(pedido.getFecha_pedido(),pedido.getMonto_pedido(),pedido.getEstado_pedido(),pedido.getIdmozo_pedido(),pedido.getIdmesa_pedido());
             mesaService.changeTableState(pedido.getIdmesa_pedido());
@@ -137,6 +171,9 @@ public class PedidoRestController {
     public ResponseEntity<List<Pedido>> updateOrderState(@PathVariable int orderid,@RequestBody PedidoRequest pedido, @RequestParam String fecha){
         try{
             List<Pedido> orderlist = pedidoService.changeOrderStateList(orderid,pedido.getEstado_pedido(),"%"+fecha+"%");
+            if(!pedido.getEstado_pedido().toLowerCase().contains("entregado")){
+                sseController.sendNotification("Estado del pedido [ "+orderid+" ]: "+pedido.getEstado_pedido());
+            }
             return new ResponseEntity<>(orderlist, HttpStatus.OK);
         } catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -164,6 +201,7 @@ public class PedidoRestController {
     public ResponseEntity<List<Pedido>> deleteOrder(@PathVariable int orderid,@PathVariable int tableid,@RequestParam String fecha){
         try{
             List<Pedido> listAfterDeleteOrder = pedidoService.deleteOrder(orderid,tableid,"%"+fecha+"%");
+            sseController.sendNotification("El pedido [ "+orderid+" ]: Ha sido cancelado");
             return new ResponseEntity<>(listAfterDeleteOrder, HttpStatus.OK);
         } catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -4,6 +4,8 @@ import { DetallesPedidoResponse, PedidoResponse } from 'src/app/backend/interfac
 import { ApiService } from 'src/app/backend/services/api.service';
 import { OrderItem } from '../register/register.component';
 import { Router } from '@angular/router';
+import { PedidoService } from 'src/app/backend/services/pedido.service';
+import { InventarioService } from 'src/app/backend/services/inventario.service';
 
 @Component({
   selector: 'app-pedidos',
@@ -29,7 +31,9 @@ export class PedidosComponent implements OnInit{
   notificationType = "success"
   constructor(
     private router:Router,
-    private apiService: ApiService,
+    //private apiService: ApiService,
+    private pedidoService: PedidoService,
+    private inventarioService: InventarioService,
     private cdr:ChangeDetectorRef
   ) {
    // this.getProducts()
@@ -41,10 +45,10 @@ export class PedidosComponent implements OnInit{
     let detallesPedidos:PedidoResponse[] = []
     const currentDate = new Date()
     const formattedDate = format(currentDate, 'yyyy-MM-dd');
-    this.apiService.getPedidos(formattedDate)
+    this.pedidoService.getPedidos(formattedDate)
       .then(pedidos => {
         pedidos.forEach((p)=>{
-          this.apiService.getPedidoDetalle(p.idpedido)
+          this.pedidoService.getPedidoDetalle(p.idpedido)
           .then(pedido=>{
             detallesPedidos.push(pedido)
             this.cdr.detectChanges()
@@ -67,7 +71,7 @@ export class PedidosComponent implements OnInit{
   getDetallePedido(p:PedidoResponse){
     let descripcion = ""
     p.detalles?.forEach((d)=>{
-      this.apiService.getProduct(d.idproducto)
+      this.inventarioService.getProduct(d.idproducto)
         .then((producto)=>{
           descripcion = descripcion + d.cantidad + " " + producto.nombre + " - " + producto.precio + '\n' 
           this.selectedPedido = {
@@ -105,7 +109,7 @@ export class PedidosComponent implements OnInit{
     this.showConfirmationAlert = false
     const currentDate = new Date()
     const formattedDate = format(currentDate, 'yyyy-MM-dd');
-    this.apiService.deletePedido(this.pedidoTemp!.idpedido,this.pedidoTemp!.idmesa,formattedDate)
+    this.pedidoService.deletePedido(this.pedidoTemp!.idpedido,this.pedidoTemp!.idmesa,formattedDate)
       .then((pedidos)=>{
         console.log(pedidos)
         this.pedidos = pedidos
