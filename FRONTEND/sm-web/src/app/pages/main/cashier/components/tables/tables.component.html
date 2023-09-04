@@ -123,9 +123,9 @@
     <div class="bg-sky-700 py-2 px-4 flex flex-col justify-center"> 
         <p class="text-white">Disposicion de mesas</p>
     </div>
-    <div class="grid grid-cols-table">
+    <div class="flex flex-col-reverse justify-end md:grid md:grid-cols-table">
         <div class="flex flex-col items-center justify-center gap-12" [ngClass]="{'bg-black bg-opacity-25':showDetailsTable}">
-            <div class="grid grid-cols-5 gap-12 animate-pulse" [ngClass]="{'hidden':mesasDisponibles.length>0}">
+            <div class="grid grid-cols-5 gap-12 animate-pulse" [ngClass]="{'hidden':!loading}">
                 <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
                 <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
                 <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
@@ -147,15 +147,17 @@
                 <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
                 <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
             </div>
-            <div class="grid grid-cols-5 gap-12" [ngClass]="{'hidden':mesasDisponibles.length==0}">
-                <div class="h-[100px] w-[100px] mx-auto" (click)="navigateRegister(t)" *ngFor="let t of mesasDisponibles">
-                    <div class="h-[100px] w-[100px] relative">
-                        <img src="{{t.image}}" alt="">
-                        <p class="absolute top-[37%] w-[100px] text-center text-white font-semibold text-[20px]">{{t.numero}}</p>
+            <div class="w-[400px] mt-10 md:mt-0 sm:w-[600px] md:w-auto">
+                <div class="grid grid-cols-[120px_120px_120px_120px_120px] md:grid-cols-5 gap-4 md:gap-12 overflow-x-auto" [ngClass]="{'hidden':loading}">
+                    <div class="h-[100px] w-[100px] mx-auto" (click)="navigateRegister(t)" *ngFor="let t of mesasDisponibles">
+                        <div class="h-[100px] w-[100px] relative">
+                            <img src="{{t.image}}" alt="">
+                            <p class="absolute top-[37%] w-[100px] text-center text-white font-semibold text-[20px]">{{t.numero}}</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="table-legend">
+            <div class="table-legend" *ngIf="mesasDisponibles.length>0">
                 <div class="info">
                     <p>Disponible</p>
                     <img src="/assets/icons/mesa-disponible.png" alt="">
@@ -165,11 +167,14 @@
                     <img src="/assets/icons/mesa-ocupada.png" alt="">
                 </div>
             </div>
+            <div *ngIf="mesasDisponibles.length == 0 && !loading">
+                <p class="text-red-400">Hubo un problema al cargar las mesas, intentelo más tarde</p>
+            </div>
         </div>
         <div class="grid grid-rows-3 gap-[1px] my-[1px] mr-[2px]">
-            <a [ngClass]="{'bg-yellow-400':showPrincipal}" class="bg-yellow-200 px-1 py-4 vertical flex items-center justify-center hover:bg-yellow-400 hover:cursor-pointer" (click)="getTablesByLocation('principal')" >PRINCIPAL</a>
-            <a [ngClass]="{'bg-yellow-400':showTerraza}" class="bg-yellow-200 px-1 py-4 vertical flex items-center justify-center hover:bg-yellow-400 hover:cursor-pointer" (click)="getTablesByLocation('terraza')" >TERRAZA</a>
-            <a [ngClass]="{'bg-yellow-400':showPiscina}" class="bg-yellow-200 px-1 py-4 vertical flex items-center justify-center hover:bg-yellow-400 hover:cursor-pointer" (click)="getTablesByLocation('piscina')" >PISCINA</a>
+            <a [ngClass]="{'bg-yellow-400':showPrincipal}" class="bg-yellow-200 px-1 py-2 md:py-4 text-xs md:text-base vertical flex items-center justify-center hover:bg-yellow-400 hover:cursor-pointer" (click)="getTablesByLocation('principal')" >PRINCIPAL</a>
+            <a [ngClass]="{'bg-yellow-400':showTerraza}" class="bg-yellow-200 px-1 py-2 md:py-4 text-xs md:text-base vertical flex items-center justify-center hover:bg-yellow-400 hover:cursor-pointer" (click)="getTablesByLocation('terraza')" >TERRAZA</a>
+            <a [ngClass]="{'bg-yellow-400':showPiscina}" class="bg-yellow-200 px-1 py-2 md:py-4 text-xs md:text-base vertical flex items-center justify-center hover:bg-yellow-400 hover:cursor-pointer" (click)="getTablesByLocation('piscina')" >PISCINA</a>
         </div>
     </div>
 </div>

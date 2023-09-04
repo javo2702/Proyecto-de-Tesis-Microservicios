@@ -7,12 +7,13 @@
     </div>
 </div>
 <div class="h-full grid grid-rows-[50px_1fr]">
-    <div class="bg-sky-700 py-2 px-4 flex flex-col justify-center"> 
-        <p class="text-white">Disposicion de mesas</p>
+    <div class="bg-sky-700  text-white py-2 px-4 flex flex-row justify-between items-center"> 
+        <p class="">Disposicion de mesas</p>
+        <p class="">Fecha: <span>{{currentDate | date: 'dd/MM/yyyy'}}</span></p>
     </div>
     <div class="grid grid-cols-table">
         <div class="flex flex-col items-center justify-center gap-12">
-            <div class="grid grid-cols-5 gap-12 animate-pulse" [ngClass]="{'hidden':mesasDisponibles.length>0}">
+            <div class="grid grid-cols-5 gap-12 animate-pulse" [ngClass]="{'hidden':!loading}">
                 <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
                 <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
                 <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
@@ -34,7 +35,7 @@
                 <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
                 <div class="h-[100px] w-[100px] mx-auto bg-gray-200 rounded-md"></div>
             </div>
-            <div class="grid grid-cols-5 gap-12" [ngClass]="{'hidden':mesasDisponibles.length==0}">
+            <div class="grid grid-cols-5 gap-12" [ngClass]="{'hidden':loading}">
                 <div class="h-[100px] w-[100px] mx-auto" (click)="navigateRegister(t)" *ngFor="let t of mesasDisponibles">
                     <div class="h-[100px] w-[100px] relative">
                         <img src="{{t.image}}" alt="">
@@ -42,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <div class="table-legend">
+            <div class="table-legend" *ngIf="mesasDisponibles.length>0">
                 <div class="info">
                     <p>Disponible</p>
                     <img src="/assets/icons/mesa-disponible.png" alt="">
@@ -51,6 +52,9 @@
                     <p>No disponible</p>
                     <img src="/assets/icons/mesa-ocupada.png" alt="">
                 </div>
+            </div>
+            <div *ngIf="mesasDisponibles.length == 0 && !loading">
+                <p class="text-red-400">Hubo un problema al cargar las mesas, intentelo más tarde</p>
             </div>
         </div>
         <div class="grid grid-rows-3 gap-[1px] my-[1px] mr-[2px]">

@@ -26,10 +26,11 @@
                         </thead>
                         <tbody>
                             <tr class="border-b border-gray-200">
-                                <td class="px-2 py-4">
+                                <td class="px-2 py-4 font-bold capitalize">
                                     <p [ngSwitch]="selectedPedido?.estado?.toLowerCase()">
-                                        <span *ngSwitchCase="'listo'" class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">{{selectedPedido?.estado}}</span>
-                                        <span *ngSwitchCase="'recibido'" class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">{{selectedPedido?.estado}}</span>
+                                        <span *ngSwitchCase="'listo'" class="bg-green-100 text-green-800 text-xs mr-2 px-2.5 py-0.5 rounded ">{{selectedPedido?.estado}}</span>
+                                        <span *ngSwitchCase="'recibido'" class="bg-red-100 text-red-800 text-xs mr-2 px-2.5 py-0.5 rounded">{{selectedPedido?.estado}}</span>
+                                        <span *ngSwitchDefault class="bg-gray-100 text-gray-800 text-xs mr-2 px-2.5 py-0.5 rounded">{{selectedPedido?.estado}}</span>
                                     </p>
                                 </td>
                                 <td class="px-2 py-4">
@@ -70,7 +71,7 @@
 <div class="h-full grid grid-rows-[50px_1fr]">
     <div class="bg-sky-700 py-2 px-4 flex flex-row items-center justify-between text-white">
         <p class="">Lista de pedidos</p>
-        <p class="">Fecha: <span>{{date}}</span></p>
+        <p class="">Fecha: <span>{{currentDate | date: 'dd/MM/yyyy'}}</span></p>
     </div>
     <div class="p-4 w-full relative  overflow-hidden">
         <table class="w-full text-center text-sm text text-gray-500 mx-auto">
@@ -98,11 +99,11 @@
                     <th  (click)="getDetallePedido(p)" scope="row" class="px-2 py-4 font-bold text-gray-900">
                         {{p.idpedido}}
                     </th>
-                    <td (click)="getDetallePedido(p)" class="px-2 py-4">
+                    <td (click)="getDetallePedido(p)" class="px-2 py-4 font-bold capitalize">
                         <p [ngSwitch]="p?.estado?.toLowerCase()">
-                            <span *ngSwitchCase="'listo'" class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">{{p?.estado}}</span>
-                            <span *ngSwitchCase="'recibido'" class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">{{p?.estado}}</span>
-                            <span *ngSwitchDefault class="bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">{{p?.estado}}</span>
+                            <span *ngSwitchCase="'listo'" class="bg-green-100 text-green-800 text-xs  mr-2 px-2.5 py-0.5 rounded ">{{p?.estado}}</span>
+                            <span *ngSwitchCase="'recibido'" class="bg-red-100 text-red-800 text-xs  mr-2 px-2.5 py-0.5 rounded">{{p?.estado}}</span>
+                            <span *ngSwitchDefault class="bg-gray-100 text-gray-800 text-xs  mr-2 px-2.5 py-0.5 rounded">{{p?.estado}}</span>
                         </p>
                     </td>
                     <td  (click)="getDetallePedido(p)" class="px-2 py-4">
@@ -139,8 +140,14 @@
                 </tr>
             </tbody>
         </table>
-        <div *ngIf="pedidos.length==0" class="border-b w-full py-2 px-4 text-gray-400 text-center">
-            <p>No se han registrado pedidos aun</p>
+        <div [ngClass]="{'hidden':!loading}" class="mt-1 flex flex-col gap-1">
+            <div role="status" class="w-full h-[40px] bg-gray-100 animate-pulse rounded-sm"></div>
+            <div role="status" class="w-full h-[40px] bg-gray-100 animate-pulse rounded-sm"></div>
+            <div role="status" class="w-full h-[40px] bg-gray-100 animate-pulse rounded-sm"></div>
+        </div>
+        <div class="border-b w-full px-4 text-gray-400 text-center" [ngClass]="{'hidden':loading}">
+            <p class="py-3" *ngIf="success && pedidos.length == 0">No se han registrado pedidos aun</p>
+            <p class="text-red-400 py-3" [ngClass]="{'hidden':success}">No se ha podido cargar los datos, intentelo más tarde</p>
         </div>
     </div>
     <!--<div class="table tasks">

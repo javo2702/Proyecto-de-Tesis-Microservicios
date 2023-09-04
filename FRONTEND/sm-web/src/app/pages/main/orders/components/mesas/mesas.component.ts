@@ -10,6 +10,10 @@ import { PedidoService } from 'src/app/backend/services/pedido.service';
 })
 export class MesasComponent implements OnInit{
 
+  currentDate: Date = new Date();
+  
+  loading: Boolean = true
+
   columnas:number = 6
   filas:number = 4
 
@@ -61,14 +65,21 @@ export class MesasComponent implements OnInit{
             )
           }
           this.mesasCopy = this.mesasDisponibles
+          this.loading = false
           this.cdr.detectChanges()
         })
       })
       .then(()=>{
           this.getTablesByLocation("principal")
+          this.loading = false
           this.cdr.detectChanges()
         }
       )
+      .catch((error)=>{
+        this.loading = false
+        this.cdr.detectChanges()
+        console.log(error)
+      })
   }
   navigateRegister(i:Table) {
     if(i.estado==="disponible"){

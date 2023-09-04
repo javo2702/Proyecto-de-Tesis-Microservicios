@@ -1,9 +1,9 @@
 package dev.jvall.UsuarioService.domain;
 
-import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import reactor.util.annotation.Nullable;
 
 @Data
 @NoArgsConstructor

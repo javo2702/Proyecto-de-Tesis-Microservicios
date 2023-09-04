@@ -39,6 +39,8 @@ export type ChartOptionsPie = {
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
+  success:Boolean = false
+  loadingVentasSemanales:Boolean = true
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions!: Partial<ChartOptions>;
   public chartOptionsPie!: Partial<ChartOptionsPie>;
@@ -183,7 +185,7 @@ export class HomeComponent implements OnInit{
   }
   ngOnInit(): void {
     this.graficoVentas()
-    this.getVentasSemanales(new Date('2023-08-23 12:00:00'))
+    this.getVentasSemanales(new Date('2023-08-29 12:00:00'))
   }
   getVentasSemanales(fecha:Date){
     /*let fecha = new Date('2023-08-23 12:00:00')
@@ -194,23 +196,27 @@ export class HomeComponent implements OnInit{
     console.log(format(new Date(new Date().setDate(fecha.getDate() + (7-fecha.getDay()))),'yyyy-MM-dd'))
     */
     var filtro: FiltroVentas = {
-      fechaini: format(new Date(new Date().setDate(fecha.getDate() - (fecha.getDay()-1))),'yyyy-MM-dd'),
-      fechafin: format(new Date(new Date().setDate(fecha.getDate() + (7-fecha.getDay()))),'yyyy-MM-dd')
+      fechaini: format(new Date(new Date(fecha).setDate(fecha.getDate() - (fecha.getDay()-1))),'yyyy-MM-dd'),
+      fechafin: format(new Date(new Date(fecha).setDate(fecha.getDate() + (7-fecha.getDay()))),'yyyy-MM-dd')
     }
     this.transaccionService.getVentasSemanales(filtro)
     .then(transacciones=>{
+        this.loadingVentasSemanales = false
         this.ventasSemanales = transacciones
+        this.success = true
+        this.llenarGrafico()
         this.cdr.detectChanges();
     })
-    .then(()=>{
-      this.llenarGrafico()
-    })
     .catch(error=>{
+      this.loadingVentasSemanales = false
+      this.success = false
       console.log(error)
       this.mensaje = error
+      this.cdr.detectChanges();
     })
   }
   llenarGrafico():void{
+    console.table(this.ventasSemanales)
     let fecha_aux = format(new Date(this.ventasSemanales[0].fecha), 'yyyy-MM-dd')
     let cantidad = 0
     this.ventasSemanales.forEach((v)=>{
@@ -228,6 +234,7 @@ export class HomeComponent implements OnInit{
       {name: "Ventas",data: this.ventas}
     ];
     this.chartOptions = {...this.chartOptions}
+    this.loadingVentasSemanales = false
     this.cdr.detectChanges()
   }
 }

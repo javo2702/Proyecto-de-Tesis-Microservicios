@@ -260,7 +260,13 @@
                         </a>
                     </div>
                     <div>
-                        <input type="date" name="fecha" id="fecha" class="border border-gray-300 rounded-md px-4 py-1">
+                        <input 
+                            type="date" 
+                            name="fechaVentas" 
+                            id="fechaVentas" 
+                            class="border border-gray-300 rounded-md px-4 py-1"
+                            [(ngModel)] = "fechaVentas"
+                        >
                     </div>
                 </div>
             </div>
@@ -299,8 +305,14 @@
                         </tr>
                     </tbody>
                 </table>
-                <div *ngIf="ventasFecha.length==0" class="border-b w-full py-3 px-4 text-gray-400 text-center">
-                    <p>No se han registrado pedidos aun</p>
+                <div [ngClass]="{'hidden':!loadingVentas}" class="mt-1 flex flex-col gap-1">
+                    <div role="status" class="w-full h-[40px] bg-gray-100 animate-pulse rounded-sm"></div>
+                    <div role="status" class="w-full h-[40px] bg-gray-100 animate-pulse rounded-sm"></div>
+                    <div role="status" class="w-full h-[40px] bg-gray-100 animate-pulse rounded-sm"></div>
+                </div>
+                <div class="border-b w-full px-4 text-gray-400 text-center" [ngClass]="{'hidden':loadingVentas}">
+                    <p class="py-3" *ngIf="successVentas && ventasFecha.length == 0">No se han registrado ventas aun</p>
+                    <p class="text-red-400 py-3" [ngClass]="{'hidden':successVentas}">No se ha podido cargar los datos, intentelo más tarde</p>
                 </div>
                 <div class="flex justify-between items-center mt-3" [ngClass]="{'hidden':ventasFecha.length==0}">
                     <div class="text-sm text-gray-400">
@@ -352,7 +364,13 @@
                         </a>
                     </div>
                     <div>
-                        <input type="date" name="fecha" id="fecha" class="border border-gray-300 rounded-md px-4 py-1">
+                        <input 
+                            type="date" 
+                            name="fechaPagos" 
+                            id="fechaPagos" 
+                            class="border border-gray-300 rounded-md px-4 py-1"
+                            [(ngModel)] = "fechaPagos"
+                        >    
                     </div>
                 </div>
             </div>
@@ -391,8 +409,14 @@
                         </tr>
                     </tbody>
                 </table>
-                <div *ngIf="pagosFecha.length==0" class="border-b w-full py-3 px-4 text-gray-400 text-center">
-                    <p>No se han registrado pedidos aun</p>
+                <div [ngClass]="{'hidden':!loadingPagos}" class="flex flex-col gap-1 mt-1">
+                    <div role="status" class="w-full h-[40px] bg-gray-100 animate-pulse rounded-sm"></div>
+                    <div role="status" class="w-full h-[40px] bg-gray-100 animate-pulse rounded-sm"></div>
+                    <div role="status" class="w-full h-[40px] bg-gray-100 animate-pulse rounded-sm"></div>
+                </div>
+                <div class="border-b w-full px-4 text-gray-400 text-center" [ngClass]="{'hidden':loadingPagos}">
+                    <p class="py-3" *ngIf="successPagos && pagosFecha.length == 0">No se han registrado pagos aun</p>
+                    <p class="text-red-400 py-3" [ngClass]="{'hidden':successPagos}">No se ha podido cargar los datos, intentelo más tarde</p>
                 </div>
                 <div class="flex justify-between items-center mt-3" [ngClass]="{'hidden':pagosFecha.length==0}">
                     <div class="text-sm text-gray-400">

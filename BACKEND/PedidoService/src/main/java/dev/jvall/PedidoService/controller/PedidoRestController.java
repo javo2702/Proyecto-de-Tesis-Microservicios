@@ -109,7 +109,9 @@ public class PedidoRestController {
     public ResponseEntity<Response> endOrderState(@PathVariable int orderid){
         try{
             Pedido orderUpdated = pedidoService.endOrderState(orderid);
-            sseController.sendNotification("Se ha pagado el pedido "+orderid);
+            sseController.sendNotificationOrder("Se ha pagado el pedido "+orderid);
+            sseController.sendNotificationAdmin("Se ha pagado el pedido "+orderid);
+            sseController.sendNotificationCashier("Se ha pagado el pedido "+orderid);
             return new ResponseEntity<>(new Response("Estado del pedido "+orderid+": Pagado"), HttpStatus.OK);
         } catch (Exception e){
             e.printStackTrace();
@@ -137,7 +139,9 @@ public class PedidoRestController {
     }
     @PostMapping("/orderlist/save")
     public ResponseEntity<Pedido> saveOrder(@RequestBody PedidoRequest pedido){
-        sseController.sendNotification("Se ha registrado un nuevo pedido");
+        sseController.sendNotificationCashier("Se ha registrado un nuevo pedido");
+        sseController.sendNotificationAdmin("Se ha registrado un nuevo pedido");
+        sseController.sendNotificationKitchen("Se ha registrado un nuevo pedido");
         try{
             Pedido ordersaved = pedidoService.saveOrder(pedido.getFecha_pedido(),pedido.getMonto_pedido(),pedido.getEstado_pedido(),pedido.getIdmozo_pedido(),pedido.getIdmesa_pedido());
             mesaService.changeTableState(pedido.getIdmesa_pedido());
@@ -172,7 +176,9 @@ public class PedidoRestController {
         try{
             List<Pedido> orderlist = pedidoService.changeOrderStateList(orderid,pedido.getEstado_pedido(),"%"+fecha+"%");
             if(!pedido.getEstado_pedido().toLowerCase().contains("entregado")){
-                sseController.sendNotification("Estado del pedido [ "+orderid+" ]: "+pedido.getEstado_pedido());
+                sseController.sendNotificationOrder("Estado del pedido [ "+orderid+" ]: "+pedido.getEstado_pedido());
+                sseController.sendNotificationCashier("Estado del pedido [ "+orderid+" ]: "+pedido.getEstado_pedido());
+                sseController.sendNotificationAdmin("Estado del pedido [ "+orderid+" ]: "+pedido.getEstado_pedido());
             }
             return new ResponseEntity<>(orderlist, HttpStatus.OK);
         } catch (Exception e){
@@ -201,7 +207,10 @@ public class PedidoRestController {
     public ResponseEntity<List<Pedido>> deleteOrder(@PathVariable int orderid,@PathVariable int tableid,@RequestParam String fecha){
         try{
             List<Pedido> listAfterDeleteOrder = pedidoService.deleteOrder(orderid,tableid,"%"+fecha+"%");
-            sseController.sendNotification("El pedido [ "+orderid+" ]: Ha sido cancelado");
+            sseController.sendNotificationOrder("El pedido [ "+orderid+" ]: Ha sido cancelado");
+            sseController.sendNotificationAdmin("El pedido [ "+orderid+" ]: Ha sido cancelado");
+            sseController.sendNotificationCashier("El pedido [ "+orderid+" ]: Ha sido cancelado");
+            sseController.sendNotificationKitchen("El pedido [ "+orderid+" ]: Ha sido cancelado");
             return new ResponseEntity<>(listAfterDeleteOrder, HttpStatus.OK);
         } catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

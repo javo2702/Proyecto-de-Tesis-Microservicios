@@ -19,6 +19,7 @@ import { format } from 'date-fns';
   styleUrls: ['./tables.component.css']
 })
 export class TablesComponent {
+  loading: Boolean = true
   fecha: Date = new Date()
   descripcion: string = ""
   monto: number = 0
@@ -51,7 +52,7 @@ export class TablesComponent {
     private transaccionService: TransaccionService,
     private cdr:ChangeDetectorRef
   ){
-
+ 
   }
 
   ngOnInit(): void {
@@ -85,16 +86,25 @@ export class TablesComponent {
             )
           }
           this.mesasCopy = this.mesasDisponibles
+          this.loading = false
           this.cdr.detectChanges()
         })
       })
       .then(()=>{
           this.getTablesByLocation("principal")
+          this.loading = false
           this.cdr.detectChanges()
         }
       )
+      .catch((error)=>{
+        this.loading = false
+        this.cdr.detectChanges()
+        console.log(error)
+      })
   }
   navigateRegister(i:Table) {
+    this.descripcion = ""
+    this.monto = 0
     if(i.estado!=="disponible"){
       this.showDetailsTable = true
       this.orden = []
@@ -166,6 +176,8 @@ export class TablesComponent {
     this.transaccionService.registrarOrder(transaccion).then(
       (response)=>{
         this.mensaje = "Se ha registrado el pago del pedido [ "+ this.pedido?.idpedido + " ] de manera exitosa"
+        this.descripcion = ""
+        this.monto = 0
         this.pedidoService.endOrderState(this.pedido?.idpedido!)
         .then((response)=>{
           console.log(response);

@@ -11,11 +11,15 @@ import { TransaccionService } from 'src/app/backend/services/transaccion.service
 })
 export class ReportsComponent implements OnInit{
   fecha: Date = new Date()
+  fechaVentas = format(new Date(), 'yyyy-MM-dd');
+  fechaPagos = format(new Date(), 'yyyy-MM-dd');
   mensaje:string = ""
+  loadingVentas:Boolean = true
+  loadingPagos:Boolean = true
+  successVentas:Boolean = false
+  successPagos:Boolean = false
   showDetallesVentas:boolean = false
-  fechaVentas:string="10/10/2021"
   showDetallesPagos:boolean = false
-  fechaPagos:string="10/10/2021"
   currentIndex:number =1
   pagination:string[] = []
   fechaActual: Date = new Date()
@@ -54,11 +58,16 @@ export class ReportsComponent implements OnInit{
         this.pagosMostrados = this.totalPagosFecha % 6
         console.log(this.pagosMostrados)
         console.table(transacciones)
+        this.loadingPagos = false
+        this.successPagos = true
         this.cdr.detectChanges();
     })
     .catch(error=>{
-      console.log(error)
+      console.log(error+"******************")
+      this.loadingPagos = false
+      this.successPagos = false
       this.mensaje = error
+      this.cdr.detectChanges()
     })
   }
   getTransaccionesVentas(){
@@ -67,11 +76,16 @@ export class ReportsComponent implements OnInit{
     .then(transacciones=>{
         this.ventasFecha = transacciones
         console.table(transacciones)
+        this.loadingVentas = false
+        this.successVentas = true
         this.cdr.detectChanges();
     })
     .catch(error=>{
+      this.loadingVentas = false
+      this.successVentas = false
       console.log(error)
       this.mensaje = error
+      this.cdr.detectChanges()
     })
   }
 

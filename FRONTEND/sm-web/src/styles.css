@@ -21,11 +21,13 @@
     cursor: pointer;
     visibility: visible;
   }
-  .vertical{
-    writing-mode: vertical-rl;
-    text-orientation: upright;
-    text-align: center;
-}
+  @media (min-width: 768px) {
+    .vertical{
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+        text-align: center;
+    }
+  }
 .active{
     background-color: rgb(3 105 161);
     border-radius: .2rem;

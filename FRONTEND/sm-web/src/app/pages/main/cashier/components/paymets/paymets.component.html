@@ -29,7 +29,7 @@
         </div>
     </div>
 </div>
-<div class="py-4 flex items-center justify-center h-full">
+<div class="py-4 flex items-start justify-center h-full">
     <div class="w-full">
         <h3 class="text-gray-500 text-lg mb-3">Registro de Pagos</h3>
         <div class="px-4 py-4 w-11/12 mx-auto border border-gray-300 rounded-md shadow-sm">
@@ -60,9 +60,6 @@
                     </div>
                 </div>
             </div>
-            <div>
-               ------- {{fechaInputValue}}  ----------
-            </div>
             <div class="w-full relative  overflow-hidden">
                 <table class="w-full text-center text-sm text text-gray-500 mx-auto">
                     <thead class="text-xs text-white uppercase bg-sky-950">
@@ -82,114 +79,32 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
+                        <tr *ngFor="let p of transacciones" class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
                             <td class="px-2 py-3">
-                                01
-                            </td>
-                            <td class="px-2 py-3">
-                                Pago a Persona X
+                                {{p.idtransaccion}}
                             </td>
                             <td class="px-2 py-3">
-                                S/. 100.00
+                                {{p.descripcion}}
                             </td>
                             <td class="px-2 py-3">
-                                10/08/2023 3:00pm
-                            </td>
-                        </tr>
-                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
-                            <td class="px-2 py-3">
-                                01
+                                S/. {{p.monto}}
                             </td>
                             <td class="px-2 py-3">
-                                Pago a Persona X
-                            </td>
-                            <td class="px-2 py-3">
-                                S/. 100.00
-                            </td>
-                            <td class="px-2 py-3">
-                                10/08/2023 3:00pm
-                            </td>
-                        </tr>
-                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
-                            <td class="px-2 py-3">
-                                01
-                            </td>
-                            <td class="px-2 py-3">
-                                Pago a Persona X
-                            </td>
-                            <td class="px-2 py-3">
-                                S/. 100.00
-                            </td>
-                            <td class="px-2 py-3">
-                                10/08/2023 3:00pm
-                            </td>
-                        </tr>
-                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
-                            <td class="px-2 py-3">
-                                01
-                            </td>
-                            <td class="px-2 py-3">
-                                Pago a Persona X
-                            </td>
-                            <td class="px-2 py-3">
-                                S/. 100.00
-                            </td>
-                            <td class="px-2 py-3">
-                                10/08/2023 3:00pm
-                            </td>
-                        </tr>
-                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
-                            <td class="px-2 py-3">
-                                01
-                            </td>
-                            <td class="px-2 py-3">
-                                Pago a Persona X
-                            </td>
-                            <td class="px-2 py-3">
-                                S/. 100.00
-                            </td>
-                            <td class="px-2 py-3">
-                                10/08/2023 3:00pm
-                            </td>
-                        </tr>
-                        <tr class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
-                            <td class="px-2 py-3">
-                                01
-                            </td>
-                            <td class="px-2 py-3">
-                                Pago a Persona X
-                            </td>
-                            <td class="px-2 py-3">
-                                S/. 100.00
-                            </td>
-                            <td class="px-2 py-3">
-                                10/08/2023 3:00pm
-                            </td>
-                        </tr>
-                        
-                        <!--<tr *ngFor="let p of pedidos" class="border-b hover:bg-gray-200 hover:text-black hover:cursor-pointer">
-                            <th  (click)="getDetallePedido(p)" scope="row" class="px-2 py-3 font-bold text-gray-900">
-                                {{p.idpedido}}
-                            </th>
-                            <td (click)="getDetallePedido(p)" class="px-2 py-3">
-                                <p [ngSwitch]="p?.estado?.toLowerCase()">
-                                    <span *ngSwitchCase="'listo'" class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">{{p?.estado}}</span>
-                                    <span *ngSwitchCase="'recibido'" class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">{{p?.estado}}</span>
-                                </p>
-                            </td>
-                            <td  (click)="getDetallePedido(p)" class="px-2 py-3">
-                                N° {{p.idmesa}}
-                            </td>
-                            <td  (click)="getDetallePedido(p)" class="px-2 py-3">
                                 {{p.fecha}}
                             </td>
-                        </tr>-->
+                        </tr>
                     </tbody>
                 </table>
-                <div *ngIf="false" class="border-b w-full py-3 px-4 text-gray-400 text-center">
-                    <p>No se han registrado pedidos aun</p>
+                <div [ngClass]="{'hidden':!loading}" class="mt-1 flex flex-col gap-1">
+                    <div role="status" class="w-full h-[40px] bg-gray-100 animate-pulse rounded-sm"></div>
+                    <div role="status" class="w-full h-[40px] bg-gray-100 animate-pulse rounded-sm"></div>
+                    <div role="status" class="w-full h-[40px] bg-gray-100 animate-pulse rounded-sm"></div>
                 </div>
-                <div class="flex justify-between items-center mt-3" [ngClass]="{'hidden':false}">
+                <div class="border-b w-full py-3 px-4 text-gray-400 text-center" [ngClass]="{'hidden':loading}">
+                    <p class="hidden" [ngClass]="{'flex':success && transacciones.length > 0}">No se han registrado pedidos aun</p>
+                    <p class="text-red-400" [ngClass]="{'hidden':success}">No se ha podido cargar los datos, intentelo más tarde</p>
+                </div>
+                <div class="flex justify-between items-center mt-3" [ngClass]="{'hidden':transacciones.length == 0}">
                     <div class="text-sm text-gray-400">
                         <p>Mostrando <span>6</span> Resultados de <span>30</span></p>
                     </div>

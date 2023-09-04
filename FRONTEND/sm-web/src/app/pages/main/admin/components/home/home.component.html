@@ -48,7 +48,7 @@
     </div>
     <div class="w-full 2xl:w-11/12 2xl:px-3 grid grid-cols-1 lg:grid-cols-[1fr_.8fr] xl:grid-cols-[1fr_.5fr] gap-x-10 gap-y-10">
         <div class="p-2 w-full mx-auto border border-gray-300 rounded-md shadow-sm">
-            <div id="chart" class="">
+            <div id="chart" class="" *ngIf="loadingVentasSemanales==false">
                 <apx-chart
                   [series]="chartOptions.series!"
                   [chart]="chartOptions.chart!"
@@ -57,7 +57,43 @@
                   [xaxis]="chartOptions.xaxis!"
                   [title]="chartOptions.title!"
                 ></apx-chart>
-              </div>
+                <div [ngClass]="{'hidden':loadingVentasSemanales}">
+                    <p class="text-red-400 text-center" [ngClass]="{'hidden':success}">No se ha podido cargar los datos, inténtelo más tarde</p>
+                    <p class="text-gray-400 text-center sm:text-sm lg:text-base" *ngIf="success && ventasSemanales.length == 0">*Aún no se han registrado ventas</p>
+                </div>
+            </div>
+            <div [ngClass]="{'hidden':!loadingVentasSemanales}" class="h-[350px]">
+                <div class="ml-[60px] mr-[20px] flex flex-row justify-between items-center gap-2">
+                    <div role="status" class="h-[350px] flex flex-col justify-between animate-pulse rounded-sm">
+                        <div class="w-[50px] h-[20px] bg-gray-100 rounded-md"></div>
+                        <div class="w-[50px] h-[150px] bg-gray-100 rounded-md"></div>
+                    </div>
+                    <div role="status" class="h-[350px] flex flex-col justify-between animate-pulse rounded-sm">
+                        <div class="w-[50px] h-[20px] bg-gray-100 rounded-md"></div>
+                        <div class="w-[50px] h-[250px] bg-gray-100 rounded-md"></div>
+                    </div>
+                    <div role="status" class="h-[350px] flex flex-col justify-between animate-pulse rounded-sm">
+                        <div class="w-[50px] h-[20px] bg-gray-100 rounded-md"></div>
+                        <div class="w-[50px] h-[100px] bg-gray-100 rounded-md"></div>
+                    </div>
+                    <div role="status" class="h-[350px] flex flex-col justify-between animate-pulse rounded-sm">
+                        <div class="w-[50px] h-[20px] bg-gray-100 rounded-md"></div>
+                        <div class="w-[50px] h-[150px] bg-gray-100 rounded-md"></div>
+                    </div>
+                    <div role="status" class="h-[350px] flex flex-col justify-between animate-pulse rounded-sm">
+                        <div class="w-[50px] h-[20px] bg-gray-100 rounded-md"></div>
+                        <div class="w-[50px] h-[50px] bg-gray-100 rounded-md"></div>
+                    </div>
+                    <div role="status" class="h-[350px] flex flex-col justify-between animate-pulse rounded-sm">
+                        <div class="w-[50px] h-[20px] bg-gray-100 rounded-md"></div>
+                        <div class="w-[50px] h-[250px] bg-gray-100 rounded-md"></div>
+                    </div>
+                    <div role="status" class="h-[350px] flex flex-col justify-between animate-pulse rounded-sm">
+                        <div class="w-[50px] h-[20px] bg-gray-100 rounded-md"></div>
+                        <div class="w-[50px] h-[280px] bg-gray-100 rounded-md"></div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="p-2 w-full mx-auto border border-gray-300 rounded-md shadow-sm flex flex-col justify-center items-center">
             <div id="chart2" class="">

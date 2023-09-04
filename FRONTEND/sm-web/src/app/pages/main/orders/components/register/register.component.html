@@ -88,7 +88,7 @@
                 <div class="h-[40px] w-full mx-auto bg-gray-200 rounded-md"></div>
                 <div class="h-[40px] w-full mx-auto bg-gray-200 rounded-md"></div>
             </div>
-            <div class="grid grid-cols-6 gap-2" [ngClass]="{'hidden':categoriasapi.length==0}">
+            <div class="grid grid-cols-6 gap-1" [ngClass]="{'hidden':categoriasapi.length==0}">
                 <div class="flex items-center justify-center w-full" *ngFor="let cat of categoriasapi" (click)="getProductsByCategory(cat)">
                     <div class="w-full text-white text-center rounded-md px-2 xl:px-4 py-2 h-[40px] hover:bg-yellow-400 hover:cursor-pointer" [ngClass]="{'bg-yellow-300':!cat.actived,'bg-yellow-400':cat.actived}">
                         <p class="text-[13px] xl:text-base h-[18px] overflow-hidden uppercase">{{cat.nombre}}</p>
@@ -96,8 +96,25 @@
                 </div>
             </div>
             <div class="flex flex-col justify-between">
-                <p class="text-gray-500 my-2">Resultados:</p>
-                <div class="h-[448px]">
+                <div class="flex flex-row justify-between mb-2">
+                    <p class="text-gray-500 my-2">Resultados:</p>
+                    <div class="flex justify-around gap-1 bg-green-400 rounded-xl px-1 py-1">
+                        <div (click)="isSoles=true;rateString='S/.';rate=1" class="flex justify-center items-center rounded-xl text-center text-white font-bold" [ngClass]="{'bg-green-500':isSoles}">
+                            <div class="px-1 py-1">
+                                <p class="w-6 h-6">S/.</p>
+                            </div>
+                        </div>
+                        <div (click)="exchangeRateApi(); isSoles=false" class="flex justify-center items-center rounded-xl text-white text-center" [ngClass]="{'bg-green-500':!isSoles}">
+                            <div class="px-1 py-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                    <path d="M10.464 8.746c.227-.18.497-.311.786-.394v2.795a2.252 2.252 0 01-.786-.393c-.394-.313-.546-.681-.546-1.004 0-.323.152-.691.546-1.004zM12.75 15.662v-2.824c.347.085.664.228.921.421.427.32.579.686.579.991 0 .305-.152.671-.579.991a2.534 2.534 0 01-.921.42z" />
+                                    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v.816a3.836 3.836 0 00-1.72.756c-.712.566-1.112 1.35-1.112 2.178 0 .829.4 1.612 1.113 2.178.502.4 1.102.647 1.719.756v2.978a2.536 2.536 0 01-.921-.421l-.879-.66a.75.75 0 00-.9 1.2l.879.66c.533.4 1.169.645 1.821.75V18a.75.75 0 001.5 0v-.81a4.124 4.124 0 001.821-.749c.745-.559 1.179-1.344 1.179-2.191 0-.847-.434-1.632-1.179-2.191a4.122 4.122 0 00-1.821-.75V8.354c.29.082.559.213.786.393l.415.33a.75.75 0 00.933-1.175l-.415-.33a3.836 3.836 0 00-1.719-.755V6z" clip-rule="evenodd" />
+                                </svg>    
+                            </div>                    
+                        </div>
+                    </div>
+                </div>
+                <div class="h-[425px]">
                     <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 animate-pulse" [ngClass]="{'hidden':productosshow.length>0}">
                         <div class="rounded-md border-1 border-gray-200 h-[212px]"><div class="h-full flex flex-col justify-between pt-3"><div class="rounded-md mx-auto bg-gray-200 lg:h-[100px] lg:w-[120px]"></div><div class="px-4"><div class="h-[30px] w-full bg-gray-200 rounded-md"></div></div><div class="flex justify-between items-center"><div class="px-2 w-full"><p class="w-10/12 mx-auto text-center h-[20px] bg-gray-200 rounded-md"></p></div><a class="bg-gray-200 rounded-md px-4 py-1 text-white h-[35px] hover:bg-sky-950 hover:cursor-pointer"></a></div></div></div>
                         <div class="rounded-md border-1 border-gray-200 h-[212px]"><div class="h-full flex flex-col justify-between pt-3"><div class="rounded-md mx-auto bg-gray-200 lg:h-[100px] lg:w-[120px]"></div><div class="px-4"><div class="h-[30px] w-full bg-gray-200 rounded-md"></div></div><div class="flex justify-between items-center"><div class="px-2 w-full"><p class="w-10/12 mx-auto text-center h-[20px] bg-gray-200 rounded-md"></p></div><a class="bg-gray-200 rounded-md px-4 py-1 text-white h-[35px] hover:bg-sky-950 hover:cursor-pointer"></a></div></div></div>
@@ -109,20 +126,24 @@
                     <div class="grid grid-cols-2 lg:grid-cols-3 gap-4" [ngClass]="{'hidden':productosshow.length==0}">
                         <div class="rounded-md border-1 border-sky-800" *ngFor="let product of productosshow">
                             <div class="">
-                                <img class="w-full lg:h-[120px] lg:w-[120px] mx-auto" src="/assets/images/producto.png" alt="Producto">
+                                <img class="w-full lg:h-[105px] lg:w-[105px] mx-auto" src="/assets/images/producto.png" alt="Producto">
                                 <div class="h-[50px] overflow-hidden flex flex-col items-center justify-start text-center capitalize">
                                     <p class="">{{product?.nombre}}</p>
                                     <span class="text-gray-400 text-[14px] px-4">{{product?.descripcion}}</span>
                                 </div>
                                 <div class="flex justify-between">
-                                    <p class="w-full text-center text-[18px]">S/. <span>{{product?.precio}}</span></p>
-                                    <a class="bg-sky-800 rounded-md px-4 py-1 text-white text-[20px] hover:bg-sky-950 hover:cursor-pointer" (click)="add(product)">+</a>
+                                    <p class="w-full text-center text-[18px]"><span [ngClass]="{'line-through text-gray-400 mr-2 text-sm':!isSoles}">{{rateString}} {{(product?.precio! / rate).toFixed(2)}}</span> <span [ngClass]="{'hidden':isSoles}">{{rateString}} {{math.ceil(product?.precio! / rate)}}</span></p>
+                                    <a class="bg-sky-800 rounded-md px-2 py-1 text-white text-[20px] hover:bg-sky-950 hover:cursor-pointer" (click)="add(product)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>                                          
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-end mt-3" [ngClass]="{'hidden':productosshow.length==0}">
+                <div class="flex justify-end" [ngClass]="{'hidden':productosshow.length==0}">
                     <nav aria-label="">
                         <ul class="flex items-center -space-x-px h-10 text-base">
                           <li>

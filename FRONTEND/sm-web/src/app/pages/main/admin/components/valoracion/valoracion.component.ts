@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
+import { FormGroup, FormControl } from "@angular/forms";
 import { format } from "date-fns";
 import {
   ApexAxisChartSeries,
@@ -28,6 +29,9 @@ export class ValoracionComponent implements OnInit{
   positivos:number = 0
   negativos:number = 0
   neutrales:number = 0
+  valoracionesSuccess:Boolean = false
+  valoracionesListSuccess:Boolean = false
+  loading:Boolean = true
   message:string = ""
   fecha = format(new Date(), 'yyyy-MM-dd');
   listaValoraciones: Valoracion[] = []
@@ -68,6 +72,7 @@ export class ValoracionComponent implements OnInit{
         ]
       }
     };
+    console.log(this.chartOptions.series?.length)
   }
   ngOnInit(): void {
     this.getListaValoraciones()
@@ -82,6 +87,7 @@ export class ValoracionComponent implements OnInit{
     this.valoracionService.getListaValoraciones(filtro)
     .then(valoraciones=>{
       this.message = ""
+      this.valoracionesListSuccess = true
       valoraciones.forEach((v)=>{
         this.listaValoraciones.push(v);
       })
@@ -89,10 +95,13 @@ export class ValoracionComponent implements OnInit{
       this.calcularNegativos()
       this.calcularNeutrales()
       this.actualizarGrafico();
+      this.valoracionesSuccess = true
+      this.loading = false
       this.cdr.detectChanges()
     })
     .catch(error => {
-      this.message = "Hubo un problema al tratar de conectarse con el servidor"
+      this.message = "No se ha podido cargar los datos, intentelo más tarde"
+      this.loading = false
       this.cdr.detectChanges()
       console.error(error);
     });

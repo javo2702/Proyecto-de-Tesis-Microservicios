@@ -4,7 +4,7 @@ export interface Transaccion{
     fecha:string,
     idorigen?:number,
     tipo:string,
-    descripcion:string
+    descripcion?:string
 }
 export interface TransaccionRequest{
     monto: number,

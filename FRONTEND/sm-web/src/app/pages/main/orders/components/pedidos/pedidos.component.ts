@@ -14,6 +14,9 @@ import { InventarioService } from 'src/app/backend/services/inventario.service';
 })
 export class PedidosComponent implements OnInit{
 
+  loading:Boolean = true
+  success:Boolean = false
+
   currentDate: Date = new Date();
   date = this.currentDate.getDate() + " / " + (this.currentDate.getMonth()+1) + " / " + this.currentDate.getFullYear()
 
@@ -51,12 +54,15 @@ export class PedidosComponent implements OnInit{
           this.pedidoService.getPedidoDetalle(p.idpedido)
           .then(pedido=>{
             detallesPedidos.push(pedido)
+            this.success = true
             this.cdr.detectChanges()
           })
           .catch(error => {
             console.error(error);
           });
         })
+        this.loading = false
+        this.cdr.detectChanges()
       })
       .then(()=>{
           this.pedidos = detallesPedidos
@@ -66,6 +72,9 @@ export class PedidosComponent implements OnInit{
       .then(()=>{this.cdr.detectChanges()})
       .catch(error => {
         console.error(error);
+        this.loading = false
+        this.success = false
+        this.cdr.detectChanges()
       });
   }
   getDetallePedido(p:PedidoResponse){

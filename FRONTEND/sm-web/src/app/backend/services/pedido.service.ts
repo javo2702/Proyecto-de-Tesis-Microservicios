@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Mesa } from '../interfaces/mesa';
 import { PedidoResponse, DetallesPedidoResponse, PedidoRequest } from '../interfaces/pedido';
 import { Responsee } from '../interfaces/response';
+import { environment } from 'src/environments/environment';
+import { ExchangeRate } from '../interfaces/exchangeRate';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +11,32 @@ import { Responsee } from '../interfaces/response';
 export class PedidoService {
   private apiUrl = 'http://192.168.18.12:8089';
   constructor() { }
+  getExchangeRate():Promise<ExchangeRate>{
+    const url = `https://v6.exchangerate-api.com/v6/${environment.exchange_rate_api_key}/latest/USD`
+    console.log(url)
+    return new Promise((resolve,reject)=>{
+      fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error en la solicitud.');
+        }
+        return response.json();
+      })
+      .then(data=>{
+        const exchange = {
+          result:data.result,
+          time_last_update_unix:data.time_last_update_unix,
+          time_next_update_unix:data.time_next_update_unix,
+          base_code:data.base_code,
+          rate:data.conversion_rates.PEN
+        }
+        resolve(exchange);
+      })
+      .catch(error => {
+        reject(error);
+      });
+    })
+  }
   getPedidos(fecha:string):Promise<PedidoResponse[]>{
     const url = `${this.apiUrl}/order/orderlist?fecha=${fecha}`;
     return new Promise((resolve, reject) => {

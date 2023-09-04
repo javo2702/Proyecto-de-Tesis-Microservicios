@@ -1,6 +1,6 @@
 package dev.jvall.TransaccionService.persistence.model;
 
-import jakarta.annotation.Nullable;
+import reactor.util.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

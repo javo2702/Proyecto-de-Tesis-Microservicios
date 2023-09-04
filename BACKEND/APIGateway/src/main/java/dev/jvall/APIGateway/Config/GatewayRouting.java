@@ -4,16 +4,9 @@ import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.reactive.CorsWebFilter;
-import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
-import org.springframework.web.reactive.config.CorsRegistry;
-import org.springframework.web.reactive.config.WebFluxConfigurer;
-
-import java.util.Arrays;
 
 @Configuration
-public class GatewayRouting implements WebFluxConfigurer {
+public class GatewayRouting {
     @Bean
     public RouteLocator configureRoute(RouteLocatorBuilder builder){
         System.out.println("VAMO A VER SI LLEGA ACA");

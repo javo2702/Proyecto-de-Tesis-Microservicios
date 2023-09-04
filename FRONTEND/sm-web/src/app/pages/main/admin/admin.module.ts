@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { RegistrarComponent } from './components/registrar/registrar.component';
 import { ValoracionComponent } from './components/valoracion/valoracion.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 const routes = [
   { 
     canActivate: [hasRole(['Manager'])],
@@ -51,6 +52,7 @@ const routes = [
   ],
   imports: [
     CommonModule,RouterModule.forChild(routes),NgApexchartsModule,
+    ReactiveFormsModule,FormsModule
   ]
 })
 export class AdminModule { }

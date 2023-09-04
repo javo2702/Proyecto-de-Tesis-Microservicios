@@ -21,7 +21,7 @@ export class KitchenComponent implements OnInit{
     {id:6,descripcion:"Descripcion",estado:"Preparando",mesa:6,hora:"3:00pm"},
     {id:7,descripcion:"Descripcion",estado:"Preparando",mesa:7,hora:"3:00pm"}
   ] */
-
+  success:Boolean = false
   currentDate: Date = new Date();
   date = this.currentDate.getDate() + " / " + (this.currentDate.getMonth()+1) + " / " + this.currentDate.getFullYear()
 
@@ -55,6 +55,8 @@ export class KitchenComponent implements OnInit{
     const formattedDate = format(currentDate, 'yyyy-MM-dd');
     this.pedidoService.getPedidos(formattedDate)
       .then(pedidos => {
+        this.loading = false
+        this.success = true
         pedidos.forEach((p)=>{
           this.pedidoService.getPedidoDetalle(p.idpedido)
           .then(pedido=>{
@@ -66,16 +68,21 @@ export class KitchenComponent implements OnInit{
             console.error(error);
           });
         })
+        this.cdr.detectChanges()
       })
       .then(()=>{
           this.pedidos = detallesPedidos
           this.pedidoCopy = this.pedidos
           this.loading = false
+          this.success = true
           //this.filtrar("recibido")
           this.cdr.detectChanges()
         })
       .catch(error => {
         console.error(error);
+        this.loading = false
+        this.success = false
+        this.cdr.detectChanges()
       });
   }
   getDetallePedido(p:Order):Order{
@@ -188,6 +195,7 @@ export class KitchenComponent implements OnInit{
       this.filter='recibido'
       this.showlisto=false;
     }
+    this.loading = false
   }
 }
 export interface Order extends PedidoResponse{

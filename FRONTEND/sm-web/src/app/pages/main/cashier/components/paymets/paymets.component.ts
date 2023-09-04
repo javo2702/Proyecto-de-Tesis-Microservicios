@@ -13,6 +13,8 @@ import { TransaccionService } from 'src/app/backend/services/transaccion.service
   styleUrls: ['./paymets.component.css']
 })
 export class PaymetsComponent implements OnInit{
+  loading:Boolean = true
+  success:Boolean = false
   dateForm = new FormGroup({
     date_: new FormControl(new Date().toISOString()),
   })
@@ -110,6 +112,8 @@ export class PaymetsComponent implements OnInit{
     var filtro: Filtro = {fecha: "%"+format(this.fecha, 'yyyy-MM-dd')+"%"}
     this.transaccionService.getPagosFecha(filtro)
     .then(transacciones=>{
+        this.loading = false
+        this.success = true
         this.transacciones = transacciones
         console.table(transacciones)
         this.cdr.detectChanges();
@@ -117,6 +121,9 @@ export class PaymetsComponent implements OnInit{
     .catch(error=>{
       console.log(error)
       this.mensaje = error
+      this.loading = false
+      this.success = false
+      this.cdr.detectChanges();
     })
   }
   savePayment(){

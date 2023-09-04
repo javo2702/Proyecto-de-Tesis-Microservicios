@@ -19,7 +19,7 @@ export class AdminComponent implements OnInit{
   showNotification = false;
   connect(): void {
       console.log("init")
-      let source = new EventSource('http://192.168.18.12:8089/sse');
+      let source = new EventSource('http://192.168.18.12:8089/sse/admin');
       source.addEventListener('message', message => {
         console.log("a: "+message.data); 
         console.log(formatDate(new Date().toUTCString(),'dd/MM/yyyy HH:mm:ss','es'))

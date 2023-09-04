@@ -127,6 +127,7 @@ export class TransaccionService {
           body:JSON.stringify({...filtro}),
         }
       ).then(response => {
+        console.table(response)
         if (!response.ok) {
           throw new Error('Error en la solicitud.');
         }
@@ -147,6 +148,7 @@ export class TransaccionService {
         }
       })
       .catch(error=>{
+        console.error(error)
         reject(error)
       })
     })

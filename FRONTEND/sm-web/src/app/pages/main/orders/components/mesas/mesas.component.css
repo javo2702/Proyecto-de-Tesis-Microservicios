@@ -68,11 +68,13 @@
     filter: opacity(50%);
     cursor: pointer;
 }
-.table-legend{
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-}
+@media (min-width: 768px) {
+    .table-legend{
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+    }
+  }
 .info{
     display: flex;
     justify-content: center;

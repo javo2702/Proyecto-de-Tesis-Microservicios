@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  eureka-server:
+    image: eureka-service:eureka
+    restart: always
+    container_name: eureka-server-container
+    ports:
+      - 8761:8761
+    networks:
+      - 'sm-network'
+  gateway-service:
+    image: api-gateway:gateway-sm
+    restart: always
+    container_name: api-gateway-container-2
+    ports:
+      - 8089:8089
+    networks:
+      - 'sm-network'
+networks:
+  sm-network: #necesitamos crear en una red para alojar los servicios en ella y que puedan comunicarse entre sí
+ 

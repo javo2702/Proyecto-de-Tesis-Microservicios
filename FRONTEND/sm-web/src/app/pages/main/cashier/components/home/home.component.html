@@ -1,4 +1,4 @@
-<div class="p-2 w-full h-full flex flex-col items-center justify-center gap-12">
+<div class="p-2 w-full h-full flex flex-col items-center justify-start gap-12">
     <div class="row-start-1 row-end-2 w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-y-4 lg:flex lg:flex-row  justify-center items-center gap-x-10">
         <div class="relative p-2 w-[240px] h-[150px] md:w-[260px] md:h-[180px] xl:w-[350px] mx-auto border border-gray-300 rounded-md shadow-sm">
             <div class="absolute top-[-10px]">
@@ -89,10 +89,19 @@
                         </tr>
                     </tbody>
                 </table>
-                <div *ngIf="transacciones.length==0" class="border-b w-full py-3 px-4 text-gray-400 text-center">
+                <div [ngClass]="{'hidden':!loading}" class="mt-1 flex flex-col gap-1">
+                    <div role="status" class="w-full h-[40px] bg-gray-100 animate-pulse rounded-sm"></div>
+                    <div role="status" class="w-full h-[40px] bg-gray-100 animate-pulse rounded-sm"></div>
+                    <div role="status" class="w-full h-[40px] bg-gray-100 animate-pulse rounded-sm"></div>
+                </div>
+                <div class="border-b w-full py-3 px-4 text-gray-400 text-center" [ngClass]="{'hidden':loading}">
+                    <p class="hidden" [ngClass]="{'flex':success && transacciones.length > 0}">No se han registrado pedidos aun</p>
+                    <p class="text-red-400" [ngClass]="{'hidden':success}">No se ha podido cargar los datos, intentelo más tarde</p>
+                </div>
+                <!--<div *ngIf="transacciones.length==0" class="border-b w-full py-3 px-4 text-gray-400 text-center">
                     <p>No se han registrado pedidos aun</p>
                     <p [ngClass]="{'hidden':mensaje==''}">{{mensaje}}</p>
-                </div>
+                </div>-->
                 <div class="flex justify-between items-center mt-3" [ngClass]="{'hidden':transacciones.length==0}">
                     <div class="text-sm text-gray-400">
                         <p>Mostrando <span>6</span> Resultados de <span>30</span></p>

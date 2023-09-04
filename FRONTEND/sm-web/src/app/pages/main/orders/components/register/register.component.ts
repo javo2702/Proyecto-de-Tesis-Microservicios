@@ -17,7 +17,10 @@ import { InventarioService } from 'src/app/backend/services/inventario.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit, AfterViewInit{
-
+  math = Math
+  rateString:string = "S/."
+  rate:number = 1
+  isSoles:Boolean = true
   table:number = -1;
   currentUser$ = this.authService.user$;
   user: User | null = null;
@@ -247,6 +250,16 @@ export class RegisterComponent implements OnInit, AfterViewInit{
     }
     this.productosshow = []
     this.productosshow = this.productosapi.slice(6*(this.currentIndex-1),6*this.currentIndex)
+  }
+  exchangeRateApi(){
+    this.rateString = "$"
+    this.pedidoService.getExchangeRate().then((data)=>{
+      this.rate = data.rate
+      this.cdr.detectChanges()
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
   }
 }
 
